@@ -3,13 +3,13 @@ import React from "react";
 
 // Styles
 import {
-  Container,
-  LeftPanel,
-  FormWrapper,
   Logo,
   Input,
   Button,
   LinkText,
+  LeftPanel,
+  Container,
+  FormWrapper,
 } from "./styles";
 
 const Login: React.FC = () => {
@@ -30,5 +30,4 @@ const Login: React.FC = () => {
     </Container>
   );
 };
-
 export default Login;

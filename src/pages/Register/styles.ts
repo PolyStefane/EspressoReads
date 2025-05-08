@@ -8,7 +8,6 @@ export const Container = styled.div`
 
 export const LeftPanel = styled.div`
   flex: 1;
-  background-color: #d4eac8;
   padding: 60px;
   display: flex;
   flex-direction: column;
