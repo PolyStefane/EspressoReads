@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -8,22 +8,47 @@ export const Container = styled.div`
 
 export const LeftPanel = styled.div`
   flex: 1;
-  background-color: #d4eac8;
-  padding: 60px;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
+`;
 
-  h1 {
-    font-size: 32px;
-    color: #6a9c89;
-  }
+export const LeftTextWrapper = styled.div`
+  margin-left: 18rem;
+  z-index: 1;
+`;
 
-  p {
-    font-size: 18px;
-    margin-top: 10px;
-    color: #333;
-  }
+export const Title = styled.h1`
+  font-size: 5rem;
+  color: #6a9c89;
+  margin-bottom: 1rem;
+`;
+
+export const Subtitle = styled.p`
+  font-size: 2rem;
+  color: #333;
+`;
+
+export const ImageTopLeft = styled.img`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 30rem;
+`;
+
+export const ImageBottomLeft = styled.img`
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 30rem;
+`;
+
+export const RightPanel = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const FormWrapper = styled.div`
@@ -31,7 +56,6 @@ export const FormWrapper = styled.div`
   background-color: #eef6e9;
   border-radius: 20px;
   padding: 40px;
-  margin: auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
   h2 {
@@ -44,7 +68,7 @@ export const FormWrapper = styled.div`
 export const Logo = styled.img`
   display: block;
   margin: 0 auto 20px;
-  width: 60px;
+  width: 7rem;
 `;
 
 export const Input = styled.input`
