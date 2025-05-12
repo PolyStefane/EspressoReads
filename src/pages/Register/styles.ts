@@ -3,81 +3,126 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   height: 100vh;
-  background-color: #d4eac8;
+  background-color: #c5ddbe;
 `;
 
 export const LeftPanel = styled.div`
   flex: 1;
-  padding: 60px;
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
+`;
 
-  h1 {
-    font-size: 32px;
-    color: #6a9c89;
-  }
+export const LeftTextWrapper = styled.div`
+  margin-left: 22rem;
+  z-index: 1;
+`;
 
-  p {
-    font-size: 18px;
-    margin-top: 10px;
-    color: #333;
-  }
+export const Title = styled.h1`
+  font-size: 4rem;
+  color: #7bb286;
+  margin-bottom: 1rem;
+  text-align: center;
+`;
+
+export const Subtitle = styled.p`
+  font-size: 2.8rem;
+  color: black;
+  text-align: center;
+`;
+
+export const ImageTopLeft = styled.img`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 30rem;
+`;
+
+export const ImageBottomLeft = styled.img`
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 30rem;
+`;
+
+export const RightPanel = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const FormWrapper = styled.div`
-  width: 400px;
-  background-color: #eef6e9;
+  width: 35rem;
+  background-color: #fffdf0;
   border-radius: 20px;
   padding: 40px;
-  margin: auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
   h2 {
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
     text-align: center;
-    color: #3b3b3b;
+    font-size: 1.8rem;
+    color: black;
   }
 `;
 
 export const Logo = styled.img`
   display: block;
-  margin: 0 auto 20px;
-  width: 60px;
+  margin: 0 auto 1.4rem;
+  width: 8rem;
 `;
 
 export const Input = styled.input`
   width: 100%;
-  padding: 12px;
-  margin-bottom: 16px;
-  border: none;
-  border-radius: 8px;
-  background-color: #d4eac8;
-  font-size: 14px;
+  padding: 0.9rem;
+  margin-bottom: 1rem;
+  border: 2px solid #d7e5d2;
+  border-radius: 0.7rem;
+  background-color: #d7e5d2;
+  font-size: 1.1rem;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  outline: none;
+
+  &::placeholder {
+    color: #6e9a77;
+  }
+
+  &:focus {
+    border-color: #7bb286;
+    background-color: #eaf3e5;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 export const Button = styled.button`
-  width: 100%;
-  padding: 12px;
-  background-color: #6a9c89;
-  color: white;
+  width: 25%;
+  padding: 0.5rem;
+  background-color: #7bb286;
+  color: #fffdf0;
   border: none;
-  border-radius: 8px;
+  border-radius: 2rem;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1.1rem;
   transition: 0.3s;
 
   &:hover {
-    background-color: #4f7c6b;
+    background-color: #5e9b73;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 `;
 
 export const LinkText = styled.a`
   display: block;
-  margin-top: 16px;
+  margin-top: 1rem;
   text-align: center;
-  color: #6a9c89;
-  font-size: 14px;
+  color: #7bb286;
+  font-size: 1.1rem;
   text-decoration: none;
 
   &:hover {

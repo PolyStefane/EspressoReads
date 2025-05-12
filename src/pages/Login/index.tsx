@@ -32,8 +32,8 @@ const Login: React.FC = () => {
         <FormWrapper>
           <Logo src="public\img\mini-logo.png" alt="Espresso Reads Logo" />
           <h2>Login</h2>
-          <Input type="email" placeholder="Enter your email" />
-          <Input type="password" placeholder="Enter your password" />
+          <Input type="email" placeholder="Enter your email..." />
+          <Input type="password" placeholder="Enter your password..." />
           <ButtonContainer>
             <Button>Enter</Button>
           </ButtonContainer>

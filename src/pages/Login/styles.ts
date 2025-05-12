@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
@@ -78,13 +78,20 @@ export const Input = styled.input`
   width: 100%;
   padding: 0.9rem;
   margin-bottom: 1rem;
-  border: none;
+  border: 2px solid #d7e5d2;
   border-radius: 0.7rem;
-  background-color: #c9dcc3;
-  font-size: 1rem;
+  background-color: #d7e5d2;
+  font-size: 1.1rem;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  outline: none;
 
   &::placeholder {
     color: #6e9a77;
+  }
+
+  &:focus {
+    border-color: #7bb286;
+    background-color: #eaf3e5;
   }
 `;
 
@@ -112,10 +119,10 @@ export const Button = styled.button`
 
 export const LinkText = styled.a`
   display: block;
-  margin-top: 16px;
+  margin-top: 1rem;
   text-align: center;
   color: #7bb286;
-  font-size: 14px;
+  font-size: 1.1rem;
   text-decoration: none;
 
   &:hover {

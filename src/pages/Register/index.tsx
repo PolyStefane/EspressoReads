@@ -10,25 +10,41 @@ import {
   Container,
   LeftPanel,
   FormWrapper,
+  ImageTopLeft,
+  LeftTextWrapper,
+  Title,
+  Subtitle,
+  ImageBottomLeft,
+  RightPanel,
+  ButtonContainer,
 } from "./styles";
 
 const Register: React.FC = () => {
   return (
     <Container>
       <LeftPanel>
-        <h1>Espresso Reads</h1>
-        <p>Your comfy reading diary</p>
+        <ImageTopLeft src="public\img\book1.png" />
+        <LeftTextWrapper>
+          <Title>Espresso Reads</Title>
+          <Subtitle>Your comfy reading diary</Subtitle>
+        </LeftTextWrapper>
+        <ImageBottomLeft src="public\img\book2.png" />
       </LeftPanel>
-      <FormWrapper>
-        <Logo src="/logo.png" alt="Espresso Reads Logo" />
-        <h2>Cadastro</h2>
-        <Input type="text" placeholder="Enter your user name" />
-        <Input type="email" placeholder="Enter your email" />
-        <Input type="password" placeholder="Enter your password" />
-        <Input type="password" placeholder="Repeat your password" />
-        <Button>Register</Button>
-        <LinkText href="/">Already have an account?</LinkText>
-      </FormWrapper>
+
+      <RightPanel>
+        <FormWrapper>
+          <Logo src="public\img\mini-logo.png" alt="Espresso Reads Logo" />
+          <h2>Cadastro</h2>
+          <Input type="text" placeholder="Enter your username..." />
+          <Input type="email" placeholder="Enter your email..." />
+          <Input type="password" placeholder="Enter your password..." />
+          <Input type="password" placeholder="Repeat your password..." />
+          <ButtonContainer>
+            <Button>Register</Button>
+          </ButtonContainer>
+          <LinkText href="/">Already have an account?</LinkText>
+        </FormWrapper>
+      </RightPanel>
     </Container>
   );
 };
