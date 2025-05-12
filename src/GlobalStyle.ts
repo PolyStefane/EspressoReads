@@ -1,5 +1,5 @@
 // src/GlobalStyle.ts
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -9,9 +9,9 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'K2D', sans-serif;
   }
 
-  body {
-    background-color: #d4eac8;
-  }
+  // body {
+  //   background-color: white;
+  // }
 
   a {
     text-decoration: none;

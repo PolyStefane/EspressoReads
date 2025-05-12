@@ -13,6 +13,7 @@ import {
   LeftTextWrapper,
   Title,
   Subtitle,
+  ButtonContainer,
 } from "./styles";
 
 const Login: React.FC = () => {
@@ -33,7 +34,9 @@ const Login: React.FC = () => {
           <h2>Login</h2>
           <Input type="email" placeholder="Enter your email" />
           <Input type="password" placeholder="Enter your password" />
-          <Button>Enter</Button>
+          <ButtonContainer>
+            <Button>Enter</Button>
+          </ButtonContainer>
           <LinkText href="/register">Create an account</LinkText>
         </FormWrapper>
       </RightPanel>
