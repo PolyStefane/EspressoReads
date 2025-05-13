@@ -1,15 +1,18 @@
+// External Libraries
 import React from "react";
 
+// Components
 import { Sidebar } from "../../components/Sidebar";
 
+// Styles
 import {
-  Description,
+  Title,
+  Subtext,
   Highlight,
+  StartButton,
+  Description,
   MainContent,
   PageContainer,
-  StartButton,
-  Subtext,
-  Title,
 } from "./styles";
 
 export const Home: React.FC = () => {

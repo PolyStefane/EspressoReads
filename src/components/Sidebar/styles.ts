@@ -24,6 +24,8 @@ export const Logo = styled.img`
 export const NavButton = styled.button`
   width: 12rem;
   display: flex;
+  align-items: center;
+  gap: 0.8rem;
   margin: 0.7rem 0;
   padding: 0.7rem 1rem;
   border: none;
@@ -33,18 +35,25 @@ export const NavButton = styled.button`
   font-size: 1.3rem;
 `;
 
+export const UserIcon = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+`;
+
 export const UserSection = styled.div`
   text-align: center;
   margin-bottom: 1rem;
 
   img {
-    width: 3rem;
+    width: 5rem;
     border-radius: 50%;
   }
 
   span {
     display: block;
     margin-top: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 1.3rem;
   }
 `;

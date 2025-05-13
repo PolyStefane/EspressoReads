@@ -3,8 +3,7 @@ import styled from "styled-components";
 export const PageContainer = styled.div`
   display: flex;
   height: 100vh;
-  background-color: #fffdf0;
-  overflow: hidden;
+  background-color: #fffefa;
 `;
 
 export const MainContent = styled.main`
@@ -17,19 +16,20 @@ export const MainContent = styled.main`
 `;
 
 export const Title = styled.h2`
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: #000;
   margin-bottom: 0.5rem;
+  font-weight: 400;
 `;
 
 export const Highlight = styled.h1`
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   color: #7bb286;
   margin-bottom: 1.2rem;
 `;
 
 export const Description = styled.p`
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   color: #333;
   text-align: center;
   margin-bottom: 1rem;
@@ -37,8 +37,8 @@ export const Description = styled.p`
 `;
 
 export const Subtext = styled.p`
-  font-size: 1rem;
-  color: #a4d1a4;
+  font-size: 1.5rem;
+  color: #7bb286;
   margin-bottom: 2rem;
 `;
 
@@ -48,7 +48,7 @@ export const StartButton = styled.button`
   border: none;
   border-radius: 2rem;
   padding: 0.6rem 1.2rem;
-  font-size: 1rem;
+  font-size: 1.3rem;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;

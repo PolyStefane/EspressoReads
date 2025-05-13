@@ -1,12 +1,16 @@
 // External Libraries
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+// Pages
 import Login from "./pages/Login";
-import Register from "./pages/Register";
-import GlobalStyle from "./GlobalStyle";
 import { Home } from "./pages/Home";
+import Register from "./pages/Register";
 
-const App = () => {
+// Styles
+import GlobalStyle from "./GlobalStyle";
+
+const App: React.FC = () => {
   return (
     <>
       <GlobalStyle />
