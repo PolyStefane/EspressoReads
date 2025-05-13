@@ -19,7 +19,7 @@ export const Sidebar: React.FC = () => {
   return (
     <SidebarContainer>
       <OptionsContainer>
-        <Logo src="public/img/mini-logo.png" alt="Espresso Reads logo" />
+        <Logo src="/img/mini-logo.png" alt="Espresso Reads logo" />
         <NavButton>
           <LibraryIconSVG width={25} height={25} /> Library
         </NavButton>
@@ -31,7 +31,7 @@ export const Sidebar: React.FC = () => {
         </NavButton>
       </OptionsContainer>
       <UserSection>
-        <img src="public/img/user.png" alt="User avatar" />
+        <img src="/img/user.png" alt="User avatar" />
         <span>user_name</span>
       </UserSection>
     </SidebarContainer>
