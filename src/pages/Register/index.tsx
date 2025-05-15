@@ -1,5 +1,7 @@
 // External Libraries
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { register } from "../../Services/AuthService";
 
 // Styles
 import {
@@ -20,6 +22,33 @@ import {
 } from "./styles";
 
 const Register: React.FC = () => {
+  // Hooks
+  const navigate = useNavigate();
+
+  // States
+  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const userPicture = "https://imagem.com/avatar.jpg";
+
+  const handleRegister = async () => {
+    if (password !== confirmPassword) {
+      alert("As senhas não coincidem!");
+      return;
+    }
+
+    try {
+      await register({ userPicture, userName, email, password });
+      alert("Usuário registrado com sucesso!");
+      navigate("/");
+    } catch (error: any) {
+      console.error("Erro ao registrar:", error);
+      alert(error.message || "Erro desconhecido");
+    }
+  };
+
   return (
     <Container>
       <LeftPanel>
@@ -35,12 +64,28 @@ const Register: React.FC = () => {
         <FormWrapper>
           <Logo src="\img\mini-logo.png" alt="Espresso Reads Logo" />
           <h2>Cadastro</h2>
-          <Input type="text" placeholder="Enter your username..." />
-          <Input type="email" placeholder="Enter your email..." />
-          <Input type="password" placeholder="Enter your password..." />
-          <Input type="password" placeholder="Repeat your password..." />
+          <Input
+            type="text"
+            placeholder="Enter your username..."
+            onChange={(e) => setUserName(e.target.value)}
+          />
+          <Input
+            type="email"
+            placeholder="Enter your email..."
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Enter your password..."
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Repeat your password..."
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
           <ButtonContainer>
-            <Button>Register</Button>
+            <Button onClick={handleRegister}>Register</Button>
           </ButtonContainer>
           <LinkText href="/">Already have an account?</LinkText>
         </FormWrapper>

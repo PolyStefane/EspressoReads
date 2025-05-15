@@ -1,5 +1,7 @@
 // External Libraries
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from "../../Services/AuthService";
 
 // Styles
 import {
@@ -20,6 +22,19 @@ import {
 } from "./styles";
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const response = await login({ email, password });
+      localStorage.setItem("token", response.token);
+      navigate("/home");
+    } catch (error) {
+      alert("Erro ao fazer login");
+    }
+  };
   return (
     <Container>
       <LeftPanel>
@@ -35,10 +50,18 @@ const Login: React.FC = () => {
         <FormWrapper>
           <Logo src="\img\mini-logo.png" alt="Espresso Reads Logo" />
           <h2>Login</h2>
-          <Input type="email" placeholder="Enter your email..." />
-          <Input type="password" placeholder="Enter your password..." />
+          <Input
+            type="email"
+            placeholder="Enter your email..."
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Enter your password..."
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <ButtonContainer>
-            <Button>Enter</Button>
+            <Button onClick={handleLogin}>Enter</Button>
           </ButtonContainer>
           <LinkText href="/register">Create an account</LinkText>
         </FormWrapper>

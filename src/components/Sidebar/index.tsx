@@ -14,8 +14,16 @@ import {
   OptionsContainer,
   SidebarContainer,
 } from "./styles";
+import { useNavigate } from "react-router-dom";
 
 export const Sidebar: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
   return (
     <SidebarContainer>
       <OptionsContainer>
@@ -33,6 +41,7 @@ export const Sidebar: React.FC = () => {
       <UserSection>
         <img src="/img/user.png" alt="User avatar" />
         <span>user_name</span>
+        <button onClick={handleLogout}>Logout</button>
       </UserSection>
     </SidebarContainer>
   );
