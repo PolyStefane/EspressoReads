@@ -17,6 +17,7 @@ export const FloatingInput: React.FC<Props> = ({ label, value, ...rest }) => {
     <FloatingInputWrapper>
       <StyledInput
         {...rest}
+        autoComplete="off"
         value={value}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}

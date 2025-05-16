@@ -10,7 +10,7 @@ import {
   BookCoverUpload,
   CheckboxWrapper,
   Container,
-  DateInput,
+  DateContainer,
   FavoriteButton,
   FormSection,
   Input,
@@ -25,6 +25,7 @@ import {
   TextArea,
   Title,
 } from "./styles";
+import { LabelInput } from "../../components/LabelInput";
 
 export const AddBook: React.FC = () => {
   const [form, setForm] = useState({
@@ -110,18 +111,24 @@ export const AddBook: React.FC = () => {
                 <option>Wishlist</option>
               </Select>
             </div>
-            <div style={{ display: "flex", gap: "1rem" }}>
-              <DateInput
+            <DateContainer style={{ display: "flex", gap: "1rem" }}>
+              <LabelInput
+                id="startDate"
                 name="startDate"
-                placeholder="Start Date"
+                label="Start Date"
+                value={form.startDate}
                 onChange={handleChange}
               />
-              <DateInput
+
+              <LabelInput
+                id="endDate"
                 name="endDate"
-                placeholder="End Date"
+                label="End Date"
+                value={form.endDate}
                 onChange={handleChange}
               />
-            </div>
+            </DateContainer>
+
             <TextArea
               name="review"
               placeholder="Insert your opinion about the book, your favorite quotes, etc..."

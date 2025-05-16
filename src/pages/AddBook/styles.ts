@@ -71,6 +71,10 @@ export const Select = styled.select`
   }
 `;
 
+export const DateContainer = styled.div`
+  margin-bottom: 2rem;
+`;
+
 export const TextArea = styled.textarea`
   width: 100%;
   height: 10rem;
