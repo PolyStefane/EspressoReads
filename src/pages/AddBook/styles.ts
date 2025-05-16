@@ -33,7 +33,7 @@ export const FormSection = styled.div`
 
 export const Input = styled.input`
   width: 100%;
-  padding: 0.8rem;
+  padding: 1rem;
   margin-bottom: 2rem;
   border: none;
   border-radius: 0.7rem;

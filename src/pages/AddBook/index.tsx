@@ -21,6 +21,7 @@ import {
   TextArea,
   Title,
 } from "./styles";
+import { FloatingInput } from "../../components/FloatingInput";
 
 // Styles
 
@@ -79,15 +80,17 @@ export const AddBook: React.FC = () => {
           <div>
             <Input
               name="title"
-              placeholder="Write the name of the book"
+              placeholder="Insert the title of the book"
               onChange={handleChange}
             />
+
+            {/* <FloatingInput label="Book Cover"></FloatingInput> */}
+
             <Input
               name="author"
               placeholder="Insert the name of the author"
               onChange={handleChange}
             />
-
             <div style={{ display: "flex", gap: "1rem" }}>
               <Select name="genre" onChange={handleChange}>
                 <option>Select Genre</option>
@@ -102,7 +105,6 @@ export const AddBook: React.FC = () => {
                 <option>Wishlist</option>
               </Select>
             </div>
-
             <div style={{ display: "flex", gap: "1rem" }}>
               <DateInput
                 name="startDate"
@@ -115,13 +117,11 @@ export const AddBook: React.FC = () => {
                 onChange={handleChange}
               />
             </div>
-
             <TextArea
               name="review"
               placeholder="Insert your opinion about the book, your favorite quotes, etc..."
               onChange={handleChange}
             />
-
             <Input
               name="favoriteCharacter"
               placeholder="Enter the name of the character who touched your heart"
