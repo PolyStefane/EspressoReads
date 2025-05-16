@@ -13,6 +13,7 @@ import {
   UserSection,
   OptionsContainer,
   SidebarContainer,
+  LogoutButton,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
 
@@ -45,7 +46,7 @@ export const Sidebar: React.FC = () => {
       <UserSection>
         <img src="/img/user.png" alt="User avatar" />
         <span>user_name</span>
-        <button onClick={handleLogout}>Logout</button>
+        <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
       </UserSection>
     </SidebarContainer>
   );

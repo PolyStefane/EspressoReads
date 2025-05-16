@@ -6,7 +6,7 @@ export const SidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem 0;
+  padding: 1rem 0;
   justify-content: space-between;
 `;
 
@@ -40,6 +40,17 @@ export const UserIcon = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 2rem;
+`;
+
+export const LogoutButton = styled.button`
+  width: 5rem;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #e9f1e8;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-size: 1rem;
 `;
 
 export const UserSection = styled.div`
