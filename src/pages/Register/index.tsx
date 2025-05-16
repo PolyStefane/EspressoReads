@@ -91,7 +91,7 @@ const Register: React.FC = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <ButtonContainer>
-              <Button onClick={handleRegister}>Register</Button>
+              <Button type="submit">Register</Button>
             </ButtonContainer>
           </form>
           <LinkText href="/">Already have an account?</LinkText>
