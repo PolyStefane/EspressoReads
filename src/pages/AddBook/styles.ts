@@ -17,7 +17,7 @@ export const PageContainer = styled.div`
 
 export const Container = styled.div`
   flex: 1;
-  padding: 5rem 20rem;
+  padding: 5rem 16rem;
   display: flex;
   flex-direction: column;
 `;
