@@ -58,8 +58,12 @@ const Login: React.FC = () => {
           >
             <Input
               type="email"
+              name="email"
               placeholder="Enter your email..."
               onChange={(e) => setEmail(e.target.value)}
+              required
+              value={email}
+              autoComplete="email"
             />
             <Input
               type="password"
@@ -67,9 +71,7 @@ const Login: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <ButtonContainer>
-              <Button type="submit" onClick={handleLogin}>
-                Enter
-              </Button>
+              <Button type="submit">Enter</Button>
             </ButtonContainer>
           </form>
           <LinkText href="/register">Create an account</LinkText>
