@@ -17,7 +17,7 @@ export const PageContainer = styled.div`
 
 export const Container = styled.div`
   flex: 1;
-  padding: 5rem 15rem;
+  padding: 5rem 20rem;
   display: flex;
   flex-direction: column;
 `;
@@ -47,11 +47,10 @@ export const Input = styled.input`
   box-shadow: #7bb286 0px 0px 7px 0px;
 
   &::placeholder {
-    color: #6e9a77;
+    color: #5d8665;
   }
 
   &:focus {
-    border-color: #7bb286;
     box-shadow: #7bb286 0px 0px 10px 1px;
   }
 `;
@@ -64,7 +63,7 @@ export const Select = styled.select`
   border-radius: 0.3rem;
   background-color: white;
   font-size: 1rem;
-  color: #6e9a77;
+  color: #5d8665;
   box-shadow: #7bb286 0px 0px 7px 0px;
 
   &:focus {
@@ -86,7 +85,7 @@ export const TextArea = styled.textarea`
   box-shadow: #7bb286 0px 0px 7px 0px;
 
   &::placeholder {
-    color: #6e9a77;
+    color: #5d8665;
   }
 
   &:focus {
@@ -97,11 +96,11 @@ export const TextArea = styled.textarea`
 
 export const DateInput = styled(Input).attrs({ type: "date" })`
   max-width: 100%;
-  color: #6e9a77;
+  color: #5d8665;
 `;
 
 export const PagesInput = styled(Input)`
-  width: 23%;
+  width: 8rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -142,6 +141,8 @@ export const CheckboxWrapper = styled.div`
 //   font-size: 1rem;
 //   text-align: center;
 // `;
+
+export const LeftContainer = styled.div``;
 
 export const BookCoverUpload = styled.div<BookCoverUploadProps>`
   width: 15rem;

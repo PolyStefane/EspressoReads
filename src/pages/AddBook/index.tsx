@@ -3,6 +3,9 @@ import React, { useState } from "react";
 
 // Components
 import { Sidebar } from "../../components/Sidebar";
+import { FloatingInput } from "../../components/FloatingInput";
+
+// Styles
 import {
   BookCoverUpload,
   CheckboxWrapper,
@@ -11,6 +14,7 @@ import {
   FavoriteButton,
   FormSection,
   Input,
+  LeftContainer,
   PageContainer,
   PagesInput,
   RatingContainer,
@@ -21,9 +25,6 @@ import {
   TextArea,
   Title,
 } from "./styles";
-import { FloatingInput } from "../../components/FloatingInput";
-
-// Styles
 
 export const AddBook: React.FC = () => {
   const [form, setForm] = useState({
@@ -78,20 +79,23 @@ export const AddBook: React.FC = () => {
         <Title>Add Book</Title>
         <FormSection>
           {/* LADO ESQUERDO */}
-          <div>
-            <Input
+          <LeftContainer>
+            <FloatingInput
+              label="Title"
               name="title"
-              placeholder="Insert the title of the book"
+              placeholder="Insert book title"
+              value={form.title}
               onChange={handleChange}
             />
 
-            {/* <FloatingInput label="Book Cover"></FloatingInput> */}
-
-            <Input
+            <FloatingInput
+              label="Author"
               name="author"
               placeholder="Insert the name of the author"
+              value={form.author}
               onChange={handleChange}
             />
+
             <div style={{ display: "flex", gap: "1rem" }}>
               <Select name="genre" onChange={handleChange}>
                 <option>Select Genre</option>
@@ -128,7 +132,7 @@ export const AddBook: React.FC = () => {
               placeholder="Enter the name of the character who touched your heart"
               onChange={handleChange}
             />
-          </div>
+          </LeftContainer>
 
           {/* LADO DIREITO */}
           <RightContainer>
@@ -204,7 +208,7 @@ export const AddBook: React.FC = () => {
 
             <PagesInput
               name="pages"
-              placeholder="Ex: 365"
+              placeholder="Pages"
               onChange={handleChange}
             />
 

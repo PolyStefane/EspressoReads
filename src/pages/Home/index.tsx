@@ -14,8 +14,14 @@ import {
   MainContent,
   PageContainer,
 } from "./styles";
+import { useNavigate } from "react-router-dom";
 
 export const Home: React.FC = () => {
+  const navigate = useNavigate();
+  const addBook = () => {
+    navigate("/add-book");
+  };
+
   return (
     <PageContainer>
       <Sidebar />
@@ -29,7 +35,7 @@ export const Home: React.FC = () => {
           All this with a super comfortable interface!
         </Description>
         <Subtext>Take your coffee and relax</Subtext>
-        <StartButton>Get start</StartButton>
+        <StartButton onClick={addBook}>Get start</StartButton>
       </MainContent>
     </PageContainer>
   );

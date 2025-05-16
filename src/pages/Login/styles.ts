@@ -122,8 +122,15 @@ export const Input = styled.input`
   }
 
   &:focus {
+    outline: none;
     border-color: #7bb286;
     background-color: #eaf3e5;
+  }
+
+  &:-webkit-autofill {
+    box-shadow: 0 0 0 1000px #d7e5d2 inset !important;
+    -webkit-text-fill-color: #1f1f1f !important;
+    transition: background-color 5000s ease-in-out 0s;
   }
 
   @media (max-width: 768px) {
