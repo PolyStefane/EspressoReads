@@ -24,6 +24,10 @@ export const Sidebar: React.FC = () => {
     navigate("/");
   };
 
+  const addBook = () => {
+    navigate("/add-book");
+  };
+
   return (
     <SidebarContainer>
       <OptionsContainer>
@@ -31,7 +35,7 @@ export const Sidebar: React.FC = () => {
         <NavButton>
           <LibraryIconSVG width={25} height={25} /> Library
         </NavButton>
-        <NavButton>
+        <NavButton onClick={addBook}>
           <AddBookIconSVG width={21} height={21} /> Add Book
         </NavButton>
         <NavButton>

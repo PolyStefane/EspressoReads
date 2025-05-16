@@ -10,6 +10,7 @@ import Register from "./pages/Register";
 // Styles
 import GlobalStyle from "./GlobalStyle";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { AddBook } from "./pages/AddBook";
 
 const App: React.FC = () => {
   return (
@@ -23,6 +24,14 @@ const App: React.FC = () => {
           element={
             <ProtectedRoute>
               <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/add-book"
+          element={
+            <ProtectedRoute>
+              <AddBook />
             </ProtectedRoute>
           }
         />
