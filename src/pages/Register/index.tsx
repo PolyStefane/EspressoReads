@@ -90,10 +90,10 @@ const Register: React.FC = () => {
               placeholder="Repeat your password..."
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
+            <ButtonContainer>
+              <Button onClick={handleRegister}>Register</Button>
+            </ButtonContainer>
           </form>
-          <ButtonContainer>
-            <Button onClick={handleRegister}>Register</Button>
-          </ButtonContainer>
           <LinkText href="/">Already have an account?</LinkText>
         </FormWrapper>
       </RightPanel>

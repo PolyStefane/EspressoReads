@@ -15,10 +15,11 @@ import {
   SidebarContainer,
   LogoutButton,
 } from "./styles";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const Sidebar: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -36,7 +37,10 @@ export const Sidebar: React.FC = () => {
         <NavButton>
           <LibraryIconSVG width={25} height={25} /> Library
         </NavButton>
-        <NavButton onClick={addBook}>
+        <NavButton
+          $active={location.pathname === "/add-book"}
+          onClick={addBook}
+        >
           <AddBookIconSVG width={21} height={21} /> Add Book
         </NavButton>
         <NavButton>

@@ -1,8 +1,9 @@
 import { SVGProps } from "react";
+
 export const AddBookIconSVG = (props: SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 18 18" width={18} height={18} fill="none" {...props}>
     <path
-      stroke="#000"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}
