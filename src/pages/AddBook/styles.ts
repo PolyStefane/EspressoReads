@@ -1,7 +1,11 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 interface FavoriteButtonProps {
   $active: boolean;
+}
+
+interface BookCoverUploadProps {
+  hasImage: boolean;
 }
 
 export const PageContainer = styled.div`
@@ -36,7 +40,7 @@ export const Input = styled.input`
   padding: 1rem;
   margin-bottom: 2rem;
   border: none;
-  border-radius: 0.7rem;
+  border-radius: 0.3rem;
   background-color: white;
   font-size: 1rem;
   outline: none;
@@ -57,7 +61,7 @@ export const Select = styled.select`
   padding: 0.8rem;
   margin-bottom: 2rem;
   border: none;
-  border-radius: 0.7rem;
+  border-radius: 0.3rem;
   background-color: white;
   font-size: 1rem;
   color: #6e9a77;
@@ -74,7 +78,7 @@ export const TextArea = styled.textarea`
   padding: 1rem;
   margin-bottom: 2rem;
   border: none;
-  border-radius: 0.7rem;
+  border-radius: 0.3rem;
   background-color: white;
   outline: none;
   font-size: 1rem;
@@ -97,7 +101,10 @@ export const DateInput = styled(Input).attrs({ type: "date" })`
 `;
 
 export const PagesInput = styled(Input)`
-  width: 50%;
+  width: 23%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 1rem;
 `;
 
@@ -110,7 +117,7 @@ export const CheckboxWrapper = styled.div`
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #333;
   }
 
@@ -121,19 +128,38 @@ export const CheckboxWrapper = styled.div`
   }
 `;
 
-export const BookCoverUpload = styled.div`
+// export const BookCoverUpload = styled.div`
+//   width: 15rem;
+//   height: 20rem;
+//   border: none;
+//   background-color: white;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   color: #6e9a77;
+//   box-shadow: #7bb286 0px 0px 7px 0px;
+
+//   font-size: 1rem;
+//   text-align: center;
+// `;
+
+export const BookCoverUpload = styled.div<BookCoverUploadProps>`
   width: 15rem;
   height: 20rem;
-  border: none;
   background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #6e9a77;
-  box-shadow: #7bb286 0px 0px 7px 0px;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  cursor: pointer;
 
-  font-size: 1rem;
-  text-align: center;
+  ${(props) =>
+    !props.hasImage &&
+    css`
+      box-shadow: #7bb286 0px 0px 7px 0px;
+      padding: 0.5rem;
+    `}
 `;
 
 export const RatingContainer = styled.div`

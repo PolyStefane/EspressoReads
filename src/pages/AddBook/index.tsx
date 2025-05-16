@@ -42,6 +42,7 @@ export const AddBook: React.FC = () => {
     },
     rating: 0,
     isFavorite: false,
+    coverUrl: "",
   });
 
   const handleChange = (
@@ -131,7 +132,37 @@ export const AddBook: React.FC = () => {
 
           {/* LADO DIREITO */}
           <RightContainer>
-            <BookCoverUpload>Insert book cover here</BookCoverUpload>
+            <BookCoverUpload
+              hasImage={!!form.coverUrl}
+              onClick={() => {
+                const url = prompt("Paste the URL of the book cover:");
+                if (url) {
+                  setForm((prev) => ({ ...prev, coverUrl: url }));
+                }
+              }}
+            >
+              {form.coverUrl ? (
+                <img
+                  src={form.coverUrl}
+                  alt="Book cover"
+                  style={{
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    width: "auto",
+                    height: "auto",
+                    objectFit: "contain",
+                    borderRadius: "0.5rem",
+                    display: "block",
+                  }}
+                  onError={(e) => {
+                    e.currentTarget.src = "";
+                  }}
+                />
+              ) : (
+                <span style={{ color: "#6e9a77" }}>Insert book cover here</span>
+              )}
+            </BookCoverUpload>
+
             <RatingContainer>
               <StarContainer>
                 {[1, 2, 3, 4, 5].map((star) => (
