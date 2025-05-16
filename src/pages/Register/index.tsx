@@ -64,26 +64,33 @@ const Register: React.FC = () => {
         <FormWrapper>
           <Logo src="\img\mini-logo.png" alt="Espresso Reads Logo" />
           <h2>Cadastro</h2>
-          <Input
-            type="text"
-            placeholder="Enter your username..."
-            onChange={(e) => setUserName(e.target.value)}
-          />
-          <Input
-            type="email"
-            placeholder="Enter your email..."
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Input
-            type="password"
-            placeholder="Enter your password..."
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Input
-            type="password"
-            placeholder="Repeat your password..."
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleRegister();
+            }}
+          >
+            <Input
+              type="text"
+              placeholder="Enter your username..."
+              onChange={(e) => setUserName(e.target.value)}
+            />
+            <Input
+              type="email"
+              placeholder="Enter your email..."
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              type="password"
+              placeholder="Enter your password..."
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Input
+              type="password"
+              placeholder="Repeat your password..."
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </form>
           <ButtonContainer>
             <Button onClick={handleRegister}>Register</Button>
           </ButtonContainer>

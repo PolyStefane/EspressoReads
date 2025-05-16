@@ -4,14 +4,24 @@ export const Container = styled.div`
   display: flex;
   height: 100vh;
   background-color: #c5ddbe;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
 `;
 
 export const LeftPanel = styled.div`
-  flex: 1;
   display: flex;
+  margin-right: 4rem;
   position: relative;
   flex-direction: column;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const LeftTextWrapper = styled.div`
@@ -24,12 +34,20 @@ export const Title = styled.h1`
   color: #7bb286;
   margin-bottom: 1rem;
   text-align: center;
+
+  @media (max-width: 1440px) {
+    font-size: 3rem;
+  }
 `;
 
 export const Subtitle = styled.p`
   font-size: 2.8rem;
   color: black;
   text-align: center;
+
+  @media (max-width: 1440px) {
+    font-size: 2rem;
+  }
 `;
 
 export const ImageTopLeft = styled.img`
@@ -51,6 +69,11 @@ export const RightPanel = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 2rem 0;
+  }
 `;
 
 export const FormWrapper = styled.div`
@@ -65,6 +88,15 @@ export const FormWrapper = styled.div`
     text-align: center;
     font-size: 1.8rem;
     color: black;
+  }
+
+  @media (max-width: 768px) {
+    width: 70%;
+    padding: 20px;
+  }
+  @media (max-width: 480px) {
+    width: 90%;
+    padding: 20px;
   }
 `;
 
@@ -93,6 +125,10 @@ export const Input = styled.input`
     border-color: #7bb286;
     background-color: #eaf3e5;
   }
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 export const ButtonContainer = styled.div`
@@ -114,6 +150,10 @@ export const Button = styled.button`
   &:hover {
     background-color: #5e9b73;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    width: 40%;
   }
 `;
 

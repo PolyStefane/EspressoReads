@@ -50,19 +50,28 @@ const Login: React.FC = () => {
         <FormWrapper>
           <Logo src="\img\mini-logo.png" alt="Espresso Reads Logo" />
           <h2>Login</h2>
-          <Input
-            type="email"
-            placeholder="Enter your email..."
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Input
-            type="password"
-            placeholder="Enter your password..."
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <ButtonContainer>
-            <Button onClick={handleLogin}>Enter</Button>
-          </ButtonContainer>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleLogin();
+            }}
+          >
+            <Input
+              type="email"
+              placeholder="Enter your email..."
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              type="password"
+              placeholder="Enter your password..."
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <ButtonContainer>
+              <Button type="submit" onClick={handleLogin}>
+                Enter
+              </Button>
+            </ButtonContainer>
+          </form>
           <LinkText href="/register">Create an account</LinkText>
         </FormWrapper>
       </RightPanel>
