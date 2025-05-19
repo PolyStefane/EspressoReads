@@ -68,9 +68,28 @@ export const AddBook: React.FC = () => {
     setForm((prev) => ({ ...prev, rating: stars }));
   };
 
-  const handleSubmit = () => {
-    console.log("Form data:", form);
-    // Aqui vai sua lógica de envio para o backend
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch("https://books-social.onrender.com/book", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save book");
+      }
+
+      const data = await response.json();
+      console.log("Book saved successfully:", data);
+      alert("Book saved successfully!");
+      // Opcional: resetar o form ou redirecionar
+    } catch (error) {
+      console.error("Error saving book:", error);
+      alert("Error saving book. Please try again.");
+    }
   };
 
   return (

@@ -11,7 +11,7 @@ interface BookCoverUploadProps {
 export const PageContainer = styled.div`
   display: flex;
   height: 100vh;
-  background-color: #fffefa;
+  /* background-color: #fffefa; */
   overflow-y: auto;
 `;
 
@@ -20,6 +20,7 @@ export const Container = styled.div`
   padding: 5rem 16rem;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(to bottom right, #fffefa, #e6f1ea);
 `;
 
 export const Title = styled.h1`

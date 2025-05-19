@@ -7,6 +7,7 @@ interface NavButtonProps {
 export const SidebarContainer = styled.div`
   width: 15rem;
   background-color: #bdd8bb;
+
   display: flex;
   flex-direction: column;
   align-items: center;
