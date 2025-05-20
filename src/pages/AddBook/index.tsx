@@ -98,9 +98,13 @@ export const AddBook: React.FC = () => {
         body: JSON.stringify(payload),
       });
 
-      if (!response.ok) throw new Error("Failed to save book");
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Request failed: ${response.status} - ${errorText}`);
+      }
 
-      const data = await response.json();
+      const responseText = await response.text();
+      const data = responseText ? JSON.parse(responseText) : null;
       console.log("Book saved successfully:", data);
       alert("Book saved successfully!");
     } catch (error) {

@@ -184,6 +184,7 @@ export const FavoriteButton = styled.button<FavoriteButtonProps>`
   font-size: 2rem;
   cursor: pointer;
   color: ${(props) => (props.$active ? "#f28a8a" : "#dcdcdc")};
+
   transition: transform 0.2s ease;
 
   &:hover {
