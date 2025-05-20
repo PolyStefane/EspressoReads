@@ -32,6 +32,7 @@ const Login: React.FC = () => {
       localStorage.setItem("token", response.token);
       navigate("/home");
     } catch (error) {
+      console.error("Login failed:", error);
       alert("Erro ao fazer login");
     }
   };
