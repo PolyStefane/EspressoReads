@@ -11,7 +11,6 @@ interface BookCoverUploadProps {
 export const PageContainer = styled.div`
   display: flex;
   height: 100vh;
-  /* background-color: #fffefa; */
   overflow-y: auto;
 `;
 
@@ -20,6 +19,8 @@ export const Container = styled.div`
   padding: 5rem 16rem;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  height: 100vh;
   background: linear-gradient(to bottom right, #fffefa, #e6f1ea);
 `;
 
@@ -132,27 +133,11 @@ export const CheckboxWrapper = styled.div`
   }
 `;
 
-// export const BookCoverUpload = styled.div`
-//   width: 15rem;
-//   height: 20rem;
-//   border: none;
-//   background-color: white;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   color: #6e9a77;
-//   box-shadow: #7bb286 0px 0px 7px 0px;
-
-//   font-size: 1rem;
-//   text-align: center;
-// `;
-
 export const LeftContainer = styled.div``;
 
 export const BookCoverUpload = styled.div<BookCoverUploadProps>`
   width: 15rem;
   height: 20rem;
-  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -165,6 +150,7 @@ export const BookCoverUpload = styled.div<BookCoverUploadProps>`
     css`
       box-shadow: #7bb286 0px 0px 7px 0px;
       padding: 0.5rem;
+      background-color: white;
     `}
 `;
 
@@ -209,8 +195,6 @@ export const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  /* background-color: blue; */
 `;
 
 export const SaveButton = styled.button`

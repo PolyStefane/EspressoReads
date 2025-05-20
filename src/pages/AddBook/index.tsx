@@ -29,22 +29,21 @@ import { LabelInput } from "../../components/LabelInput";
 
 export const AddBook: React.FC = () => {
   const [form, setForm] = useState({
+    ownerId: "a1dc5d2e-42ea-4db8-90e1-3179d8f45f90",
     title: "",
     author: "",
     genre: "",
-    status: "",
     startDate: "",
     endDate: "",
     review: "",
     favoriteCharacter: "",
-    pages: "",
-    format: {
-      physical: false,
-      digital: false,
-    },
     rating: 0,
-    isFavorite: false,
     coverUrl: "",
+    numberPages: "",
+    readingStatus: "",
+    isFavorite: false,
+    physical: false,
+    digital: false,
   });
 
   const handleChange = (
@@ -58,10 +57,7 @@ export const AddBook: React.FC = () => {
 
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      format: { ...prev.format, [name]: checked },
-    }));
+    setForm((prev) => ({ ...prev, [name]: checked }));
   };
 
   const handleRating = (stars: number) => {
@@ -69,23 +65,44 @@ export const AddBook: React.FC = () => {
   };
 
   const handleSubmit = async () => {
+    const token = localStorage.getItem("token");
+
+    const bookTypes = [];
+    if (form.digital) bookTypes.push("DIGITAL");
+    if (form.physical) bookTypes.push("PHYSICAL");
+
+    const payload = {
+      ownerId: form.ownerId,
+      title: form.title,
+      author: form.author,
+      genre: form.genre.toUpperCase(),
+      startDate: form.startDate,
+      endDate: form.endDate,
+      review: form.review,
+      favoriteCharacter: form.favoriteCharacter,
+      rating: form.rating,
+      coverUrl: form.coverUrl,
+      numberPages: Number(form.numberPages),
+      readingStatus: form.readingStatus.toUpperCase(),
+      isFavorite: form.isFavorite,
+      bookTypes: bookTypes,
+    };
+
     try {
       const response = await fetch("https://books-social.onrender.com/book", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          ...(token && { Authorization: `Bearer ${token}` }),
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to save book");
-      }
+      if (!response.ok) throw new Error("Failed to save book");
 
       const data = await response.json();
       console.log("Book saved successfully:", data);
       alert("Book saved successfully!");
-      // Opcional: resetar o form ou redirecionar
     } catch (error) {
       console.error("Error saving book:", error);
       alert("Error saving book. Please try again.");
@@ -118,16 +135,16 @@ export const AddBook: React.FC = () => {
 
             <div style={{ display: "flex", gap: "1rem" }}>
               <Select name="genre" onChange={handleChange}>
-                <option>Select Genre</option>
-                <option>Fantasy</option>
-                <option>Romance</option>
-                <option>Thriller</option>
+                <option value={""}>Select Genre</option>
+                <option value={"fantasy"}>Fantasy</option>
+                <option value={"romance"}>Romance</option>
+                <option value={"thriller"}>Thriller</option>
               </Select>
-              <Select name="status" onChange={handleChange}>
-                <option>Status</option>
-                <option>Reading</option>
-                <option>Completed</option>
-                <option>Wishlist</option>
+              <Select name="readingStatus" onChange={handleChange}>
+                <option value={""}>Status</option>
+                <option value={"reading"}>Reading</option>
+                <option value={"completed"}>Completed</option>
+                <option value={"wishlist"}>Wishlist</option>
               </Select>
             </div>
             <DateContainer style={{ display: "flex", gap: "1rem" }}>
@@ -218,6 +235,7 @@ export const AddBook: React.FC = () => {
                 <input
                   type="checkbox"
                   name="physical"
+                  checked={form.physical}
                   onChange={handleCheckbox}
                 />
                 Physical
@@ -226,6 +244,7 @@ export const AddBook: React.FC = () => {
                 <input
                   type="checkbox"
                   name="digital"
+                  checked={form.digital}
                   onChange={handleCheckbox}
                 />
                 Digital
@@ -233,7 +252,7 @@ export const AddBook: React.FC = () => {
             </CheckboxWrapper>
 
             <PagesInput
-              name="pages"
+              name="numberPages"
               placeholder="Pages"
               onChange={handleChange}
             />

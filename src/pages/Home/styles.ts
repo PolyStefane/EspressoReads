@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const PageContainer = styled.div`
   display: flex;
   height: 100vh;
-  background-color: #fffefa;
+  background: linear-gradient(to bottom right, #fffefa, #e6f1ea);
 `;
 
 export const MainContent = styled.main`
