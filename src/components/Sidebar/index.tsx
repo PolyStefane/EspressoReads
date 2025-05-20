@@ -29,12 +29,15 @@ export const Sidebar: React.FC = () => {
   const addBook = () => {
     navigate("/add-book");
   };
+  const library = () => {
+    navigate("/library");
+  };
 
   return (
     <SidebarContainer>
       <OptionsContainer>
         <Logo src="/img/mini-logo.png" alt="Espresso Reads logo" />
-        <NavButton>
+        <NavButton $active={location.pathname === "/library"} onClick={library}>
           <LibraryIconSVG width={25} height={25} /> Library
         </NavButton>
         <NavButton

@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import GlobalStyle from "./GlobalStyle";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AddBook } from "./pages/AddBook";
+import { Library } from "./pages/Library";
 
 const App: React.FC = () => {
   return (
@@ -32,6 +33,14 @@ const App: React.FC = () => {
           element={
             <ProtectedRoute>
               <AddBook />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/library"
+          element={
+            <ProtectedRoute>
+              <Library />
             </ProtectedRoute>
           }
         />
