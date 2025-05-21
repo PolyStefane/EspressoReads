@@ -6,11 +6,7 @@ import { Sidebar } from "../../components/Sidebar";
 import { useNavigate } from "react-router-dom";
 
 // Styles
-import {
-  Title,
-  MainContent,
-  PageContainer,
-} from "./styles";
+import { Title, MainContent, PageContainer } from "./styles";
 import { fetchWithAuth } from "../../Services/api";
 
 type Book = {
@@ -33,21 +29,20 @@ type Book = {
 
 export const Library: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
-  
-  useEffect(() => {
-  fetchWithAuth("https://books-social.onrender.com/book")
-    .then((res) => {
-      if (!res.ok) throw new Error(`Erro HTTP: ${res.status}`);
-      return res.json();
-    })
-    .then((data) => {
-      setBooks(data);
-    })
-    .catch((error) => {
-      console.error("Erro ao buscar livros:", error.message);
-    });
-}, []);
 
+  useEffect(() => {
+    fetchWithAuth("https://books-social.onrender.com/api/v1/book")
+      .then((res) => {
+        if (!res.ok) throw new Error(`Erro HTTP: ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        setBooks(data);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar livros:", error.message);
+      });
+  }, []);
 
   return (
     <PageContainer>
@@ -56,7 +51,7 @@ export const Library: React.FC = () => {
         <Title>Welcome to your Library</Title>
 
         {books.length === 0 ? (
-          <p>Carregando livros...</p>
+          <p>Loading books...</p>
         ) : (
           <ul>
             {books.map((book) => (

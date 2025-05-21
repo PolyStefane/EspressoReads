@@ -89,14 +89,17 @@ export const AddBook: React.FC = () => {
     };
 
     try {
-      const response = await fetch("https://books-social.onrender.com/book", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token && { Authorization: `Bearer ${token}` }),
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        "https://books-social.onrender.com/api/v1/book",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token && { Authorization: `Bearer ${token}` }),
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (!response.ok) {
         const errorText = await response.text();
