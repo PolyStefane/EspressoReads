@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 
 // Components
 import { Sidebar } from "../../components/Sidebar";
-import { useNavigate } from "react-router-dom";
+
+// Services
+import { fetchWithAuth } from "../../Services/api";
 
 // Styles
 import { Title, MainContent, PageContainer } from "./styles";
-import { fetchWithAuth } from "../../Services/api";
 
 type Book = {
   _id: string;
