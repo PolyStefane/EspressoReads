@@ -1,6 +1,11 @@
-// src/components/BookCover.tsx
+// External Libraries
 import React, { useState } from "react";
-import { Cover, CoverFallback } from "./styles";
+
+// Assets
+import { MissingImageSVG } from "../../../../assets/icons/MissingImage";
+
+// Styles
+import { Cover, CoverFallback, Icon, Text } from "./styles";
 
 type Props = {
   coverUrl: string;
@@ -18,7 +23,10 @@ export const BookCover: React.FC<Props> = ({ coverUrl, title }) => {
     />
   ) : (
     <CoverFallback>
-      <p>📘 Imagem indisponível</p>
+      <Icon>
+        <MissingImageSVG />
+      </Icon>
+      <Text>Missing Image</Text>
     </CoverFallback>
   );
 };

@@ -4,10 +4,10 @@ import React from "react";
 
 // Components
 import { Sidebar } from "../../components/Sidebar";
-import { FloatingInput } from "../../components/FloatingInput";
-import { LabelInput } from "../../components/LabelInput";
 import { CoverUpload } from "./components/CoverUpload";
 import { RatingStars } from "./components/RatingStars";
+import { LabelInput } from "../../components/LabelInput";
+import { FloatingInput } from "../../components/FloatingInput";
 import { BookTypeCheckbox } from "./components/BookTypeCheckbox";
 
 // Hooks
@@ -15,18 +15,18 @@ import { useBookForm } from "./hooks/useBookForm";
 
 // Styles
 import {
-  PageContainer,
-  Container,
-  Title,
-  FormSection,
-  LeftContainer,
-  RightContainer,
-  Select,
-  DateContainer,
-  TextArea,
   Input,
+  Title,
+  Select,
+  TextArea,
+  Container,
   PagesInput,
   SaveButton,
+  FormSection,
+  PageContainer,
+  LeftContainer,
+  DateContainer,
+  RightContainer,
   SelectContainer,
 } from "./styles";
 
@@ -35,11 +35,11 @@ export const AddBook: React.FC = () => {
     form,
     isSubmitting,
     handleChange,
-    handleCheckbox,
     handleRating,
-    handleCoverUpload,
     handleSubmit,
+    handleCheckbox,
     toggleFavorite,
+    handleCoverUpload,
   } = useBookForm();
 
   return (
