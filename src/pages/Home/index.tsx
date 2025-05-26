@@ -1,5 +1,6 @@
 // External Libraries
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 // Components
 import { Sidebar } from "../../components/Sidebar";
@@ -14,7 +15,6 @@ import {
   MainContent,
   PageContainer,
 } from "./styles";
-import { useNavigate } from "react-router-dom";
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
