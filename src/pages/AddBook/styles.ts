@@ -35,7 +35,7 @@ export const Title = styled.h1`
 export const FormSection = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 2rem;
+  gap: 1.5rem;
 `;
 
 export const Input = styled.input`
@@ -58,6 +58,11 @@ export const Input = styled.input`
   }
 `;
 
+export const SelectContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
 export const Select = styled.select`
   width: 100%;
   padding: 0.8rem;
@@ -76,6 +81,8 @@ export const Select = styled.select`
 
 export const DateContainer = styled.div`
   margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
 `;
 
 export const TextArea = styled.textarea`
