@@ -72,21 +72,25 @@ const Register: React.FC = () => {
           >
             <Input
               type="text"
+              required
               placeholder="Enter your username..."
               onChange={(e) => setUserName(e.target.value)}
             />
             <Input
               type="email"
+              required
               placeholder="Enter your email..."
               onChange={(e) => setEmail(e.target.value)}
             />
             <Input
               type="password"
+              required
               placeholder="Enter your password..."
               onChange={(e) => setPassword(e.target.value)}
             />
             <Input
               type="password"
+              required
               placeholder="Repeat your password..."
               onChange={(e) => setConfirmPassword(e.target.value)}
             />

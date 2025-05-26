@@ -10,13 +10,15 @@ interface BookCoverUploadProps {
 
 export const PageContainer = styled.div`
   display: flex;
+  width: 100%;
   height: 100vh;
   background: linear-gradient(to bottom right, #fffefa, #e6f1ea);
 `;
 
 export const Container = styled.div`
   flex: 1;
-  padding: 5rem 16rem;
+
+  padding: 5rem 18rem;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
