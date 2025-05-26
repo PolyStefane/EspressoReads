@@ -200,8 +200,8 @@ export const RightContainer = styled.div`
 `;
 
 export const SaveButton = styled.button`
-  width: 30%;
-  padding: 0.8rem;
+  width: fit-content;
+  padding: 0.8rem 1.5rem;
   background-color: #7bb286;
   color: #fffdf0;
   border: none;
@@ -213,6 +213,12 @@ export const SaveButton = styled.button`
   &:hover {
     background-color: #5e9b73;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  &:disabled {
+    background-color: #a3bfa9;
+    cursor: not-allowed;
+    opacity: 0.7;
   }
 
   @media (max-width: 768px) {

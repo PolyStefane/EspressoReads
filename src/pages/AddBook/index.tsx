@@ -63,8 +63,13 @@ export const AddBook: React.FC = () => {
   const handleRating = (stars: number) => {
     setForm((prev) => ({ ...prev, rating: stars }));
   };
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async () => {
+    if (isSubmitting) return; // impede múltiplos cliques
+
+    setIsSubmitting(true); // começa envio
+
     const token = localStorage.getItem("token");
 
     const bookTypes = [];
@@ -113,6 +118,8 @@ export const AddBook: React.FC = () => {
     } catch (error) {
       console.error("Error saving book:", error);
       alert("Error saving book. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -266,7 +273,9 @@ export const AddBook: React.FC = () => {
               onChange={handleChange}
             />
 
-            <SaveButton onClick={handleSubmit}>Save</SaveButton>
+            <SaveButton onClick={handleSubmit} disabled={isSubmitting}>
+              {isSubmitting ? "Saving..." : "Save"}
+            </SaveButton>
           </RightContainer>
         </FormSection>
       </Container>
