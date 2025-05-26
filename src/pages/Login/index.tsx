@@ -29,13 +29,20 @@ const Login: React.FC = () => {
   const handleLogin = async () => {
     try {
       const response = await login({ email, password });
+      console.log("Login bem-sucedido, salvando userId...");
+
       localStorage.setItem("token", response.token);
-      navigate("/home");
+      localStorage.setItem("userId", "a1dc5d2e-42ea-4db8-90e1-3179d8f45f90");
+
+      setTimeout(() => {
+        navigate("/home");
+      }, 100);
     } catch (error) {
       console.error("Login failed:", error);
       alert("Erro ao fazer login");
     }
   };
+
   return (
     <Container>
       <LeftPanel>
