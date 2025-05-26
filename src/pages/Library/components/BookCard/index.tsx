@@ -1,23 +1,35 @@
-// External Libraries
+// pages/Library/components/BookCard.tsx
+
 import React from "react";
-
-// Components
-import { BookCover } from "../BookCover";
-
-// Types
 import { Book } from "../../types/Book";
-
-// Styles
-import { StyledCard, AuthorText, BookInfo, TitleText } from "./styles";
+import { BookCover } from "../BookCover";
+import {
+  ActionButton,
+  AuthorText,
+  BookInfo,
+  Overlay,
+  StyledCard,
+  TitleText,
+} from "./styles";
 
 type Props = {
   book: Book;
+  onDelete?: (id: string) => void;
+  onOpen?: (book: Book) => void;
 };
 
-export const BookCard: React.FC<Props> = ({ book }) => {
+export const BookCard: React.FC<Props> = ({ book, onDelete, onOpen }) => {
   return (
     <StyledCard>
-      <BookCover coverUrl={book.coverUrl} title={book.title} />
+      <div style={{ position: "relative" }}>
+        <BookCover coverUrl={book.coverUrl} title={book.title} />
+        <Overlay className="overlay">
+          <ActionButton onClick={() => onOpen?.(book)}>Open</ActionButton>
+          <ActionButton onClick={() => onDelete?.(book._id)}>
+            Delete
+          </ActionButton>
+        </Overlay>
+      </div>
       <BookInfo>
         <TitleText>{book.title}</TitleText>
         <AuthorText>{book.author}</AuthorText>
