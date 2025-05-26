@@ -25,7 +25,7 @@ export const Library: React.FC = () => {
         ) : (
           <BookGrid>
             {books.map((book) => (
-              <BookCard key={book._id} book={book} />
+              <BookCard key={book.bookId} book={book} />
             ))}
           </BookGrid>
         )}

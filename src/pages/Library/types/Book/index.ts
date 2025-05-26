@@ -1,7 +1,7 @@
 // pages/Library/types/Book.ts
 
 export type Book = {
-  _id: string;
+  bookId: string;
   title: string;
   genre: string;
   author: string;

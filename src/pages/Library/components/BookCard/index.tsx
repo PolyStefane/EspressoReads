@@ -11,6 +11,7 @@ import {
   StyledCard,
   TitleText,
 } from "./styles";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   book: Book;
@@ -18,14 +19,24 @@ type Props = {
   onOpen?: (book: Book) => void;
 };
 
-export const BookCard: React.FC<Props> = ({ book, onDelete, onOpen }) => {
+export const BookCard: React.FC<Props> = ({ book, onDelete }) => {
+  const navigate = useNavigate();
+
   return (
     <StyledCard>
       <div style={{ position: "relative" }}>
         <BookCover coverUrl={book.coverUrl} title={book.title} />
         <Overlay className="overlay">
-          <ActionButton onClick={() => onOpen?.(book)}>Open</ActionButton>
-          <ActionButton onClick={() => onDelete?.(book._id)}>
+          <ActionButton
+            onClick={() => {
+              console.log("Abrindo livro:", book);
+              console.log("ID:", book.bookId);
+              navigate(`/book/${book.bookId}`);
+            }}
+          >
+            Open
+          </ActionButton>
+          <ActionButton onClick={() => onDelete?.(book.bookId)}>
             Delete
           </ActionButton>
         </Overlay>

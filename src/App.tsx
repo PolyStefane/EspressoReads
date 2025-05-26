@@ -12,6 +12,7 @@ import GlobalStyle from "./GlobalStyle";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AddBook } from "./pages/AddBook";
 import { Library } from "./pages/Library";
+import { BookDetails } from "./pages/BookDetails";
 
 const App: React.FC = () => {
   return (
@@ -41,6 +42,14 @@ const App: React.FC = () => {
           element={
             <ProtectedRoute>
               <Library />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/book/:id"
+          element={
+            <ProtectedRoute>
+              <BookDetails />
             </ProtectedRoute>
           }
         />
