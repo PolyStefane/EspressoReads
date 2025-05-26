@@ -3,12 +3,22 @@ import React, { useEffect, useState } from "react";
 
 // Components
 import { Sidebar } from "../../components/Sidebar";
+import { BookCover } from "./components/BookCover";
 
 // Services
 import { fetchWithAuth } from "../../Services/api";
 
 // Styles
-import { Title, MainContent, PageContainer } from "./styles";
+import {
+  Title,
+  MainContent,
+  PageContainer,
+  BookGrid,
+  BookCard,
+  BookInfo,
+  TitleText,
+  AuthorText,
+} from "./styles";
 
 type Book = {
   _id: string;
@@ -58,17 +68,18 @@ export const Library: React.FC = () => {
       <MainContent>
         <Title>Welcome to your Library</Title>
 
-        {books.length === 0 ? (
-          <p>Loading books...</p>
-        ) : (
-          <ul>
-            {books.map((book) => (
-              <li key={book._id}>
-                <strong>{book.title}</strong> — {book.author}
-              </li>
-            ))}
-          </ul>
-        )}
+        <BookGrid>
+          {books.map((book) => (
+            <BookCard key={book._id}>
+              <BookCover coverUrl={book.coverUrl} title={book.title} />
+
+              <BookInfo>
+                <TitleText>{book.title}</TitleText>
+                <AuthorText>{book.author}</AuthorText>
+              </BookInfo>
+            </BookCard>
+          ))}
+        </BookGrid>
       </MainContent>
     </PageContainer>
   );

@@ -1,8 +1,8 @@
 export const fetchWithAuth = async (
   url: string,
-  options: RequestInit = {},
+  options: RequestInit = {}
 ): Promise<Response> => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   const headers = {
     ...(options.headers || {}),
