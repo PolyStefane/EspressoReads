@@ -11,14 +11,16 @@ export const MainContent = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  padding: 5rem 8rem;
+  height: 100vh;
+  overflow-y: auto;
 `;
 
 export const Title = styled.h2`
-  font-size: 2rem;
-  color: #000;
+  font-size: 2.4rem;
+  color: #1f1f1f;
+  text-align: center;
   margin-bottom: 0.5rem;
-  font-weight: 400;
 `;
 
 export const Highlight = styled.h1`
@@ -62,7 +64,7 @@ export const BookGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 2rem;
   padding-top: 3rem;
-  width: 100%;
+  width: 90%;
 `;
 
 export const BookCard = styled.div`
@@ -79,7 +81,7 @@ export const BookCard = styled.div`
 `;
 
 export const BookInfo = styled.div`
-  padding: 12px;
+  padding: 0.6rem;
 `;
 
 export const TitleText = styled.h3`

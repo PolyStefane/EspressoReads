@@ -41,6 +41,7 @@ type Book = {
 export const Library: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const userId = localStorage.getItem("userId");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!userId) {
@@ -59,6 +60,9 @@ export const Library: React.FC = () => {
       })
       .catch((error) => {
         console.error("Erro ao buscar livros:", error.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [userId]);
 
@@ -68,18 +72,22 @@ export const Library: React.FC = () => {
       <MainContent>
         <Title>Welcome to your Library</Title>
 
-        <BookGrid>
-          {books.map((book) => (
-            <BookCard key={book._id}>
-              <BookCover coverUrl={book.coverUrl} title={book.title} />
+        {loading ? (
+          <p>📚 Carregando seus livros...</p>
+        ) : (
+          <BookGrid>
+            {books.map((book) => (
+              <BookCard key={book._id}>
+                <BookCover coverUrl={book.coverUrl} title={book.title} />
 
-              <BookInfo>
-                <TitleText>{book.title}</TitleText>
-                <AuthorText>{book.author}</AuthorText>
-              </BookInfo>
-            </BookCard>
-          ))}
-        </BookGrid>
+                <BookInfo>
+                  <TitleText>{book.title}</TitleText>
+                  <AuthorText>{book.author}</AuthorText>
+                </BookInfo>
+              </BookCard>
+            ))}
+          </BookGrid>
+        )}
       </MainContent>
     </PageContainer>
   );

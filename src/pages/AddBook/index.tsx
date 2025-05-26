@@ -150,7 +150,7 @@ export const AddBook: React.FC = () => {
               <Select name="readingStatus" onChange={handleChange}>
                 <option value={""}>Status</option>
                 <option value={"reading"}>Reading</option>
-                <option value={"completed"}>Completed</option>
+                <option value={"finished"}>Finished</option>
                 <option value={"wishlist"}>Wishlist</option>
               </Select>
             </div>
@@ -189,7 +189,9 @@ export const AddBook: React.FC = () => {
             <BookCoverUpload
               hasImage={!!form.coverUrl}
               onClick={() => {
-                const url = prompt("Paste the URL of the book cover:");
+                const url = prompt(
+                  "Paste the URL of the book cover: 🧠 Tip: Use images with at least 360x540px for better viewing."
+                );
                 if (url) {
                   setForm((prev) => ({ ...prev, coverUrl: url }));
                 }

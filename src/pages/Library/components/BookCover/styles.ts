@@ -5,12 +5,13 @@ export const Cover = styled.img`
   aspect-ratio: 2 / 3;
   object-fit: cover;
   border-bottom: 1px solid #eee;
+  padding: 0;
+  image-rendering: auto;
 `;
 
 export const CoverFallback = styled.div`
   width: 100%;
   aspect-ratio: 2 / 3;
-  background-color: #f5f5f5;
   color: #666;
   font-size: 0.85rem;
   display: flex;
