@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchWithAuth } from "../../Services/api";
 import { Book } from "../Library/types/Book";
-import { Sidebar } from "../../components/Sidebar";
+import { Container } from "./styles";
 
 export const BookDetails: React.FC = () => {
   const { id } = useParams();
@@ -18,12 +18,10 @@ export const BookDetails: React.FC = () => {
   if (!book) return <p>Loading...</p>;
 
   return (
-    <div style={{ display: "flex" }}>
-      <Sidebar />
-      {/* layout */}
+    <Container>
       <div style={{ padding: "2rem" }}>
         <h1>{book.title}</h1>
       </div>
-    </div>
+    </Container>
   );
 };

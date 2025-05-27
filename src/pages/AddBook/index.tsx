@@ -3,7 +3,6 @@
 import React from "react";
 
 // Components
-import { Sidebar } from "../../components/Sidebar";
 import { CoverUpload } from "./components/CoverUpload";
 import { RatingStars } from "./components/RatingStars";
 import { LabelInput } from "../../components/LabelInput";
@@ -23,7 +22,6 @@ import {
   PagesInput,
   SaveButton,
   FormSection,
-  PageContainer,
   LeftContainer,
   DateContainer,
   RightContainer,
@@ -43,113 +41,107 @@ export const AddBook: React.FC = () => {
   } = useBookForm();
 
   return (
-    <PageContainer>
-      <Sidebar />
-      <Container>
-        <Title>Add Book</Title>
-        <FormSection>
-          {/* LADO ESQUERDO */}
-          <LeftContainer>
-            <FloatingInput
-              label="Title"
-              name="title"
-              placeholder="Insert book title"
-              value={form.title}
+    <Container>
+      <Title>Add Book</Title>
+      <FormSection>
+        {/* LADO ESQUERDO */}
+        <LeftContainer>
+          <FloatingInput
+            label="Title"
+            name="title"
+            placeholder="Insert book title"
+            value={form.title}
+            onChange={handleChange}
+          />
+          <FloatingInput
+            label="Author"
+            name="author"
+            placeholder="Insert the name of the author"
+            value={form.author}
+            onChange={handleChange}
+          />
+
+          <SelectContainer>
+            <Select name="genre" onChange={handleChange} value={form.genre}>
+              <option value="">Select Genre</option>
+              <option value="fantasy">Fantasy</option>
+              <option value="romance">Romance</option>
+              <option value="thriller">Thriller</option>
+            </Select>
+
+            <Select
+              name="readingStatus"
+              onChange={handleChange}
+              value={form.readingStatus}
+            >
+              <option value="">Status</option>
+              <option value="reading">Reading</option>
+              <option value="finished">Finished</option>
+              <option value="wishlist">Wishlist</option>
+            </Select>
+          </SelectContainer>
+
+          <DateContainer>
+            <LabelInput
+              id="startDate"
+              name="startDate"
+              label="Start Date"
+              value={form.startDate}
               onChange={handleChange}
             />
-            <FloatingInput
-              label="Author"
-              name="author"
-              placeholder="Insert the name of the author"
-              value={form.author}
+            <LabelInput
+              id="endDate"
+              name="endDate"
+              label="End Date"
+              value={form.endDate}
               onChange={handleChange}
             />
+          </DateContainer>
 
-            <SelectContainer>
-              <Select name="genre" onChange={handleChange} value={form.genre}>
-                <option value="">Select Genre</option>
-                <option value="fantasy">Fantasy</option>
-                <option value="romance">Romance</option>
-                <option value="thriller">Thriller</option>
-              </Select>
+          <TextArea
+            name="review"
+            placeholder="Insert your opinion about the book, your favorite quotes, etc..."
+            value={form.review}
+            onChange={handleChange}
+          />
 
-              <Select
-                name="readingStatus"
-                onChange={handleChange}
-                value={form.readingStatus}
-              >
-                <option value="">Status</option>
-                <option value="reading">Reading</option>
-                <option value="finished">Finished</option>
-                <option value="wishlist">Wishlist</option>
-              </Select>
-            </SelectContainer>
+          <Input
+            name="favoriteCharacter"
+            placeholder="Enter the name of the character who touched your heart"
+            value={form.favoriteCharacter}
+            onChange={handleChange}
+          />
+        </LeftContainer>
 
-            <DateContainer>
-              <LabelInput
-                id="startDate"
-                name="startDate"
-                label="Start Date"
-                value={form.startDate}
-                onChange={handleChange}
-              />
-              <LabelInput
-                id="endDate"
-                name="endDate"
-                label="End Date"
-                value={form.endDate}
-                onChange={handleChange}
-              />
-            </DateContainer>
+        {/* LADO DIREITO */}
+        <RightContainer>
+          <CoverUpload coverUrl={form.coverUrl} onUpload={handleCoverUpload} />
 
-            <TextArea
-              name="review"
-              placeholder="Insert your opinion about the book, your favorite quotes, etc..."
-              value={form.review}
-              onChange={handleChange}
-            />
+          <RatingStars
+            rating={form.rating}
+            isFavorite={form.isFavorite}
+            onRate={handleRating}
+            onToggleFavorite={toggleFavorite}
+          />
 
-            <Input
-              name="favoriteCharacter"
-              placeholder="Enter the name of the character who touched your heart"
-              value={form.favoriteCharacter}
-              onChange={handleChange}
-            />
-          </LeftContainer>
+          <BookTypeCheckbox
+            digital={form.digital}
+            physical={form.physical}
+            onChange={handleCheckbox}
+          />
 
-          {/* LADO DIREITO */}
-          <RightContainer>
-            <CoverUpload
-              coverUrl={form.coverUrl}
-              onUpload={handleCoverUpload}
-            />
+          <PagesInput
+            name="numberPages"
+            placeholder="Pages"
+            value={form.numberPages}
+            onChange={handleChange}
+          />
 
-            <RatingStars
-              rating={form.rating}
-              isFavorite={form.isFavorite}
-              onRate={handleRating}
-              onToggleFavorite={toggleFavorite}
-            />
-
-            <BookTypeCheckbox
-              digital={form.digital}
-              physical={form.physical}
-              onChange={handleCheckbox}
-            />
-
-            <PagesInput
-              name="numberPages"
-              placeholder="Pages"
-              value={form.numberPages}
-              onChange={handleChange}
-            />
-
-            <SaveButton onClick={handleSubmit} disabled={isSubmitting}>
-              {isSubmitting ? "Saving..." : "Save"}
-            </SaveButton>
-          </RightContainer>
-        </FormSection>
-      </Container>
-    </PageContainer>
+          <SaveButton onClick={handleSubmit} disabled={isSubmitting}>
+            {isSubmitting ? "Saving..." : "Save"}
+          </SaveButton>
+        </RightContainer>
+      </FormSection>
+    </Container>
   );
 };

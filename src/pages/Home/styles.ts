@@ -1,18 +1,12 @@
 import styled from "styled-components";
 
-export const PageContainer = styled.div`
-  display: flex;
-  height: 100vh;
-  background: linear-gradient(to bottom right, #fffefa, #e6f1ea);
-`;
-
 export const MainContent = styled.main`
-  flex: 1;
   display: flex;
+  width: 100%;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  padding: 2rem;
+  margin-top: 10rem;
 `;
 
 export const Title = styled.h2`

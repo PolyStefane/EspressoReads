@@ -1,4 +1,3 @@
-// External Libraries
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
@@ -6,13 +5,16 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import { Home } from "./pages/Home";
 import Register from "./pages/Register";
-
-// Styles
-import GlobalStyle from "./GlobalStyle";
-import ProtectedRoute from "./components/ProtectedRoute";
 import { AddBook } from "./pages/AddBook";
 import { Library } from "./pages/Library";
 import { BookDetails } from "./pages/BookDetails";
+
+// Components
+import ProtectedRoute from "./components/ProtectedRoute";
+
+// Styles
+import GlobalStyle from "./GlobalStyle";
+import Layout from "./layouts/Layout";
 
 const App: React.FC = () => {
   return (
@@ -21,38 +23,20 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        {/* Protected routes with Sidebar */}
         <Route
-          path="/home"
           element={
             <ProtectedRoute>
-              <Home />
+              <Layout />
             </ProtectedRoute>
           }
-        />
-        <Route
-          path="/add-book"
-          element={
-            <ProtectedRoute>
-              <AddBook />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/library"
-          element={
-            <ProtectedRoute>
-              <Library />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/book/:id"
-          element={
-            <ProtectedRoute>
-              <BookDetails />
-            </ProtectedRoute>
-          }
-        />
+        >
+          <Route path="/home" element={<Home />} />
+          <Route path="/add-book" element={<AddBook />} />
+          <Route path="/library" element={<Library />} />
+          <Route path="/book/:id" element={<BookDetails />} />
+        </Route>
       </Routes>
     </>
   );

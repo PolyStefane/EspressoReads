@@ -1,16 +1,4 @@
-import styled from 'styled-components';
-
-export const PageContainer = styled.div`
-  display: flex;
-  height: 100vh;
-  //background-image: url('/img/papel3.png');
-  //background-size: cover;
-  //background-repeat: no-repeat;
-  //background-position: center;
-  //background: linear-gradient(to bottom right, #fffefa, #e6f1ea);
-
-  background: linear-gradient(135deg, #f8f8f2, #d6e5d3);
-`;
+import styled from "styled-components";
 
 export const MainContent = styled.main`
   flex: 1;
@@ -18,8 +6,6 @@ export const MainContent = styled.main`
   flex-direction: column;
   align-items: center;
   padding: 5rem 8rem;
-  height: 100vh;
-  overflow-y: auto;
 `;
 
 export const Title = styled.h2`

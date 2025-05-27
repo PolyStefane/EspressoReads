@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 interface FavoriteButtonProps {
   $active: boolean;
@@ -8,27 +8,8 @@ interface BookCoverUploadProps {
   hasImage: boolean;
 }
 
-export const PageContainer = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100vh;
-  //background-image: url('/img/papel3.png');
-  //background-size: cover;
-  //background-repeat: no-repeat;
-  //background-position: center;
-  //background: linear-gradient(to bottom right, #fffefa, #e6f1ea);
-
-  background: linear-gradient(135deg, #f8f8f2, #d6e5d3);
-`;
-
 export const Container = styled.div`
-  flex: 1;
-
   padding: 5rem 18rem;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  height: 100vh;
 `;
 
 export const Title = styled.h1`
@@ -114,7 +95,7 @@ export const TextArea = styled.textarea`
   }
 `;
 
-export const DateInput = styled(Input).attrs({ type: 'date' })`
+export const DateInput = styled(Input).attrs({ type: "date" })`
   max-width: 100%;
   color: #5d8665;
 `;
@@ -140,7 +121,7 @@ export const CheckboxWrapper = styled.div`
     color: #333;
   }
 
-  input[type='checkbox'] {
+  input[type="checkbox"] {
     transform: scale(1.2);
     accent-color: #bdd9c3;
     cursor: pointer;
@@ -197,7 +178,7 @@ export const FavoriteButton = styled.button<FavoriteButtonProps>`
   border: none;
   font-size: 2rem;
   cursor: pointer;
-  color: ${(props) => (props.$active ? '#f28a8a' : '#dcdcdc')};
+  color: ${(props) => (props.$active ? "#f28a8a" : "#dcdcdc")};
 
   transition: transform 0.2s ease;
 
