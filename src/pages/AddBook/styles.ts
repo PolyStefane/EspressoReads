@@ -9,14 +9,30 @@ interface BookCoverUploadProps {
 }
 
 export const Container = styled.div`
-  padding: 5rem 18rem;
+  width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* padding: 5rem 8rem; */
+
+  /* background-color: blue; */
 `;
 
 export const Title = styled.h1`
   font-size: 2.4rem;
   color: #1f1f1f;
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
+`;
+
+export const FormContainer = styled.div`
+  width: 100%;
+  max-width: 70rem;
+  padding: 3rem;
+  /* background-color: white; */
+  /* border-radius: 1rem; */
 `;
 
 export const FormSection = styled.div`
