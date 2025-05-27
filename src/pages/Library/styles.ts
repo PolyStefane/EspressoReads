@@ -1,9 +1,15 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const PageContainer = styled.div`
   display: flex;
   height: 100vh;
-  background: linear-gradient(to bottom right, #fffefa, #e6f1ea);
+  //background-image: url('/img/papel3.png');
+  //background-size: cover;
+  //background-repeat: no-repeat;
+  //background-position: center;
+  //background: linear-gradient(to bottom right, #fffefa, #e6f1ea);
+
+  background: linear-gradient(135deg, #f8f8f2, #d6e5d3);
 `;
 
 export const MainContent = styled.main`
