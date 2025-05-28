@@ -1,5 +1,3 @@
-// pages/Library/types/Book.ts
-
 export type Book = {
   bookId: string;
   title: string;
