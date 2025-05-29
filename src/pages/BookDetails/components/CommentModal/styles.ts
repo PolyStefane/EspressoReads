@@ -36,6 +36,7 @@ export const Textarea = styled.textarea`
   padding: 0.8rem;
   border-radius: 0.5rem;
   font-size: 1rem;
+  resize: none;
 `;
 
 export const Input = styled.input`

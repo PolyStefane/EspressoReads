@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import { MdFavorite } from "react-icons/md";
 import { useParams } from "react-router-dom";
 
+// Components
+import { CommentModal } from "./components/CommentModal";
+import { CommentHistoryModal } from "./components/CommentHistoryModal";
+
 // Services
 import { fetchWithAuth } from "../../Services/api";
 
@@ -12,33 +16,38 @@ import { Book } from "../Library/types/Book";
 
 // Styles
 import {
-  Container,
-  FormContainer,
-  FormSection,
-  LeftContainer,
-  RightContainer,
+  Row,
+  Tag,
   Title,
   Field,
   Label,
-  DateContainer,
-  CoverImage,
   Stars,
-  HeartIcon,
-  IconGroup,
-  Tag,
-  StatusRow,
   Buttons,
-  Row,
+  HeartIcon,
+  Container,
+  StatusRow,
+  IconGroup,
+  CoverImage,
+  FormSection,
+  DateContainer,
+  FormContainer,
+  LeftContainer,
+  RightContainer,
 } from "./styles";
-import { CommentModal } from "./components/CommentModal";
 
 export const BookDetails: React.FC = () => {
-  const { id } = useParams();
+  const { id: bookId } = useParams();
   const [book, setBook] = useState<Book | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [showHistory, setShowHistory] = useState(false);
+
+  const userId = localStorage.getItem("userId") ?? "";
 
   useEffect(() => {
-    fetchWithAuth(`https://books-social.onrender.com/api/v1/book/find/${id}`)
+    fetchWithAuth(
+      `https://books-social.onrender.com/api/v1/book/find/${bookId}`
+    )
       .then((res) => res.json())
       .then((data) => {
         const book = {
@@ -49,9 +58,22 @@ export const BookDetails: React.FC = () => {
         setBook(book);
       })
       .catch(console.error);
-  }, [id]);
+  }, [bookId]);
 
   if (!book) return <p>Loading...</p>;
+
+  const fetchComments = async () => {
+    try {
+      const res = await fetchWithAuth(
+        `https://books-social.onrender.com/api/v1/commentary/${bookId}`
+      );
+      const data = await res.json();
+      setComments(data.comments || []); // <-- isso é ESSENCIAL
+      setShowHistory(true); // <-- mostra o modal
+    } catch (err) {
+      console.error("Erro ao buscar comentários:", err);
+    }
+  };
 
   return (
     <Container>
@@ -116,6 +138,7 @@ export const BookDetails: React.FC = () => {
                 </HeartIcon>
               )}
             </IconGroup>
+
             <Row>
               <Field>
                 <Label>Format</Label>
@@ -134,13 +157,29 @@ export const BookDetails: React.FC = () => {
 
             <Buttons>
               <button onClick={() => setIsModalOpen(true)}>Add Comment</button>
-              <button>Comment History</button>
-              <button>Update</button>
+              <button onClick={fetchComments}>Comment History</button>
+
+              <button>Update Book</button>
             </Buttons>
           </RightContainer>
         </FormSection>
       </FormContainer>
-      {isModalOpen && <CommentModal onClose={() => setIsModalOpen(false)} />}
+
+      {isModalOpen && userId && (
+        <CommentModal
+          onClose={() => setIsModalOpen(false)}
+          bookId={bookId!}
+          userId={userId}
+        />
+      )}
+
+      {showHistory && (
+        <CommentHistoryModal
+          bookId={bookId!}
+          comments={comments}
+          onClose={() => setShowHistory(false)}
+        />
+      )}
     </Container>
   );
 };
