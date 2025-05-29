@@ -1,4 +1,4 @@
-// External Libraries
+// External libraries
 import React from "react";
 
 // Components
@@ -11,7 +11,11 @@ import { useBooks } from "./hooks/useBooks";
 import { Title, MainContent, BookGrid } from "./styles";
 
 export const Library: React.FC = () => {
-  const { books, loading } = useBooks();
+  const { books, setBooks, loading } = useBooks();
+
+  const handleDelete = (bookId: string) => {
+    setBooks((prevBooks) => prevBooks.filter((book) => book.bookId !== bookId));
+  };
 
   return (
     <MainContent>
@@ -21,7 +25,7 @@ export const Library: React.FC = () => {
       ) : (
         <BookGrid>
           {books.map((book) => (
-            <BookCard key={book.bookId} book={book} />
+            <BookCard key={book.bookId} book={book} onDelete={handleDelete} />
           ))}
         </BookGrid>
       )}

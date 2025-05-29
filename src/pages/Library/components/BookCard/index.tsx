@@ -1,8 +1,14 @@
-// pages/Library/components/BookCard.tsx
-
+// External libraries
 import React from "react";
-import { Book } from "../../types/Book";
+import { useNavigate } from "react-router-dom";
+
+// Components
 import { BookCover } from "../BookCover";
+
+//Types
+import { Book } from "../../types/Book";
+
+// Styles
 import {
   ActionButton,
   AuthorText,
@@ -11,7 +17,7 @@ import {
   StyledCard,
   TitleText,
 } from "./styles";
-import { useNavigate } from "react-router-dom";
+import { fetchWithAuth } from "../../../../Services/api";
 
 type Props = {
   book: Book;
@@ -21,6 +27,31 @@ type Props = {
 
 export const BookCard: React.FC<Props> = ({ book, onDelete }) => {
   const navigate = useNavigate();
+
+  const handleDelete = async () => {
+    const confirm = window.confirm(
+      `Tem certeza que deseja deletar "${book.title}"?`
+    );
+    if (!confirm) return;
+
+    try {
+      const response = await fetchWithAuth(
+        `https://books-social.onrender.com/api/v1/book/delete/${book.bookId}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Erro ao deletar o livro");
+      }
+
+      console.log("Livro deletado com sucesso:", book.bookId);
+      onDelete?.(book.bookId);
+    } catch (error) {
+      console.error("Erro ao deletar livro:", error);
+    }
+  };
 
   return (
     <StyledCard>
@@ -36,9 +67,7 @@ export const BookCard: React.FC<Props> = ({ book, onDelete }) => {
           >
             Open
           </ActionButton>
-          <ActionButton onClick={() => onDelete?.(book.bookId)}>
-            Delete
-          </ActionButton>
+          <ActionButton onClick={handleDelete}>Delete</ActionButton>
         </Overlay>
       </div>
       <BookInfo>

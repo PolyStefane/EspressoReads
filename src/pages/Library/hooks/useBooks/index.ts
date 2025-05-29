@@ -1,5 +1,3 @@
-// pages/Library/hooks/useBooks.ts
-
 import { useEffect, useState } from "react";
 import { Book } from "../../types/Book";
 import { fetchBooks } from "../../services/bookService";
@@ -24,5 +22,5 @@ export const useBooks = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  return { books, loading };
+  return { books, setBooks, loading };
 };

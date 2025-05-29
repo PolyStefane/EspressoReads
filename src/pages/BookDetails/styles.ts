@@ -1,34 +1,5 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
-  display: flex;
-  height: 100vh;
-  font-family: sans-serif;
-`;
-
-export const Sidebar = styled.div`
-  background-color: #dfeee7;
-  width: 200px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  font-weight: bold;
-  border-right: 2px solid #aaa;
-
-  button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    text-align: left;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
-
 export const MainContent = styled.div`
   flex: 1;
   background-color: #f9f9f9;
