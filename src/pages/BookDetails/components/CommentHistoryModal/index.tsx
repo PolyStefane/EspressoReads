@@ -12,6 +12,7 @@ import {
   ReactionProgress,
   IconButton,
   ScrollableContent,
+  EmptyState,
 } from "./styles";
 
 import { FaHeart, FaCommentDots, FaEllipsisH } from "react-icons/fa";
@@ -34,32 +35,40 @@ export const CommentHistoryModal: React.FC<Props> = ({ comments, onClose }) => {
       <Modal>
         <Title>Comment History</Title>
 
-        <ScrollableContent>
-          <CommentList>
-            {comments.map((comment, index) => (
-              <StyledCommentCard key={index}>
-                <CommentText>{comment.commentaryText}</CommentText>
+        {comments.length === 0 ? (
+          <EmptyState>
+            📝 No comments yet.
+            <br />
+            Be the first to share your thoughts!
+          </EmptyState>
+        ) : (
+          <ScrollableContent>
+            <CommentList>
+              {comments.map((comment, index) => (
+                <StyledCommentCard key={index}>
+                  <CommentText>{comment.commentaryText}</CommentText>
 
-                <ReactionProgress>
-                  <span>{getEmoji(comment.reaction)}</span>
-                  <span>{comment.progress}%</span>
-                </ReactionProgress>
+                  <ReactionProgress>
+                    <span>{getEmoji(comment.reaction)}</span>
+                    <span>{comment.progress}%</span>
+                  </ReactionProgress>
 
-                <CommentFooter>
-                  <div>
-                    <IconButton>
-                      <FaHeart /> <span>4</span>
-                    </IconButton>
-                    <IconButton>
-                      <FaCommentDots /> <span>Comentar</span>
-                    </IconButton>
-                  </div>
-                  <FaEllipsisH />
-                </CommentFooter>
-              </StyledCommentCard>
-            ))}
-          </CommentList>
-        </ScrollableContent>
+                  <CommentFooter>
+                    <div>
+                      <IconButton>
+                        <FaHeart /> <span>4</span>
+                      </IconButton>
+                      <IconButton>
+                        <FaCommentDots /> <span>Comentar</span>
+                      </IconButton>
+                    </div>
+                    <FaEllipsisH />
+                  </CommentFooter>
+                </StyledCommentCard>
+              ))}
+            </CommentList>
+          </ScrollableContent>
+        )}
 
         <ModalActions>
           <CloseButton onClick={onClose}>Close</CloseButton>

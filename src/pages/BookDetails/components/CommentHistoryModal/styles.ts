@@ -111,3 +111,11 @@ export const IconButton = styled.span`
   margin-right: 1rem;
   cursor: pointer;
 `;
+
+export const EmptyState = styled.div`
+  text-align: center;
+  color: #666;
+  padding: 2rem;
+  font-size: 1rem;
+  opacity: 0.8;
+`;
