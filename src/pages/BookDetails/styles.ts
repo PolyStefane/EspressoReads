@@ -47,7 +47,7 @@ export const Stars = styled.div`
 
 export const HeartIcon = styled.div`
   font-size: 2rem;
-  color: #ff4f81;
+  color: #e18eeb;
   display: flex;
   align-items: center;
   justify-content: center;

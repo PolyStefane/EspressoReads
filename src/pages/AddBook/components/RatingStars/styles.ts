@@ -30,10 +30,10 @@ export const FavoriteButton = styled.button<{ $active: boolean }>`
   border: none;
   font-size: 2.4rem;
   cursor: pointer;
-  margin-left: 0.5rem;
+  margin-left: 0.3rem;
 
   width: 2.4rem;
-  height: 2.8rem;
+  height: 3rem;
   display: flex;
   align-items: start;
   justify-content: center;
@@ -59,6 +59,6 @@ export const HeartIconOutline = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.4rem;
+  font-size: 2.8rem;
   color: rgb(228, 183, 233);
 `;

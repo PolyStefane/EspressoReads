@@ -7,6 +7,7 @@ import {
   RatingContainer,
   StarContainer,
 } from "./styles";
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
 type Props = {
   rating: number;
@@ -38,11 +39,11 @@ export const RatingStars: React.FC<Props> = ({
       >
         {isFavorite ? (
           <HeartIcon>
-            <FaHeart />
+            <MdFavorite />
           </HeartIcon>
         ) : (
           <HeartIconOutline>
-            <FaRegHeart />
+            <MdFavoriteBorder />
           </HeartIconOutline>
         )}
       </FavoriteButton>

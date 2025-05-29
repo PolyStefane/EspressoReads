@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchWithAuth } from "../../Services/api";
 import { Book } from "../Library/types/Book";
+import { FaStar } from "react-icons/fa";
+import { MdFavorite } from "react-icons/md";
 import {
   MainContent,
   BookPanel,
@@ -16,8 +18,6 @@ import {
   Stars,
   Title,
 } from "./styles";
-import { FaStar } from "react-icons/fa";
-import { AiFillHeart } from "react-icons/ai";
 
 export const BookDetails: React.FC = () => {
   const { id } = useParams();
@@ -72,7 +72,7 @@ export const BookDetails: React.FC = () => {
             {book.readingStatus === "Read" && (
               <Tag color="#d4f7dc">✅ Read</Tag>
             )}
-            {book.isFavorite && <Tag color="#f4d1f7">💜 Favorites</Tag>}
+            {book.isFavorite && <Tag color="#FDE9FF">💜 Favorites</Tag>}
           </StatusRow>
 
           <Field>
@@ -109,7 +109,7 @@ export const BookDetails: React.FC = () => {
             </Stars>
             {book.isFavorite && (
               <HeartIcon>
-                <AiFillHeart />
+                <MdFavorite />
               </HeartIcon>
             )}
           </IconGroup>
