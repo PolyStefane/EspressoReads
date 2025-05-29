@@ -1,13 +1,16 @@
+// External libraries
 import React from "react";
-import { FaStar, FaRegStar, FaHeart, FaRegHeart } from "react-icons/fa";
-import {
-  FavoriteButton,
-  HeartIcon,
-  HeartIconOutline,
-  RatingContainer,
-  StarContainer,
-} from "./styles";
+import { FaStar, FaRegStar } from "react-icons/fa";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
+
+// Styles
+import {
+  HeartIcon,
+  StarContainer,
+  FavoriteButton,
+  RatingContainer,
+  HeartIconOutline,
+} from "./styles";
 
 type Props = {
   rating: number;

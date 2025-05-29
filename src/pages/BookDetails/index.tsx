@@ -1,22 +1,29 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { fetchWithAuth } from "../../Services/api";
-import { Book } from "../Library/types/Book";
+// External libraries
 import { FaStar } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import { MdFavorite } from "react-icons/md";
+import { useParams } from "react-router-dom";
+
+// Services
+import { fetchWithAuth } from "../../Services/api";
+
+// Types
+import { Book } from "../Library/types/Book";
+
+// Styles
 import {
-  MainContent,
-  BookPanel,
-  CoverImage,
-  Field,
-  Label,
   Tag,
-  StatusRow,
+  Label,
+  Field,
+  Title,
+  Stars,
   Buttons,
+  StatusRow,
   IconGroup,
   HeartIcon,
-  Stars,
-  Title,
+  BookPanel,
+  CoverImage,
+  MainContent,
 } from "./styles";
 
 export const BookDetails: React.FC = () => {
