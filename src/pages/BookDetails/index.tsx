@@ -8,13 +8,13 @@ import {
   CoverImage,
   Field,
   Label,
-  Highlight,
   Tag,
   StatusRow,
   Buttons,
   IconGroup,
   HeartIcon,
   Stars,
+  Title,
 } from "./styles";
 
 export const BookDetails: React.FC = () => {
@@ -34,12 +34,7 @@ export const BookDetails: React.FC = () => {
     <MainContent>
       <BookPanel>
         <div style={{ flex: 1 }}>
-          <h1>Book #{book.bookId}</h1>
-
-          <Field>
-            <Label>Title</Label>
-            <Highlight>{book.title}</Highlight>
-          </Field>
+          <Title>{book.title}</Title>
 
           <Field>
             <Label>Author</Label>
