@@ -16,14 +16,14 @@ export const Title = styled.h1`
 
 export const FormContainer = styled.div`
   width: 100%;
-  max-width: 50rem;
+  max-width: 60rem;
   padding: 3rem;
 `;
 
 export const FormSection = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
-  /* gap: 1.5rem; */
+  gap: 6rem;
 `;
 
 export const LeftContainer = styled.div``;
