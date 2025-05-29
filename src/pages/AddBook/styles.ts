@@ -1,9 +1,5 @@
 import styled, { css } from "styled-components";
 
-interface FavoriteButtonProps {
-  $active: boolean;
-}
-
 interface BookCoverUploadProps {
   hasImage: boolean;
 }
@@ -166,44 +162,6 @@ export const BookCoverUpload = styled.div<BookCoverUploadProps>`
       padding: 0.5rem;
       background-color: white;
     `}
-`;
-
-export const RatingContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1rem;
-`;
-
-export const StarContainer = styled.div`
-  display: flex;
-
-  font-size: 2.5rem;
-  color: #f2c94c;
-  cursor: pointer;
-
-  span {
-    margin-right: 0.4rem;
-    transition: transform 0.2s ease;
-
-    &:hover {
-      transform: scale(1.2);
-    }
-  }
-`;
-
-export const FavoriteButton = styled.button<FavoriteButtonProps>`
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  color: ${(props) => (props.$active ? "#f28a8a" : "#dcdcdc")};
-
-  transition: transform 0.2s ease;
-
-  &:hover {
-    transform: scale(1.2);
-  }
 `;
 
 export const RightContainer = styled.div`

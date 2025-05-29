@@ -1,6 +1,12 @@
-// pages/AddBook/components/RatingStars.tsx
 import React from "react";
-import { FavoriteButton, RatingContainer, StarContainer } from "../../styles";
+import { FaStar, FaRegStar, FaHeart, FaRegHeart } from "react-icons/fa";
+import {
+  FavoriteButton,
+  HeartIcon,
+  HeartIconOutline,
+  RatingContainer,
+  StarContainer,
+} from "./styles";
 
 type Props = {
   rating: number;
@@ -20,7 +26,7 @@ export const RatingStars: React.FC<Props> = ({
       <StarContainer>
         {[1, 2, 3, 4, 5].map((star) => (
           <span key={star} onClick={() => onRate(star)}>
-            {rating >= star ? "★" : "☆"}
+            {rating >= star ? <FaStar /> : <FaRegStar />}
           </span>
         ))}
       </StarContainer>
@@ -30,7 +36,15 @@ export const RatingStars: React.FC<Props> = ({
         onClick={onToggleFavorite}
         aria-label="Mark as favorite"
       >
-        {isFavorite ? "🩷" : "🤍"}
+        {isFavorite ? (
+          <HeartIcon>
+            <FaHeart />
+          </HeartIcon>
+        ) : (
+          <HeartIconOutline>
+            <FaRegHeart />
+          </HeartIconOutline>
+        )}
       </FavoriteButton>
     </RatingContainer>
   );

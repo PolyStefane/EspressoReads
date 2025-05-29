@@ -16,6 +16,8 @@ import {
   Stars,
   Title,
 } from "./styles";
+import { FaStar } from "react-icons/fa";
+import { AiFillHeart } from "react-icons/ai";
 
 export const BookDetails: React.FC = () => {
   const { id } = useParams();
@@ -102,10 +104,14 @@ export const BookDetails: React.FC = () => {
           <IconGroup>
             <Stars>
               {[...Array(book.rating)].map((_, i) => (
-                <span key={i}>⭐</span>
+                <FaStar key={i} />
               ))}
             </Stars>
-            {book.isFavorite && <HeartIcon>💜</HeartIcon>}
+            {book.isFavorite && (
+              <HeartIcon>
+                <AiFillHeart />
+              </HeartIcon>
+            )}
           </IconGroup>
         </CoverImage>
       </BookPanel>

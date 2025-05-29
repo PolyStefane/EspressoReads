@@ -35,12 +35,22 @@ export const IconGroup = styled.div`
 `;
 
 export const Stars = styled.div`
-  font-size: 1.3rem;
+  display: flex;
+  font-size: 1.6rem;
+  color: #f2c94c;
+  margin-bottom: 0.5rem;
+
+  svg {
+    margin-right: 0.3rem;
+  }
 `;
 
 export const HeartIcon = styled.div`
-  font-size: 1.5rem;
-  color: purple;
+  font-size: 2rem;
+  color: #ff4f81;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Title = styled.h1`
