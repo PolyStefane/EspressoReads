@@ -64,6 +64,7 @@ export const Input = styled.input`
 export const SelectContainer = styled.div`
   display: flex;
   gap: 1rem;
+  margin-bottom: 2rem;
 `;
 
 export const Select = styled.select`
@@ -117,10 +118,12 @@ export const DateInput = styled(Input).attrs({ type: "date" })`
 `;
 
 export const PagesInput = styled(Input)`
-  width: 8rem;
+  width: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
+  text-align: center;
   margin-top: 1rem;
 `;
 
@@ -147,8 +150,8 @@ export const CheckboxWrapper = styled.div`
 export const LeftContainer = styled.div``;
 
 export const BookCoverUpload = styled.div<BookCoverUploadProps>`
-  width: 15rem;
-  height: 20rem;
+  width: 17rem;
+  height: 25rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -206,6 +209,7 @@ export const FavoriteButton = styled.button<FavoriteButtonProps>`
 export const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 3rem;
   align-items: center;
 `;
 

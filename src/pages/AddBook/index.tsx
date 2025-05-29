@@ -14,9 +14,7 @@ import { useBookForm } from "./hooks/useBookForm";
 
 // Styles
 import {
-  Input,
   Title,
-  Select,
   TextArea,
   Container,
   PagesInput,
@@ -28,6 +26,7 @@ import {
   SelectContainer,
   FormContainer,
 } from "./styles";
+import { LabeledReactSelect } from "./components/LabeledReactSelect";
 
 export const AddBook: React.FC = () => {
   const {
@@ -64,23 +63,37 @@ export const AddBook: React.FC = () => {
             />
 
             <SelectContainer>
-              <Select name="genre" onChange={handleChange} value={form.genre}>
-                <option value="">Select Genre</option>
-                <option value="fantasy">Fantasy</option>
-                <option value="romance">Romance</option>
-                <option value="thriller">Thriller</option>
-              </Select>
+              <LabeledReactSelect
+                label="Genre"
+                name="genre"
+                value={form.genre}
+                onChange={(value: string) =>
+                  handleChange({
+                    target: { name: "genre", value },
+                  } as React.ChangeEvent<HTMLInputElement>)
+                }
+                options={[
+                  { value: "fantasy", label: "Fantasy" },
+                  { value: "romance", label: "Romance" },
+                  { value: "thriller", label: "Thriller" },
+                ]}
+              />
 
-              <Select
+              <LabeledReactSelect
+                label="Reading Status"
                 name="readingStatus"
-                onChange={handleChange}
                 value={form.readingStatus}
-              >
-                <option value="">Status</option>
-                <option value="reading">Reading</option>
-                <option value="finished">Finished</option>
-                <option value="wishlist">Wishlist</option>
-              </Select>
+                onChange={(value: string) =>
+                  handleChange({
+                    target: { name: "readingStatus", value },
+                  } as React.ChangeEvent<HTMLInputElement>)
+                }
+                options={[
+                  { value: "reading", label: "Reading" },
+                  { value: "finished", label: "Finished" },
+                  { value: "wishlist", label: "Wishlist" },
+                ]}
+              />
             </SelectContainer>
 
             <DateContainer>
@@ -99,15 +112,14 @@ export const AddBook: React.FC = () => {
                 onChange={handleChange}
               />
             </DateContainer>
-
             <TextArea
               name="review"
               placeholder="Insert your opinion about the book, your favorite quotes, etc..."
               value={form.review}
               onChange={handleChange}
             />
-
-            <Input
+            <FloatingInput
+              label="Favorite Character"
               name="favoriteCharacter"
               placeholder="Enter the name of the character who touched your heart"
               value={form.favoriteCharacter}
