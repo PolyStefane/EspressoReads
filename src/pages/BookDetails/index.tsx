@@ -30,10 +30,12 @@ import {
   Buttons,
   Row,
 } from "./styles";
+import { CommentModal } from "./components/CommentModal";
 
 export const BookDetails: React.FC = () => {
   const { id } = useParams();
   const [book, setBook] = useState<Book | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetchWithAuth(`https://books-social.onrender.com/api/v1/book/find/${id}`)
@@ -131,13 +133,14 @@ export const BookDetails: React.FC = () => {
             </Row>
 
             <Buttons>
-              <button>Add Comment</button>
+              <button onClick={() => setIsModalOpen(true)}>Add Comment</button>
               <button>Comment History</button>
               <button>Update</button>
             </Buttons>
           </RightContainer>
         </FormSection>
       </FormContainer>
+      {isModalOpen && <CommentModal onClose={() => setIsModalOpen(false)} />}
     </Container>
   );
 };
