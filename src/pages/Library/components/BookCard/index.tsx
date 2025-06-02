@@ -19,6 +19,7 @@ import {
 } from "./styles";
 import { fetchWithAuth } from "../../../../Services/api";
 import { ConfirmDeleteModal } from "../ConfirmDeleteModal";
+import { toast } from "sonner";
 
 type Props = {
   book: Book;
@@ -40,13 +41,14 @@ export const BookCard: React.FC<Props> = ({ book, onDelete }) => {
       );
 
       if (!response.ok) {
-        throw new Error("Erro ao deletar o livro");
+        throw new Error("Failed to delete the book");
       }
 
-      console.log("Livro deletado com sucesso:", book.bookId);
+      toast.success(`"${book.title}" was successfully deleted.`);
       onDelete?.(book.bookId);
     } catch (error) {
-      console.error("Erro ao deletar livro:", error);
+      console.error("Failed to delete book:", error);
+      toast.error("Something went wrong while deleting the book.");
     } finally {
       setShowModal(false);
     }

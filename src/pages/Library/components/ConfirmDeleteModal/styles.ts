@@ -47,6 +47,16 @@ export const CancelButton = styled.button`
   border-radius: 8px;
   border: none;
   cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: #d5d5d5;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
 `;
 
 export const ConfirmButton = styled.button`
@@ -56,4 +66,14 @@ export const ConfirmButton = styled.button`
   border-radius: 8px;
   border: none;
   cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: #e85c5c;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
 `;
