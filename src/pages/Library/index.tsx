@@ -48,12 +48,14 @@ export const Library: React.FC = () => {
   return (
     <MainContent>
       <Title>Welcome to your Library</Title>
+
       {loading ? (
         <p>📚 Loading your books...</p>
       ) : books.length === 0 ? (
         <p>📭 No books found in your library. Try adding some!</p>
       ) : (
         <>
+          {/* Filtros e busca sempre visíveis */}
           <FilterContainer>
             <SearchWrapper>
               <FiSearch />
@@ -87,11 +89,20 @@ export const Library: React.FC = () => {
             />
           </FilterContainer>
 
-          <BookGrid>
-            {filteredBooks.map((book) => (
-              <BookCard key={book.bookId} book={book} onDelete={handleDelete} />
-            ))}
-          </BookGrid>
+          {/* Verifica resultados depois */}
+          {filteredBooks.length === 0 ? (
+            <p>🔍 No results match your search or selected filter.</p>
+          ) : (
+            <BookGrid>
+              {filteredBooks.map((book) => (
+                <BookCard
+                  key={book.bookId}
+                  book={book}
+                  onDelete={handleDelete}
+                />
+              ))}
+            </BookGrid>
+          )}
         </>
       )}
     </MainContent>
