@@ -27,11 +27,11 @@ const Register: React.FC = () => {
 
   // States
   const [email, setEmail] = useState("");
-  const [userName, setUserName] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const userPicture = "https://imagem.com/avatar.jpg";
+  const userPhoto = "https://imagem.com/avatar.jpg";
 
   const handleRegister = async () => {
     if (password !== confirmPassword) {
@@ -40,7 +40,7 @@ const Register: React.FC = () => {
     }
 
     try {
-      await register({ userPicture, userName, email, password });
+      await register({ userPhoto, username, email, password });
       alert("Usuário registrado com sucesso!");
       navigate("/");
     } catch (error: any) {
