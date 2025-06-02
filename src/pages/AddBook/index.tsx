@@ -73,9 +73,27 @@ export const AddBook: React.FC = () => {
                   } as React.ChangeEvent<HTMLInputElement>)
                 }
                 options={[
-                  { value: "fantasy", label: "Fantasy" },
-                  { value: "romance", label: "Romance" },
-                  { value: "thriller", label: "Thriller" },
+                  { value: "ADVENTURE", label: "Adventure" },
+                  { value: "BIOGRAPHY", label: "Biography" },
+                  { value: "CHILDREN", label: "Children" },
+                  { value: "CLASSIC", label: "Classic" },
+                  { value: "COMIC", label: "Comic" },
+                  { value: "DRAMA", label: "Drama" },
+                  { value: "DYSTOPIAN", label: "Dystopian" },
+                  { value: "FANTASY", label: "Fantasy" },
+                  { value: "GRAPHIC_NOVEL", label: "Graphic Novel" },
+                  { value: "HISTORICAL", label: "Historical" },
+                  { value: "HORROR", label: "Horror" },
+                  { value: "HUMOR", label: "Humor" },
+                  { value: "MANGA", label: "Manga" },
+                  { value: "MYSTERY", label: "Mystery" },
+                  { value: "POETRY", label: "Poetry" },
+                  { value: "ROMANCE", label: "Romance" },
+                  { value: "SCIENCE_FICTION", label: "Science Fiction" },
+                  { value: "TECHNOLOGY", label: "Technology" },
+                  { value: "THRILLER", label: "Thriller" },
+                  { value: "TRUE_CRIME", label: "True Crime" },
+                  { value: "YOUNG_ADULT", label: "Young Adult" },
                 ]}
               />
 

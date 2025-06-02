@@ -191,7 +191,7 @@ export const BookDetails: React.FC = () => {
               >
                 Comment History
               </button>
-              <button>Update Book</button>
+              {/* <button>Update Book</button> */}
             </Buttons>
           </RightContainer>
         </FormSection>
