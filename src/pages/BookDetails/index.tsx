@@ -1,6 +1,6 @@
 // External libraries
 import { FaStar } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MdFavorite } from "react-icons/md";
 import { useParams } from "react-router-dom";
 
@@ -43,8 +43,12 @@ export const BookDetails: React.FC = () => {
   const [showHistory, setShowHistory] = useState(false);
 
   const userId = localStorage.getItem("userId") ?? "";
+  const hasFetched = useRef(false);
 
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
     fetchWithAuth(
       `https://books-social.onrender.com/api/v1/book/find/${bookId}`
     )
