@@ -80,8 +80,8 @@ export const CommentHistoryModal: React.FC<Props> = ({ comments, onClose }) => {
 
 function getEmoji(reaction: string) {
   const map: Record<string, string> = {
-    LOVED: "😍",
-    HAPPY: "🤩",
+    LOVING: "😍",
+    EXCITED: "🤩",
     AMAZED: "😱",
     DELUDED: "🤡",
     LAUGH: "😂",
