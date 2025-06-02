@@ -42,6 +42,7 @@ export const BookDetails: React.FC = () => {
   const [book, setBook] = useState<Book | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
+  const [loadingComments, setLoadingComments] = useState(false);
 
   const userId = localStorage.getItem("userId") ?? "";
   const hasFetched = useRef(false);
@@ -68,15 +69,33 @@ export const BookDetails: React.FC = () => {
   if (!book) return <p>Loading...</p>;
 
   const fetchComments = async () => {
+    setLoadingComments(true);
     try {
       const res = await fetchWithAuth(
         `https://books-social.onrender.com/api/v1/commentary/${bookId}`
       );
-      const data = await res.json();
-      setComments(data.comments || []); // <-- isso é ESSENCIAL
-      setShowHistory(true); // <-- mostra o modal
+
+      if (!res.ok) {
+        throw new Error("Erro na requisição");
+      }
+
+      let data;
+      try {
+        data = await res.json();
+      } catch (e) {
+        const fallbackText = await res.text();
+        console.error("Resposta não parseável como JSON:", fallbackText);
+        throw new Error("Resposta não é JSON");
+      }
+
+      console.log("✅ Comentários:", data);
+
+      setComments(data.comments || []);
+      setShowHistory(true);
     } catch (err) {
       console.error("Erro ao buscar comentários:", err);
+    } finally {
+      setLoadingComments(false);
     }
   };
 
@@ -164,8 +183,14 @@ export const BookDetails: React.FC = () => {
 
             <Buttons>
               <button onClick={() => setIsModalOpen(true)}>Add Comment</button>
-              <button onClick={fetchComments}>Comment History</button>
-
+              <button
+                onClick={() => {
+                  setShowHistory(true);
+                  fetchComments();
+                }}
+              >
+                Comment History
+              </button>
               <button>Update Book</button>
             </Buttons>
           </RightContainer>
@@ -184,6 +209,7 @@ export const BookDetails: React.FC = () => {
         <CommentHistoryModal
           bookId={bookId!}
           comments={comments}
+          loading={loadingComments}
           onClose={() => setShowHistory(false)}
         />
       )}

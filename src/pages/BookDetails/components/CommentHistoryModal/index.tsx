@@ -25,17 +25,24 @@ type Comment = {
 
 type Props = {
   bookId: string;
+  loading: boolean;
   comments: Comment[];
   onClose: () => void;
 };
 
-export const CommentHistoryModal: React.FC<Props> = ({ comments, onClose }) => {
+export const CommentHistoryModal: React.FC<Props> = ({
+  comments,
+  onClose,
+  loading,
+}) => {
   return (
     <Overlay>
       <Modal>
         <Title>Comment History</Title>
 
-        {comments.length === 0 ? (
+        {loading ? (
+          <EmptyState>⏳ Loading comments...</EmptyState>
+        ) : comments.length === 0 ? (
           <EmptyState>
             📝 No comments yet.
             <br />
