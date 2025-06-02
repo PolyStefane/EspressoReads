@@ -66,25 +66,21 @@ export const Library: React.FC = () => {
             </SearchWrapper>
 
             <FilterTag
-              label="💜 Favorites"
               type="FAVORITES"
               active={activeFilter === "FAVORITES"}
               onClick={handleFilterClick}
             />
             <FilterTag
-              label="✅ Finished"
               type="FINISHED"
               active={activeFilter === "FINISHED"}
               onClick={handleFilterClick}
             />
             <FilterTag
-              label="📖 Reading"
               type="READING"
               active={activeFilter === "READING"}
               onClick={handleFilterClick}
             />
             <FilterTag
-              label="🔮 Want to read"
               type="WISHLIST"
               active={activeFilter === "WISHLIST"}
               onClick={handleFilterClick}

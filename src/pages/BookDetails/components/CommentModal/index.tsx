@@ -114,7 +114,7 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
         />
 
         <Input
-          placeholder="Enter your progress (page or percentage)"
+          placeholder="Enter your progress (percentage)"
           value={progress}
           onChange={(e) => setProgress(e.target.value)}
         />
