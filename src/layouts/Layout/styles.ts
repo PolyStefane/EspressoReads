@@ -8,7 +8,7 @@ export const Container = styled.div`
 
 export const ContentArea = styled.div`
   flex: 1;
-  padding: 2rem;
+  padding: 0rem;
   height: 100vh;
   overflow-y: auto;
   /* background: linear-gradient(135deg, #f8f8f2, #d6e5d3); */

@@ -10,10 +10,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  /* padding: 5rem 8rem; */
-
-  /* background-color: blue; */
 `;
 
 export const Title = styled.h1`
@@ -27,8 +23,6 @@ export const FormContainer = styled.div`
   width: 100%;
   max-width: 70rem;
   padding: 3rem;
-  /* background-color: white; */
-  /* border-radius: 1rem; */
 `;
 
 export const FormSection = styled.div`

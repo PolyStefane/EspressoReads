@@ -12,7 +12,7 @@ export const Title = styled.h2`
   font-size: 2.4rem;
   color: #1f1f1f;
   text-align: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 2.5rem;
 `;
 
 export const Highlight = styled.h1`
@@ -48,6 +48,44 @@ export const StartButton = styled.button`
 
   &:hover {
     background-color: #5e9b73;
+  }
+`;
+export const FilterContainer = styled.div`
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+`;
+
+export const SearchWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  svg {
+    position: absolute;
+    left: 1.2rem;
+    color: #999;
+    font-size: 1.2rem;
+  }
+`;
+
+export const SearchInput = styled.input`
+  padding: 0.6rem 1rem 0.6rem 2.8rem;
+  font-size: 1rem;
+  border-radius: 2rem;
+  border: none;
+  background-color: #f5f4f2;
+  width: 20rem;
+
+  &::placeholder {
+    color: #999;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #d0d0d0;
   }
 `;
 

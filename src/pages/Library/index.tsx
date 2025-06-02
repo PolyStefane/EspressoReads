@@ -1,17 +1,45 @@
 // External libraries
-import React from "react";
+import React, { useState } from "react";
 
 // Components
 import { BookCard } from "./components/BookCard";
+import { FilterTag, FilterType } from "../../components/Tag";
 
 // Hooks
 import { useBooks } from "./hooks/useBooks";
 
 // Styles
-import { Title, MainContent, BookGrid } from "./styles";
+import {
+  Title,
+  MainContent,
+  BookGrid,
+  FilterContainer,
+  SearchInput,
+  SearchWrapper,
+} from "./styles";
+import { FaSearch } from "react-icons/fa";
 
 export const Library: React.FC = () => {
   const { books, setBooks, loading } = useBooks();
+  const [search, setSearch] = useState("");
+  const [activeFilter, setActiveFilter] = useState<null | FilterType>(null);
+  const handleFilterClick = (type: FilterType) => {
+    setActiveFilter((prev) => (prev === type ? null : type));
+  };
+  const filteredBooks = books.filter((book) => {
+    const matchesSearch =
+      book.title.toLowerCase().includes(search.toLowerCase()) ||
+      book.author.toLowerCase().includes(search.toLowerCase());
+
+    const matchesFilter =
+      !activeFilter ||
+      (activeFilter === "FAVORITES" && book.isFavorite) ||
+      (activeFilter === "FINISHED" && book.readingStatus === "FINISHED") ||
+      (activeFilter === "READING" && book.readingStatus === "READING") ||
+      (activeFilter === "WISHLIST" && book.readingStatus === "WISHLIST");
+
+    return matchesSearch && matchesFilter;
+  });
 
   const handleDelete = (bookId: string) => {
     setBooks((prevBooks) => prevBooks.filter((book) => book.bookId !== bookId));
@@ -25,11 +53,50 @@ export const Library: React.FC = () => {
       ) : books.length === 0 ? (
         <p>📭 No books found in your library. Try adding some!</p>
       ) : (
-        <BookGrid>
-          {books.map((book) => (
-            <BookCard key={book.bookId} book={book} onDelete={handleDelete} />
-          ))}
-        </BookGrid>
+        <>
+          <FilterContainer>
+            <SearchWrapper>
+              <FaSearch />
+              <SearchInput
+                type="text"
+                placeholder="Search..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </SearchWrapper>
+
+            <FilterTag
+              label="💜 Favorites"
+              type="FAVORITES"
+              active={activeFilter === "FAVORITES"}
+              onClick={handleFilterClick}
+            />
+            <FilterTag
+              label="✅ Finished"
+              type="FINISHED"
+              active={activeFilter === "FINISHED"}
+              onClick={handleFilterClick}
+            />
+            <FilterTag
+              label="📖 Reading"
+              type="READING"
+              active={activeFilter === "READING"}
+              onClick={handleFilterClick}
+            />
+            <FilterTag
+              label="🔮 Want to read"
+              type="WISHLIST"
+              active={activeFilter === "WISHLIST"}
+              onClick={handleFilterClick}
+            />
+          </FilterContainer>
+
+          <BookGrid>
+            {filteredBooks.map((book) => (
+              <BookCard key={book.bookId} book={book} onDelete={handleDelete} />
+            ))}
+          </BookGrid>
+        </>
       )}
     </MainContent>
   );

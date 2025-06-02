@@ -37,9 +37,9 @@ import {
 
 export const BookDetails: React.FC = () => {
   const { id: bookId } = useParams();
+  const [comments, setComments] = useState([]);
   const [book, setBook] = useState<Book | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [comments, setComments] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
 
   const userId = localStorage.getItem("userId") ?? "";
