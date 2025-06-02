@@ -1,6 +1,8 @@
 // External Libraries
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+// Services
 import { login } from "../../Services/AuthService";
 
 // Styles
@@ -29,14 +31,19 @@ const Login: React.FC = () => {
   const handleLogin = async () => {
     try {
       const response = await login({ email, password });
-      console.log("Login bem-sucedido, salvando userId...");
+      const username = response?.username;
+      const userId = response?.id;
 
-      localStorage.setItem("token", response.token);
-      localStorage.setItem("userId", "a1dc5d2e-42ea-4db8-90e1-3179d8f45f90");
+      console.log("RESPOSTA DA API:", response);
 
-      setTimeout(() => {
+      if (userId) {
+        localStorage.setItem("token", response.token);
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("username", username || "User");
         navigate("/home");
-      }, 100);
+      } else {
+        console.error("userId está indefinido. Verifique a resposta da API.");
+      }
     } catch (error) {
       console.error("Login failed:", error);
       alert("Erro ao fazer login");

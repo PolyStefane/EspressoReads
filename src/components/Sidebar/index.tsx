@@ -1,5 +1,6 @@
 // External Libraries
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 //Assets
 import { FeedIconSVG } from "../../assets/icons/FeedIcon";
@@ -11,18 +12,26 @@ import {
   Logo,
   NavButton,
   UserSection,
+  LogoutButton,
   OptionsContainer,
   SidebarContainer,
-  LogoutButton,
 } from "./styles";
-import { useLocation, useNavigate } from "react-router-dom";
 
 export const Sidebar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [username, setUsername] = useState("User");
+
+  useEffect(() => {
+    const storedName = localStorage.getItem("username");
+    if (storedName) setUsername(storedName);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("username");
+
     navigate("/");
   };
 
@@ -52,7 +61,7 @@ export const Sidebar: React.FC = () => {
       </OptionsContainer>
       <UserSection>
         <img src="/img/user.png" alt="User avatar" />
-        <span>user_name</span>
+        <span>{username}</span>
         <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
       </UserSection>
     </SidebarContainer>

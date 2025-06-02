@@ -22,6 +22,8 @@ export const Library: React.FC = () => {
       <Title>Welcome to your Library</Title>
       {loading ? (
         <p>📚 Loading your books...</p>
+      ) : books.length === 0 ? (
+        <p>📭 No books found in your library. Try adding some!</p>
       ) : (
         <BookGrid>
           {books.map((book) => (

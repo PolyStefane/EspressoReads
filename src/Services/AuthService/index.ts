@@ -1,8 +1,8 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
 export async function register(data: {
-  username: string;
   email: string;
+  username: string;
   password: string;
   userPhoto: string;
 }) {
