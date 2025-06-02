@@ -110,6 +110,7 @@ export const Tag = styled.span<{ color: string }>`
 export const Row = styled.div`
   margin-top: 2rem;
   display: flex;
+  padding: 0 1rem;
   text-align: center;
   gap: 2rem;
 `;

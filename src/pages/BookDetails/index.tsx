@@ -17,7 +17,6 @@ import { Book } from "../Library/types/Book";
 // Styles
 import {
   Row,
-  Tag,
   Title,
   Field,
   Label,
@@ -34,6 +33,8 @@ import {
   LeftContainer,
   RightContainer,
 } from "./styles";
+import { StatusTag } from "./components/StatusTag";
+import { FilterType } from "../../components/Tag";
 
 export const BookDetails: React.FC = () => {
   const { id: bookId } = useParams();
@@ -119,8 +120,10 @@ export const BookDetails: React.FC = () => {
             </Field>
 
             <StatusRow>
-              {book.isFavorite && <Tag color="#FDE9FF">💜 Favorites</Tag>}
-              <Tag color="#DDF6D0">{book.readingStatus}</Tag>
+              {book.isFavorite && <StatusTag type="FAVORITES" />}
+              {book.readingStatus && (
+                <StatusTag type={book.readingStatus as FilterType} />
+              )}
             </StatusRow>
           </LeftContainer>
 
