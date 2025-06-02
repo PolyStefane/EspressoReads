@@ -1,12 +1,16 @@
+// External dependencies
+import React from "react";
+
+// Styles
 import {
+  Icon,
+  Modal,
+  SubText,
+  Message,
+  Overlay,
   ButtonRow,
   CancelButton,
   ConfirmButton,
-  Icon,
-  Message,
-  Modal,
-  Overlay,
-  SubText,
 } from "./styles";
 
 interface ConfirmDeleteModalProps {

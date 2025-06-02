@@ -1,5 +1,6 @@
 // External libraries
 import React, { useState } from "react";
+import { FiSearch } from "react-icons/fi";
 
 // Components
 import { BookCard } from "./components/BookCard";
@@ -11,13 +12,12 @@ import { useBooks } from "./hooks/useBooks";
 // Styles
 import {
   Title,
-  MainContent,
   BookGrid,
-  FilterContainer,
+  MainContent,
   SearchInput,
   SearchWrapper,
+  FilterContainer,
 } from "./styles";
-import { FaSearch } from "react-icons/fa";
 
 export const Library: React.FC = () => {
   const { books, setBooks, loading } = useBooks();
@@ -56,7 +56,7 @@ export const Library: React.FC = () => {
         <>
           <FilterContainer>
             <SearchWrapper>
-              <FaSearch />
+              <FiSearch />
               <SearchInput
                 type="text"
                 placeholder="Search..."

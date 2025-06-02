@@ -1,9 +1,14 @@
 // External libraries
+import { toast } from "sonner";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Components
 import { BookCover } from "../BookCover";
+import { ConfirmDeleteModal } from "../ConfirmDeleteModal";
+
+// Services
+import { fetchWithAuth } from "../../../../Services/api";
 
 //Types
 import { Book } from "../../types/Book";
@@ -17,9 +22,6 @@ import {
   StyledCard,
   TitleText,
 } from "./styles";
-import { fetchWithAuth } from "../../../../Services/api";
-import { ConfirmDeleteModal } from "../ConfirmDeleteModal";
-import { toast } from "sonner";
 
 type Props = {
   book: Book;
