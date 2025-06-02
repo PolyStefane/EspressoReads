@@ -26,7 +26,6 @@ const App: React.FC = () => {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* Protected routes with Sidebar */}
         <Route
           element={
             <ProtectedRoute>

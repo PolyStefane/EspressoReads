@@ -20,6 +20,7 @@ import {
   ImageBottomLeft,
   ButtonContainer,
 } from "./styles";
+import { toast } from "sonner";
 
 const Register: React.FC = () => {
   // Hooks
@@ -29,23 +30,33 @@ const Register: React.FC = () => {
   const [email, setEmail] = useState("");
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const userPhoto = "https://imagem.com/avatar.jpg";
 
   const handleRegister = async () => {
+    if (isLoading) return;
+
     if (password !== confirmPassword) {
-      alert("As senhas não coincidem!");
+      toast.error("Passwords do not match!");
       return;
     }
 
+    setIsLoading(true);
+    const toastId = toast.loading("Connecting to server...");
+
     try {
       await register({ userPhoto, username, email, password });
-      alert("Usuário registrado com sucesso!");
+      toast.success("Account created successfully!", { id: toastId });
       navigate("/");
     } catch (error: any) {
-      console.error("Erro ao registrar:", error);
-      alert(error.message || "Erro desconhecido");
+      console.error("Registration failed:", error);
+      toast.error(error.message || "An unexpected error occurred.", {
+        id: toastId,
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -95,7 +106,9 @@ const Register: React.FC = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <ButtonContainer>
-              <Button type="submit">Register</Button>
+              <Button type="submit" disabled={isLoading}>
+                {isLoading ? "Registering..." : "Register"}
+              </Button>
             </ButtonContainer>
           </form>
           <LinkText href="/">Already have an account?</LinkText>

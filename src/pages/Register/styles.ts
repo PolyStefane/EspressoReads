@@ -152,6 +152,12 @@ export const Button = styled.button`
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
+  &:disabled {
+    background-color: #dfe6e9;
+    color: #636e72;
+    cursor: not-allowed;
+  }
+
   @media (max-width: 768px) {
     width: 40%;
   }

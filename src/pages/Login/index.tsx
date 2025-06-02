@@ -22,31 +22,46 @@ import {
   LeftTextWrapper,
   ButtonContainer,
 } from "./styles";
+import { toast } from "sonner";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
+    if (isLoading) return;
+    setIsLoading(true);
+
+    const toastId = toast.loading("Connecting to server...");
+
     try {
       const response = await login({ email, password });
       const username = response?.username;
       const userId = response?.id;
 
-      console.log("RESPOSTA DA API:", response);
-
       if (userId) {
         localStorage.setItem("token", response.token);
         localStorage.setItem("userId", userId);
         localStorage.setItem("username", username || "User");
+
+        toast.success("Login successful!", { id: toastId });
         navigate("/home");
       } else {
-        console.error("userId está indefinido. Verifique a resposta da API.");
+        toast.error("Could not process login.", { id: toastId });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Login failed:", error);
-      alert("Erro ao fazer login");
+
+      const message =
+        error?.status === 401
+          ? "Invalid email or password."
+          : "Failed to log in.";
+
+      toast.error(message, { id: toastId });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -87,7 +102,9 @@ const Login: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <ButtonContainer>
-              <Button type="submit">Enter</Button>
+              <Button type="submit" disabled={isLoading}>
+                {isLoading ? "Loading..." : "Enter"}
+              </Button>
             </ButtonContainer>
           </form>
           <LinkText href="/register">Create an account</LinkText>
