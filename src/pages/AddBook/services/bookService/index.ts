@@ -14,8 +14,11 @@ export const saveBook = async (payload: any) => {
   );
 
   if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Request failed: ${response.status} - ${errorText}`);
+    const errorBody = await response.json().catch(() => ({}));
+    const error: any = new Error("Erro ao salvar livro");
+    error.status = response.status;
+    error.detail = errorBody?.detail || "";
+    throw error;
   }
 
   const responseText = await response.text();

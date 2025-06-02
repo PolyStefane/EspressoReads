@@ -15,10 +15,12 @@ import ProtectedRoute from "./components/ProtectedRoute";
 // Styles
 import GlobalStyle from "./GlobalStyle";
 import Layout from "./layouts/Layout";
+import { Toaster } from "sonner";
 
 const App: React.FC = () => {
   return (
     <>
+      <Toaster richColors position="bottom-right" />
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<Login />} />

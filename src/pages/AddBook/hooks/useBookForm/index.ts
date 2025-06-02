@@ -6,6 +6,8 @@ import { BookFormValues, createBookPayload } from "../../types/BookForm";
 
 // Services
 import { saveBook } from "../../services/bookService";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 export const useBookForm = () => {
   const [form, setForm] = useState<BookFormValues>({
@@ -49,6 +51,8 @@ export const useBookForm = () => {
     }
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = async () => {
     if (isSubmitting) return;
     setIsSubmitting(true);
@@ -56,10 +60,16 @@ export const useBookForm = () => {
     try {
       const payload = createBookPayload(form);
       await saveBook(payload);
-      alert("Book saved successfully!");
-    } catch (error) {
-      alert("Error saving book.");
-      console.error(error);
+
+      toast.success("Book saved successfully!");
+      navigate("/library");
+    } catch (error: any) {
+      if (error?.status === 409) {
+        toast.error(error.detail || "Already exists a book with this title.");
+      } else {
+        toast.error("Failed to save book. Please try again.");
+      }
+      console.error("Erro ao salvar:", error);
     } finally {
       setIsSubmitting(false);
     }
