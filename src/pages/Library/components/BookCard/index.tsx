@@ -15,12 +15,12 @@ import { Book } from "../../types/Book";
 
 // Styles
 import {
-  ActionButton,
-  AuthorText,
-  BookInfo,
   Overlay,
-  StyledCard,
+  BookInfo,
   TitleText,
+  AuthorText,
+  StyledCard,
+  ActionButton,
 } from "./styles";
 
 type Props = {

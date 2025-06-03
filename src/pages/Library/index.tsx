@@ -55,7 +55,6 @@ export const Library: React.FC = () => {
         <p>📭 No books found in your library. Try adding some!</p>
       ) : (
         <>
-          {/* Filtros e busca sempre visíveis */}
           <FilterContainer>
             <SearchWrapper>
               <FiSearch />
@@ -89,7 +88,6 @@ export const Library: React.FC = () => {
             />
           </FilterContainer>
 
-          {/* Verifica resultados depois */}
           {filteredBooks.length === 0 ? (
             <p>🔍 No results match your search or selected filter.</p>
           ) : (
