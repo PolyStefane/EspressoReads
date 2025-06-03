@@ -1,4 +1,3 @@
-// pages/AddBook/components/CoverUpload.tsx
 import React from "react";
 import { BookCoverUpload } from "../../styles";
 

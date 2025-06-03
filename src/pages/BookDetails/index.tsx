@@ -2,7 +2,7 @@
 import { FaStar } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import { MdFavorite } from "react-icons/md";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 // Components
 import { CommentModal } from "./components/CommentModal";
@@ -43,6 +43,7 @@ export const BookDetails: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const [loadingComments, setLoadingComments] = useState(false);
+  const navigate = useNavigate();
 
   const userId = localStorage.getItem("userId") ?? "";
   const hasFetched = useRef(false);
@@ -191,7 +192,9 @@ export const BookDetails: React.FC = () => {
               >
                 Comment History
               </button>
-              {/* <button>Update Book</button> */}
+              {/* <button onClick={() => navigate(`/books/edit/${book.bookId}`)}>
+                Edit Book
+              </button>{" "} */}
             </Buttons>
           </RightContainer>
         </FormSection>
