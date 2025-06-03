@@ -17,6 +17,7 @@ import GlobalStyle from "./GlobalStyle";
 import Layout from "./layouts/Layout";
 import { Toaster } from "sonner";
 import { UpdateBook } from "./pages/UpdateBook";
+import { Feed } from "./pages/Feed";
 
 const App: React.FC = () => {
   return (
@@ -39,6 +40,7 @@ const App: React.FC = () => {
           <Route path="/library" element={<Library />} />
           <Route path="/book/:id" element={<BookDetails />} />
           <Route path="/books/edit/:id" element={<UpdateBook />} />
+          <Route path="/feed" element={<Feed />} />
         </Route>
       </Routes>
     </>

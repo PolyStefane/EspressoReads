@@ -42,6 +42,10 @@ export const Sidebar: React.FC = () => {
     navigate("/library");
   };
 
+  const feed = () => {
+    navigate("/feed");
+  };
+
   return (
     <SidebarContainer>
       <OptionsContainer>
@@ -55,7 +59,7 @@ export const Sidebar: React.FC = () => {
         >
           <AddBookIconSVG width={21} height={21} /> Add Book
         </NavButton>
-        <NavButton>
+        <NavButton $active={location.pathname === "/feed"} onClick={feed}>
           <FeedIconSVG /> Feed
         </NavButton>
       </OptionsContainer>
