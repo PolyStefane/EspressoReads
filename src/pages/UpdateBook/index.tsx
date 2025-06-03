@@ -20,7 +20,7 @@ export const UpdateBook: React.FC = () => {
     setForm,
     isSubmitting,
     handleChange,
-    handleSubmit,
+    // handleSubmit,
     handleRating,
     handleCheckbox,
     toggleFavorite,
