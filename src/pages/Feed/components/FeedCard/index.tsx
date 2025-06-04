@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Card,
   Left,
@@ -10,7 +10,9 @@ import {
   Username,
   Actions,
   ContainerProgress,
-} from "./styles";
+  ContainerBook,
+  BookTitle,
+} from './styles';
 
 interface Props {
   comment: any;
@@ -18,18 +20,18 @@ interface Props {
 
 export const FeedCard: React.FC<Props> = ({ comment }) => {
   const reactionMap: Record<string, string> = {
-    LOVING: "😍",
-    EXCITED: "🤩",
-    AMAZED: "😱",
-    DELUDED: "🤡",
-    LAUGH: "😂",
-    DISAPPOINTED: "💔",
-    CONFUSED: "😕",
-    ANGRY: "🤬",
-    SAD: "😢",
-    NAUSEOUS: "🤢",
-    BORED: "😴",
-    AGONY: "😩",
+    LOVING: '😍',
+    EXCITED: '🤩',
+    AMAZED: '😱',
+    DELUDED: '🤡',
+    LAUGH: '😂',
+    DISAPPOINTED: '💔',
+    CONFUSED: '😕',
+    ANGRY: '🤬',
+    SAD: '😢',
+    NAUSEOUS: '🤢',
+    BORED: '😴',
+    AGONY: '😩',
   };
 
   return (
@@ -38,9 +40,9 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
         <img
           src="/img/user.png"
           alt="avatar"
-          style={{ width: 20, height: 20, borderRadius: "50%" }}
+          style={{ width: 20, height: 20, borderRadius: '50%' }}
         />
-        @{comment.userName || "Anônimo"}
+        @{comment.userName || 'Anônimo'}
       </Username>
 
       <BookBox>
@@ -49,19 +51,19 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
 
           <ContainerProgress>
             <Progress>
-              {reactionMap[comment.reaction] || "💬"} {comment.progress || 0}%
+              {reactionMap[comment.reaction] || '💬'} {comment.progress || 0}%
             </Progress>
           </ContainerProgress>
         </Left>
 
-        <div>
+        <ContainerBook>
           <Cover src={comment.bookCoverUrl} alt={comment.bookTitle} />
           <BookInfo>
-            <strong>{comment.bookTitle}</strong>
+            <BookTitle>{comment.bookTitle}</BookTitle>
             <br />
             <span>{comment.bookAuthor}</span>
           </BookInfo>
-        </div>
+        </ContainerBook>
       </BookBox>
 
       <Actions>

@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 interface BookCoverUploadProps {
   hasImage: boolean;
@@ -102,7 +102,7 @@ export const TextArea = styled.textarea`
   }
 `;
 
-export const DateInput = styled(Input).attrs({ type: "date" })`
+export const DateInput = styled(Input).attrs({ type: 'date' })`
   max-width: 100%;
   color: #5d8665;
 `;
@@ -130,7 +130,7 @@ export const CheckboxWrapper = styled.div`
     color: #333;
   }
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     transform: scale(1.2);
     accent-color: #bdd9c3;
     cursor: pointer;
