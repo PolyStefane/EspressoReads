@@ -2,7 +2,7 @@
 import { FaStar } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import { MdFavorite } from "react-icons/md";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 // Components
 import { CommentModal } from "./components/CommentModal";
@@ -35,6 +35,7 @@ import {
 } from "./styles";
 import { StatusTag } from "./components/StatusTag";
 import { FilterType } from "../../components/Tag";
+import { Spinner } from "../../components/Spinner";
 
 const genreLabels: Record<string, string> = {
   ADVENTURE: "Adventure",
@@ -67,7 +68,7 @@ export const BookDetails: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const [loadingComments, setLoadingComments] = useState(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const userId = localStorage.getItem("userId") ?? "";
   const hasFetched = useRef(false);
@@ -91,7 +92,13 @@ export const BookDetails: React.FC = () => {
       .catch(console.error);
   }, [bookId]);
 
-  if (!book) return <p>Loading...</p>;
+  if (!book) {
+    return (
+      <div>
+        <Spinner text="Loading book details..." />
+      </div>
+    );
+  }
 
   const fetchComments = async () => {
     setLoadingComments(true);
@@ -230,9 +237,9 @@ export const BookDetails: React.FC = () => {
               >
                 Comment History
               </button>
-              {/* <button onClick={() => navigate(`/books/edit/${book.bookId}`)}>
+              <button onClick={() => navigate(`/books/edit/${book.bookId}`)}>
                 Edit Book
-              </button>{" "} */}
+              </button>{" "}
             </Buttons>
           </RightContainer>
         </FormSection>

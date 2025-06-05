@@ -14,6 +14,8 @@ import {
   CommentText,
   ContainerBook,
   ContainerProgress,
+  BookTitle,
+  BookAuthor,
 } from "./styles";
 
 interface Props {
@@ -64,13 +66,12 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
             alt={comment.bookTitle || comment.book?.title}
           />
           <BookInfo>
-            <strong>
+            <BookTitle>
               {comment.bookTitle || comment.book?.title || " Unknown Title"}
-            </strong>
-            <br />
-            <span>
+            </BookTitle>
+            <BookAuthor>
               {comment.bookAuthor || comment.book?.author || "Unknown Author"}
-            </span>
+            </BookAuthor>
           </BookInfo>
         </ContainerBook>
       </BookBox>

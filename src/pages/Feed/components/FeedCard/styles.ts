@@ -36,7 +36,7 @@ export const Left = styled.div`
 export const CommentText = styled.p`
   font-size: 1.2rem;
   color: #111;
-  margin: 0 5rem 0 1rem;
+  margin: 0 2rem 0 1rem;
   word-break: break-word;
 `;
 
@@ -83,8 +83,13 @@ export const Actions = styled.div`
 export const BookTitle = styled.span`
   font-weight: bold;
   font-size: 1rem;
-  max-width: 8rem;
+  max-width: 10rem;
   display: block;
   margin: 0 auto;
   word-break: break-word;
+`;
+
+export const BookAuthor = styled.span`
+  font-size: 0.9rem;
+  color: gray;
 `;
