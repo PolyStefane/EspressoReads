@@ -36,6 +36,30 @@ import {
 import { StatusTag } from "./components/StatusTag";
 import { FilterType } from "../../components/Tag";
 
+const genreLabels: Record<string, string> = {
+  ADVENTURE: "Adventure",
+  BIOGRAPHY: "Biography",
+  CHILDREN: "Children",
+  CLASSIC: "Classic",
+  COMIC: "Comic",
+  DRAMA: "Drama",
+  DYSTOPIAN: "Dystopian",
+  FANTASY: "Fantasy",
+  GRAPHIC_NOVEL: "Graphic Novel",
+  HISTORICAL: "Historical",
+  HORROR: "Horror",
+  HUMOR: "Humor",
+  MANGA: "Manga",
+  MYSTERY: "Mystery",
+  POETRY: "Poetry",
+  ROMANCE: "Romance",
+  SCIENCE_FICTION: "Science Fiction",
+  TECHNOLOGY: "Technology",
+  THRILLER: "Thriller",
+  TRUE_CRIME: "True Crime",
+  YOUNG_ADULT: "Young Adult",
+};
+
 export const BookDetails: React.FC = () => {
   const { id: bookId } = useParams();
   const [comments, setComments] = useState([]);
@@ -114,29 +138,41 @@ export const BookDetails: React.FC = () => {
 
             <Field>
               <Label>Genre</Label>
-              <span>{book.genre}</span>
+              <span>{genreLabels[book.genre] || book.genre}</span>
             </Field>
 
             <DateContainer>
               <Field>
                 <Label>Start Date</Label>
-                <span>{book.startDate}</span>
+                <span>
+                  {book.startDate ? book.startDate : "No start date registered"}
+                </span>
               </Field>
 
               <Field>
                 <Label>End Date</Label>
-                <span>{book.endDate}</span>
+                <span>
+                  {book.endDate ? book.endDate : "No end date registered"}
+                </span>
               </Field>
             </DateContainer>
 
             <Field>
               <Label>Review</Label>
-              <span>{book.review}</span>
+              <span>
+                {book.review?.trim()
+                  ? book.review
+                  : "There are no reviews for this book yet"}
+              </span>
             </Field>
 
             <Field>
               <Label>Favorite Character</Label>
-              <span>{book.favoriteCharacter}</span>
+              <span>
+                {book.favoriteCharacter?.trim()
+                  ? book.favoriteCharacter
+                  : "Haven’t discovered your favorite character yet"}
+              </span>
             </Field>
 
             <StatusRow>
@@ -155,9 +191,9 @@ export const BookDetails: React.FC = () => {
 
             <IconGroup>
               <Stars>
-                {[...Array(book.rating)].map((_, i) => (
-                  <FaStar key={i} />
-                ))}
+                {typeof book.rating === "number" &&
+                  book.rating >= 1 &&
+                  [...Array(book.rating)].map((_, i) => <FaStar key={i} />)}
               </Stars>
               {book.isFavorite && (
                 <HeartIcon>
@@ -167,14 +203,16 @@ export const BookDetails: React.FC = () => {
             </IconGroup>
 
             <Row>
-              <Field>
-                <Label>Format</Label>
-                <span>
-                  {book.physical && "Physical"}
-                  {book.physical && book.digital && " and "}
-                  {book.digital && "Digital"}
-                </span>
-              </Field>
+              {book.readingStatus !== "WISHLIST" && (
+                <Field>
+                  <Label>Format</Label>
+                  <span>
+                    {book.physical && "Physical"}
+                    {book.physical && book.digital && " and "}
+                    {book.digital && "Digital"}
+                  </span>
+                </Field>
+              )}
 
               <Field>
                 <Label>Pages</Label>
