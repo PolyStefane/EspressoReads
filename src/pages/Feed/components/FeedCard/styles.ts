@@ -93,3 +93,17 @@ export const BookAuthor = styled.span`
   font-size: 0.9rem;
   color: gray;
 `;
+
+export const LikeButton = styled.span<{ $liked: boolean; $loading: boolean }>`
+  cursor: ${({ $loading }) => ($loading ? "not-allowed" : "pointer")};
+  color: ${({ $liked }) => ($liked ? "#e63946" : "#888")};
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  user-select: none;
+  transition: color 0.2s;
+  font-size: 1.1em;
+  &:hover {
+    color: ${({ $liked }) => ($liked ? "#b71c1c" : "#444")};
+  }
+`;
