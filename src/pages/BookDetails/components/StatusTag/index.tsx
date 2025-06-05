@@ -17,9 +17,9 @@ const icons = {
 
 const labels = {
   FAVORITES: "Favorites",
-  FINISHED: "Read",
+  FINISHED: "Finished",
   READING: "Reading",
-  WISHLIST: "Want to read",
+  WISHLIST: "Wishlist",
 };
 
 interface Props {

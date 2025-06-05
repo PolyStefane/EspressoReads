@@ -18,8 +18,8 @@ export type BookFormValues = {
 
 export const createBookPayload = (form: BookFormValues) => {
   const bookTypes = [];
-  if (form.digital) bookTypes.push("DIGITAL");
   if (form.physical) bookTypes.push("PHYSICAL");
+  if (form.digital) bookTypes.push("DIGITAL");
 
   return {
     ownerId: form.ownerId,

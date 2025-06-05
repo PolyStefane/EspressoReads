@@ -9,6 +9,7 @@ import { fetchWithAuth } from "../../Services/api";
 
 // Styles
 import { FeedContainer, FeedSubtitle, FeedTitle } from "./styles";
+import { Spinner } from "../../components/Spinner";
 
 export const Feed: React.FC = () => {
   const [comments, setComments] = useState([]);
@@ -61,9 +62,7 @@ export const Feed: React.FC = () => {
         of the moment
       </FeedSubtitle>
       {loading ? (
-        <p style={{ textAlign: "center", color: "#888", marginTop: 32 }}>
-          Loading Comments...
-        </p>
+        <Spinner text="Loading comments..." />
       ) : comments.length === 0 ? (
         <p style={{ textAlign: "center", color: "#888", marginTop: 32 }}>
           There are no comments yet.
