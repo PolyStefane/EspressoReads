@@ -1,16 +1,19 @@
+// External libraries
 import React from "react";
+
+// Styles
 import {
   Card,
   Left,
-  BookBox,
-  CommentText,
-  Progress,
   Cover,
-  BookInfo,
-  Username,
   Actions,
-  ContainerProgress,
+  BookBox,
+  BookInfo,
+  Progress,
+  Username,
+  CommentText,
   ContainerBook,
+  ContainerProgress,
 } from "./styles";
 
 interface Props {

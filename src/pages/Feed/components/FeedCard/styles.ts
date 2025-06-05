@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Card = styled.div`
   background: #d3e8cd;
@@ -9,8 +9,8 @@ export const Card = styled.div`
 
 export const Username = styled.div`
   font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 8px;
+  font-size: 1.1rem;
+  margin-bottom: 0.9rem;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -36,7 +36,7 @@ export const Left = styled.div`
 export const CommentText = styled.p`
   font-size: 1.2rem;
   color: #111;
-  margin: 0 6rem 0 1rem;
+  margin: 0 5rem 0 1rem;
   word-break: break-word;
 `;
 

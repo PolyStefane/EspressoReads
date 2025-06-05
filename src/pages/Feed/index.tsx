@@ -8,7 +8,7 @@ import { FeedCard } from "./components/FeedCard";
 import { fetchWithAuth } from "../../Services/api";
 
 // Styles
-import { FeedContainer, FeedTitle } from "./styles";
+import { FeedContainer, FeedSubtitle, FeedTitle } from "./styles";
 
 export const Feed: React.FC = () => {
   const [comments, setComments] = useState([]);
@@ -29,17 +29,16 @@ export const Feed: React.FC = () => {
 
         const enriched = (data.comments || []).map((comment: any) => ({
           ...comment,
-          commentaryText:
-            comment.commentary?.commentaryText || "Comentário sem texto.",
+          commentaryText: comment.commentary?.commentaryText || "No text...",
           progress: comment.commentary?.progress ?? 0,
           reaction: comment.commentary?.reaction,
-          bookTitle: comment.book?.title || "Título desconhecido",
-          bookAuthor: comment.book?.author || "Autor desconhecido",
+          bookTitle: comment.book?.title || "Unknown Title",
+          bookAuthor: comment.book?.author || "Unknown Author",
           bookCoverUrl:
             comment.book?.coverUrl ||
             "https://m.media-amazon.com/images/I/71fEYN72-UL._SY466_.jpg",
           username: comment.username || "Anônimo",
-          _id: comment.commentary?.commentaryId || Math.random().toString(), // para key única
+          _id: comment.commentary?.commentaryId || Math.random().toString(),
         }));
 
         setComments(enriched);
@@ -57,13 +56,17 @@ export const Feed: React.FC = () => {
   return (
     <FeedContainer>
       <FeedTitle>Feed</FeedTitle>
+      <FeedSubtitle>
+        Here you can see what people are thinking about the most popular books
+        of the moment
+      </FeedSubtitle>
       {loading ? (
         <p style={{ textAlign: "center", color: "#888", marginTop: 32 }}>
-          Carregando comentários...
+          Loading Comments...
         </p>
       ) : comments.length === 0 ? (
         <p style={{ textAlign: "center", color: "#888", marginTop: 32 }}>
-          Não há comentários para exibir ainda.
+          There are no comments yet.
         </p>
       ) : (
         comments.map((comment: any) => (
