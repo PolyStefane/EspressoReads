@@ -22,7 +22,7 @@ const icons = {
 
 const labels = {
   FAVORITES: "Favorites",
-  FINISHED: "Read",
+  FINISHED: "Finished",
   READING: "Reading",
   WISHLIST: "Wishlist",
 };

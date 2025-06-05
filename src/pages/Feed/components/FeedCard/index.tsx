@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Card,
   Left,
@@ -11,8 +11,7 @@ import {
   Actions,
   ContainerProgress,
   ContainerBook,
-  BookTitle,
-} from './styles';
+} from "./styles";
 
 interface Props {
   comment: any;
@@ -20,18 +19,18 @@ interface Props {
 
 export const FeedCard: React.FC<Props> = ({ comment }) => {
   const reactionMap: Record<string, string> = {
-    LOVING: '😍',
-    EXCITED: '🤩',
-    AMAZED: '😱',
-    DELUDED: '🤡',
-    LAUGH: '😂',
-    DISAPPOINTED: '💔',
-    CONFUSED: '😕',
-    ANGRY: '🤬',
-    SAD: '😢',
-    NAUSEOUS: '🤢',
-    BORED: '😴',
-    AGONY: '😩',
+    LOVING: "😍",
+    EXCITED: "🤩",
+    AMAZED: "😱",
+    DELUDED: "🤡",
+    LAUGH: "😂",
+    DISAPPOINTED: "💔",
+    CONFUSED: "😕",
+    ANGRY: "🤬",
+    SAD: "😢",
+    NAUSEOUS: "🤢",
+    BORED: "😴",
+    AGONY: "😩",
   };
 
   return (
@@ -40,34 +39,41 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
         <img
           src="/img/user.png"
           alt="avatar"
-          style={{ width: 20, height: 20, borderRadius: '50%' }}
+          style={{ width: 20, height: 20, borderRadius: "50%" }}
         />
-        @{comment.userName || 'Anônimo'}
+        @{comment.userName || comment.username || "Anonymous"}
       </Username>
 
       <BookBox>
         <Left>
-          <CommentText>{comment.text}</CommentText>
+          <CommentText>{comment.commentaryText}</CommentText>
 
           <ContainerProgress>
             <Progress>
-              {reactionMap[comment.reaction] || '💬'} {comment.progress || 0}%
+              {reactionMap[comment.reaction] || "💬"} {comment.progress}%
             </Progress>
           </ContainerProgress>
         </Left>
 
         <ContainerBook>
-          <Cover src={comment.bookCoverUrl} alt={comment.bookTitle} />
+          <Cover
+            src={comment.bookCoverUrl || comment.book?.coverUrl}
+            alt={comment.bookTitle || comment.book?.title}
+          />
           <BookInfo>
-            <BookTitle>{comment.bookTitle}</BookTitle>
+            <strong>
+              {comment.bookTitle || comment.book?.title || " Unknown Title"}
+            </strong>
             <br />
-            <span>{comment.bookAuthor}</span>
+            <span>
+              {comment.bookAuthor || comment.book?.author || "Unknown Author"}
+            </span>
           </BookInfo>
         </ContainerBook>
       </BookBox>
 
       <Actions>
-        <span>❤️ {comment.likes || 0}</span>
+        <span>❤️ {comment.likes ?? 0}</span>
         <span>💬 Comment</span>
       </Actions>
     </Card>
