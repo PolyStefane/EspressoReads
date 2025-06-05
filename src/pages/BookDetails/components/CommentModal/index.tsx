@@ -13,6 +13,7 @@ import {
   Title,
 } from "./styles";
 import { fetchWithAuth } from "../../../../Services/api";
+import { toast } from "sonner";
 
 type Props = {
   onClose: () => void;
@@ -97,6 +98,7 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
         reaction: selectedReaction,
       });
       onClose();
+      toast.success("Comment saved successfully!");
     } catch (err) {
       console.error("Erro ao salvar comentário:", err);
     }
@@ -114,7 +116,7 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
         />
 
         <Input
-          placeholder="Enter your progress (pages number)"
+          placeholder="Enter your progress (page number)"
           value={progress}
           onChange={(e) => setProgress(e.target.value)}
         />

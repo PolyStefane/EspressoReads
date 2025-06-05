@@ -72,9 +72,14 @@ export const UpdateBook: React.FC = () => {
 
   const handleUpdate = async () => {
     try {
+      const bookTypes = [];
+      if (form.physical) bookTypes.push("PHYSICAL");
+      if (form.digital) bookTypes.push("DIGITAL");
+
       const payload = {
         ...form,
         readingStatus: form.readingStatus?.toUpperCase(),
+        bookTypes,
       };
 
       const res = await fetchWithAuth(
