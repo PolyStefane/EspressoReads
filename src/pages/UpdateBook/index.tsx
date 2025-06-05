@@ -3,13 +3,14 @@ import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 // Components
-import { AddBookLayout } from "../AddBook/components/AddBookLayout";
 
 // Services
 import { fetchWithAuth } from "../../Services/api";
 
 // Hook
 import { useBookForm } from "../AddBook/hooks/useBookForm";
+import { BookForm } from "../AddBook/components/AddBookLayout";
+import { useBookFormVisibility } from "../AddBook/hooks/useBookFormVisibility";
 
 export const UpdateBook: React.FC = () => {
   const { id: bookId } = useParams<{ id: string }>();
@@ -20,7 +21,6 @@ export const UpdateBook: React.FC = () => {
     isSubmitting,
     setForm,
     handleChange,
-    // handleSubmit,
     handleRating,
     handleCheckbox,
     toggleFavorite,
@@ -63,18 +63,34 @@ export const UpdateBook: React.FC = () => {
       console.error("Erro no update:", err);
     }
   };
+
+  const {
+    showReview,
+    showRating,
+    showEndDate,
+    showStartDate,
+    showFavoriteCharacter,
+    showFormat,
+  } = useBookFormVisibility(form.readingStatus);
+
   return (
-    <AddBookLayout
-      title="Edit Book"
+    <BookForm
+      title="Update Book"
       form={form}
       isSubmitting={isSubmitting}
-      onChange={handleChange}
-      onSubmit={handleUpdate}
-      onRate={handleRating}
-      onCheckboxChange={handleCheckbox}
-      onFavoriteToggle={toggleFavorite}
-      onCoverUpload={handleCoverUpload}
+      handleChange={handleChange}
+      handleRating={handleRating}
+      handleSubmit={handleUpdate}
+      handleCheckbox={handleCheckbox}
+      toggleFavorite={toggleFavorite}
+      handleCoverUpload={handleCoverUpload}
       isEdit
+      showReview={showReview}
+      showRating={showRating}
+      showEndDate={showEndDate}
+      showStartDate={showStartDate}
+      showFavoriteCharacter={showFavoriteCharacter}
+      showFormat={showFormat}
     />
   );
 };

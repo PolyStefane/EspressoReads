@@ -3,12 +3,12 @@ import { BookCoverUpload } from "../../styles";
 
 type Props = {
   coverUrl: string;
-  onUpload: () => void;
+  onUpload: (url: string) => void;
 };
 
 export const CoverUpload: React.FC<Props> = ({ coverUrl, onUpload }) => {
   return (
-    <BookCoverUpload hasImage={!!coverUrl} onClick={onUpload}>
+    <BookCoverUpload hasImage={!!coverUrl} onClick={() => onUpload(coverUrl)}>
       {coverUrl ? (
         <img
           src={coverUrl}
