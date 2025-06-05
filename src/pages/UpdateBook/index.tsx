@@ -11,6 +11,7 @@ import { fetchWithAuth } from "../../Services/api";
 import { useBookForm } from "../AddBook/hooks/useBookForm";
 import { BookForm } from "../AddBook/components/AddBookLayout";
 import { useBookFormVisibility } from "../AddBook/hooks/useBookFormVisibility";
+import { toast } from "sonner";
 
 export const UpdateBook: React.FC = () => {
   const { id: bookId } = useParams<{ id: string }>();
@@ -45,20 +46,50 @@ export const UpdateBook: React.FC = () => {
       .catch(console.error);
   }, [bookId]);
 
+  useEffect(() => {
+    const status = form.readingStatus?.toLowerCase();
+
+    if (status === "reading") {
+      setForm((prev) => ({
+        ...prev,
+        review: "",
+        favoriteCharacter: "",
+        rating: null,
+        endDate: "",
+      }));
+    } else if (status === "wishlist") {
+      setForm((prev) => ({
+        ...prev,
+        review: "",
+        favoriteCharacter: "",
+        rating: null,
+        endDate: "",
+        physical: false,
+        digital: false,
+      }));
+    }
+  }, [form.readingStatus, setForm]);
+
   const handleUpdate = async () => {
     try {
+      const payload = {
+        ...form,
+        readingStatus: form.readingStatus?.toUpperCase(),
+      };
+
       const res = await fetchWithAuth(
         `https://books-social.onrender.com/api/v1/book/update/${bookId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
+          body: JSON.stringify(payload),
         }
       );
 
       if (!res.ok) throw new Error("Erro ao atualizar o livro");
 
-      navigate(`/books/${bookId}`);
+      toast.success("Book updated successfully!");
+      navigate("/library");
     } catch (err) {
       console.error("Erro no update:", err);
     }

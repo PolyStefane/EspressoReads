@@ -148,21 +148,25 @@ export const BookDetails: React.FC = () => {
               <span>{genreLabels[book.genre] || book.genre}</span>
             </Field>
 
-            <DateContainer>
-              <Field>
-                <Label>Start Date</Label>
-                <span>
-                  {book.startDate ? book.startDate : "No start date registered"}
-                </span>
-              </Field>
+            {book.readingStatus !== "WISHLIST" && (
+              <DateContainer>
+                <Field>
+                  <Label>Start Date</Label>
+                  <span>
+                    {book.startDate
+                      ? book.startDate
+                      : "No start date registered"}
+                  </span>
+                </Field>
 
-              <Field>
-                <Label>End Date</Label>
-                <span>
-                  {book.endDate ? book.endDate : "No end date registered"}
-                </span>
-              </Field>
-            </DateContainer>
+                <Field>
+                  <Label>End Date</Label>
+                  <span>
+                    {book.endDate ? book.endDate : "No end date registered"}
+                  </span>
+                </Field>
+              </DateContainer>
+            )}
 
             <Field>
               <Label>Review</Label>
@@ -228,7 +232,11 @@ export const BookDetails: React.FC = () => {
             </Row>
 
             <Buttons>
-              <button onClick={() => setIsModalOpen(true)}>Add Comment</button>
+              {book.readingStatus === "READING" && (
+                <button onClick={() => setIsModalOpen(true)}>
+                  Add Comment
+                </button>
+              )}
               <button
                 onClick={() => {
                   setShowHistory(true);
@@ -239,7 +247,7 @@ export const BookDetails: React.FC = () => {
               </button>
               <button onClick={() => navigate(`/books/edit/${book.bookId}`)}>
                 Edit Book
-              </button>{" "}
+              </button>
             </Buttons>
           </RightContainer>
         </FormSection>
