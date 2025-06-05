@@ -1,6 +1,6 @@
 // pages/AddBook/index.tsx
 
-import React from "react";
+import React, { useEffect } from "react";
 
 // Components
 import { CoverUpload } from "./components/CoverUpload";
@@ -38,7 +38,42 @@ export const AddBook: React.FC = () => {
     handleCheckbox,
     toggleFavorite,
     handleCoverUpload,
+    setForm,
   } = useBookForm();
+
+  const status = form.readingStatus?.toLowerCase();
+
+  const showReview = !status || status === "finished";
+  const showRating = !status || status === "finished";
+  const showEndDate = !status || status === "finished";
+  const showStartDate = !status || status !== "wishlist";
+  const showFavoriteCharacter = !status || status === "finished";
+  const showFormat = !status || status === "reading" || status === "finished";
+
+  useEffect(() => {
+    if (status === "reading") {
+      setForm((prev) => ({
+        ...prev,
+        review: "",
+        rating: null,
+        isFavorite: false,
+        endDate: "",
+        favoriteCharacter: "",
+      }));
+    } else if (status === "wishlist") {
+      setForm((prev) => ({
+        ...prev,
+        review: "",
+        rating: null,
+        isFavorite: false,
+        endDate: "",
+        favoriteCharacter: "",
+        startDate: "",
+        physical: false,
+        digital: false,
+      }));
+    }
+  }, [status]);
 
   return (
     <Container>
@@ -115,34 +150,43 @@ export const AddBook: React.FC = () => {
             </SelectContainer>
 
             <DateContainer>
-              <LabelInput
-                id="startDate"
-                name="startDate"
-                label="Start Date"
-                value={form.startDate}
-                onChange={handleChange}
-              />
-              <LabelInput
-                id="endDate"
-                name="endDate"
-                label="End Date"
-                value={form.endDate}
-                onChange={handleChange}
-              />
+              {showStartDate && (
+                <LabelInput
+                  id="startDate"
+                  name="startDate"
+                  label="Start Date"
+                  value={form.startDate}
+                  onChange={handleChange}
+                />
+              )}
+              {showEndDate && (
+                <LabelInput
+                  id="endDate"
+                  name="endDate"
+                  label="End Date"
+                  value={form.endDate}
+                  onChange={handleChange}
+                />
+              )}
             </DateContainer>
-            <TextArea
-              name="review"
-              placeholder="Insert your opinion about the book, your favorite quotes, etc..."
-              value={form.review}
-              onChange={handleChange}
-            />
-            <FloatingInput
-              label="Favorite Character"
-              name="favoriteCharacter"
-              placeholder="Enter the name of the character who touched your heart"
-              value={form.favoriteCharacter}
-              onChange={handleChange}
-            />
+
+            {showReview && (
+              <TextArea
+                name="review"
+                placeholder="Insert your opinion about the book, your favorite quotes, etc..."
+                value={form.review}
+                onChange={handleChange}
+              />
+            )}
+            {showFavoriteCharacter && (
+              <FloatingInput
+                label="Favorite Character"
+                name="favoriteCharacter"
+                placeholder="Enter the name of the character who touched your heart"
+                value={form.favoriteCharacter}
+                onChange={handleChange}
+              />
+            )}
           </LeftContainer>
 
           {/* LADO DIREITO */}
@@ -152,18 +196,21 @@ export const AddBook: React.FC = () => {
               onUpload={handleCoverUpload}
             />
 
-            <RatingStars
-              rating={form.rating}
-              isFavorite={form.isFavorite}
-              onRate={handleRating}
-              onToggleFavorite={toggleFavorite}
-            />
-
-            <BookTypeCheckbox
-              digital={form.digital}
-              physical={form.physical}
-              onChange={handleCheckbox}
-            />
+            {showRating && (
+              <RatingStars
+                rating={form.rating ?? 0}
+                isFavorite={form.isFavorite}
+                onRate={handleRating}
+                onToggleFavorite={toggleFavorite}
+              />
+            )}
+            {showFormat && (
+              <BookTypeCheckbox
+                digital={form.digital}
+                physical={form.physical}
+                onChange={handleCheckbox}
+              />
+            )}
 
             <PagesInput
               name="numberPages"

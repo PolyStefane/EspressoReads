@@ -7,7 +7,7 @@ export type BookFormValues = {
   endDate: string;
   review: string;
   favoriteCharacter: string;
-  rating: number;
+  rating?: number | null;
   coverUrl: string;
   numberPages: string;
   readingStatus: string;

@@ -19,7 +19,7 @@ export const useBookForm = () => {
     endDate: "",
     review: "",
     favoriteCharacter: "",
-    rating: 0,
+    rating: null,
     coverUrl: "",
     numberPages: "",
     readingStatus: "",
