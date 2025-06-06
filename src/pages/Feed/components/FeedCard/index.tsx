@@ -67,7 +67,7 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
         const updated = await res.json();
         setLikes(updated.likes ?? 0);
         if (typeof updated.liked === "boolean") setLiked(updated.liked);
-        else setLiked(!liked); // fallback
+        else setLiked(!liked);
       }
     } catch (err) {
       console.error(err);

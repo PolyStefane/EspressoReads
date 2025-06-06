@@ -15,15 +15,14 @@ export const Feed: React.FC = () => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const page = 0;
-  const size = 20;
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     const fetchComments = async () => {
       setLoading(true);
       try {
         const res = await fetchWithAuth(
-          `https://books-social.onrender.com/api/v1/commentary/random/${page}/${size}`
+          `https://books-social.onrender.com/api/v1/commentary/random/${userId}`
         );
         const data = await res.json();
         console.log("API:", data.comments);
@@ -31,6 +30,7 @@ export const Feed: React.FC = () => {
         const enriched = (data.comments || []).map((comment: any) => ({
           ...comment,
           commentaryText: comment.commentary?.commentaryText || "No text...",
+          readPages: comment.commentary?.readPages ?? 0,
           progress: comment.commentary?.progress ?? 0,
           reaction: comment.commentary?.reaction,
           bookTitle: comment.book?.title || "Unknown Title",
@@ -51,8 +51,10 @@ export const Feed: React.FC = () => {
       }
     };
 
-    fetchComments();
-  }, []);
+    if (userId) {
+      fetchComments();
+    }
+  }, [userId]);
 
   return (
     <FeedContainer>

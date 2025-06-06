@@ -40,6 +40,7 @@ type CommentPayload = {
   bookId: string;
   userId: string;
   commentaryText: string;
+  readPages: number;
   progress: number;
   reaction:
     | "LOVING"
@@ -81,19 +82,21 @@ export async function postCommentary(comment: CommentPayload) {
 
 export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
   const [commentText, setCommentText] = useState("");
+  const [readPages, setReadPages] = useState("");
   const [progress, setProgress] = useState("");
   const [selectedReaction, setSelectedReaction] = useState<
     CommentPayload["reaction"] | null
   >(null);
 
   const handleSaveComment = async () => {
-    if (!commentText || !progress || !selectedReaction) return;
+    if (!commentText || !readPages || !selectedReaction) return;
 
     try {
       await postCommentary({
         bookId,
         userId,
         commentaryText: commentText,
+        readPages: Number(readPages),
         progress: Number(progress),
         reaction: selectedReaction,
       });
@@ -117,8 +120,8 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
 
         <Input
           placeholder="Enter your progress (page number)"
-          value={progress}
-          onChange={(e) => setProgress(e.target.value)}
+          value={readPages}
+          onChange={(e) => setReadPages(e.target.value)}
         />
 
         <ReactionSection>
@@ -142,7 +145,7 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
         <ModalActions>
           <SaveButton
             onClick={handleSaveComment}
-            disabled={!commentText || !progress || !selectedReaction}
+            disabled={!commentText || !readPages || !selectedReaction}
           >
             Save
           </SaveButton>

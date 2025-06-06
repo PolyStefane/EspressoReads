@@ -19,6 +19,7 @@ import { FaHeart, FaCommentDots, FaEllipsisH } from "react-icons/fa";
 
 type Comment = {
   commentaryText: string;
+  readPages: number;
   progress: number;
   reaction: string;
 };
