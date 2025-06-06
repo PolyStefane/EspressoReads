@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Card = styled.div`
-  background: #d3e8cd;
+  background: #bdd8bb;
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 24px;
@@ -9,7 +9,7 @@ export const Card = styled.div`
 
 export const Username = styled.div`
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin-bottom: 0.9rem;
   display: flex;
   align-items: center;
@@ -57,7 +57,7 @@ export const ContainerBook = styled.div`
 `;
 
 export const Cover = styled.img`
-  width: 5.5rem;
+  width: 5.6rem;
   /* height: 9rem; */
   display: flex;
   object-fit: cover;
@@ -68,7 +68,6 @@ export const Cover = styled.img`
 export const BookInfo = styled.div`
   text-align: center;
   margin-top: 8px;
-  font-size: 1rem;
 `;
 
 export const Actions = styled.div`
@@ -82,7 +81,7 @@ export const Actions = styled.div`
 
 export const BookTitle = styled.span`
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.1rem;
   max-width: 10rem;
   display: block;
   margin: 0 auto;
@@ -90,20 +89,72 @@ export const BookTitle = styled.span`
 `;
 
 export const BookAuthor = styled.span`
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: gray;
 `;
 
 export const LikeButton = styled.span<{ $liked: boolean; $loading: boolean }>`
   cursor: ${({ $loading }) => ($loading ? "not-allowed" : "pointer")};
-  color: ${({ $liked }) => ($liked ? "#e63946" : "#888")};
+  color: ${({ $liked }) => ($liked ? "#F82371" : "#F82371")};
   display: flex;
   align-items: center;
   gap: 4px;
   user-select: none;
   transition: color 0.2s;
-  font-size: 1.1em;
+  font-size: 1.2rem;
   &:hover {
     color: ${({ $liked }) => ($liked ? "#b71c1c" : "#444")};
+  }
+`;
+
+export const CommentButton = styled.button`
+  background: none;
+  border: none;
+  color: #888;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin-left: 18px;
+  transition: color 0.2s;
+  padding: 0;
+  outline: none;
+
+  &:hover {
+    color: #6c9;
+  }
+
+  svg {
+    margin-right: 4px;
+    font-size: 1.2em;
+  }
+`;
+
+export const CommentBox = styled.div`
+  margin-top: 12px;
+  width: 100%;
+`;
+
+export const CommentTextarea = styled.textarea`
+  width: 100%;
+  min-height: 60px;
+  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
+`;
+
+export const SendButton = styled.button`
+  margin-top: 8px;
+  padding: 6px 16px;
+  border-radius: 6px;
+  background: #6c9;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  &:hover {
+    background: #4a6;
   }
 `;

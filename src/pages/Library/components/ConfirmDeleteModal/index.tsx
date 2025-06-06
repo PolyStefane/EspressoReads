@@ -12,6 +12,7 @@ import {
   CancelButton,
   ConfirmButton,
 } from "./styles";
+import { WarningIconSVG } from "../../../../assets/icons/WarningIcon";
 
 interface ConfirmDeleteModalProps {
   onConfirm: () => void;
@@ -25,7 +26,9 @@ export const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({
   return (
     <Overlay>
       <Modal>
-        <Icon>⚠️</Icon>
+        <Icon>
+          <WarningIconSVG />
+        </Icon>
         <Message>
           Are you sure you want to delete this book from your library?
         </Message>

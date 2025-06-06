@@ -18,7 +18,12 @@ import {
   BookTitle,
   BookAuthor,
   LikeButton,
+  CommentBox,
+  CommentTextarea,
+  SendButton,
+  CommentButton,
 } from "./styles";
+import { CommentIconSVG } from "../../../../assets/icons/CommentIcon";
 
 interface Props {
   comment: any;
@@ -41,11 +46,12 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
   };
 
   const [likes, setLikes] = useState<number>(comment.likes ?? 0);
-  // Use isLiked como prioridade, depis liked, depois false
   const [liked, setLiked] = useState<boolean>(
     comment.isLiked ?? comment.liked ?? false
   );
   const [loading, setLoading] = useState(false);
+  const [showCommentBox, setShowCommentBox] = useState(false);
+  const [commentText, setCommentText] = useState("");
 
   const handleLike = async () => {
     if (loading) return;
@@ -92,13 +98,19 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
     }
   };
 
+  const handleSendComment = () => {
+    //logica
+    setShowCommentBox(false);
+    setCommentText("");
+  };
+
   return (
     <Card>
       <Username>
         <img
           src="/img/user.png"
           alt="avatar"
-          style={{ width: 20, height: 20, borderRadius: "50%" }}
+          style={{ width: 40, height: 40, borderRadius: "50%" }}
         />
         @{comment.userName || comment.username || "Anonymous"}
       </Username>
@@ -139,8 +151,24 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
         >
           {liked ? <FaHeart /> : <FaRegHeart />} <span>{likes}</span>
         </LikeButton>
-        <span>💬 Comment</span>
+        <CommentButton
+          type="button"
+          onClick={() => setShowCommentBox((v) => !v)}
+          title="Comment"
+        >
+          <CommentIconSVG /> Comment
+        </CommentButton>
       </Actions>
+      {showCommentBox && (
+        <CommentBox>
+          <CommentTextarea
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
+            placeholder="Write your reply..."
+          />
+          <SendButton onClick={handleSendComment}>Send</SendButton>
+        </CommentBox>
+      )}
     </Card>
   );
 };

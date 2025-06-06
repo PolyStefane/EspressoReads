@@ -22,7 +22,7 @@ export const Modal = styled.div`
 
 export const Icon = styled.div`
   font-size: 40px;
-  margin-bottom: 16px;
+  margin-bottom: 0.5rem;
 `;
 
 export const Message = styled.p`

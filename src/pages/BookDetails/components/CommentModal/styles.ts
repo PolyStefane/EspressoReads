@@ -22,7 +22,7 @@ export const Title = styled.h2`
 `;
 
 export const Modal = styled.div`
-  background-color: #fffdf7;
+  background-color: #fffefa;
   padding: 2rem;
   border-radius: 1.5rem;
   width: 500px;
@@ -32,19 +32,32 @@ export const Modal = styled.div`
 export const Textarea = styled.textarea`
   width: 100%;
   height: 100px;
+  background-color: white;
   margin-top: 1rem;
   padding: 0.8rem;
   border-radius: 0.5rem;
   font-size: 1rem;
+  border: 2px solid #e6e6e6;
   resize: none;
+
+  &:focus {
+    border: 2px solid #bdd8bb;
+    outline: none;
+  }
 `;
 
 export const Input = styled.input`
   width: 100%;
   margin-top: 1rem;
+  background-color: white;
+  border: 2px solid #e6e6e6;
   padding: 0.8rem;
   border-radius: 0.5rem;
   font-size: 1rem;
+  &:focus {
+    border: 2px solid #bdd8bb;
+    outline: none;
+  }
 `;
 
 export const ReactionSection = styled.div`
@@ -59,13 +72,14 @@ export const EmojiGrid = styled.div`
 
   justify-content: center;
 `;
+
 export const EmojiBox = styled.button<{ $selected: boolean }>`
   width: 50px;
   height: 50px;
   font-size: 1.5rem;
-  border: 2px solid ${({ $selected }) => ($selected ? "#e18eeb" : "#ccc")};
-  background-color: ${({ $selected }) => ($selected ? "#fdeeff" : "#fff")};
-  border-radius: 12px;
+  border: 2px solid ${({ $selected }) => ($selected ? "#bdd8bb" : "#E6E6E6")};
+  background-color: ${({ $selected }) => ($selected ? "#EFF6EE" : "#fff")};
+  border-radius: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -73,7 +87,8 @@ export const EmojiBox = styled.button<{ $selected: boolean }>`
   transition: all 0.2s;
 
   &:hover {
-    border-color: #e18eeb;
+    border-color: #a6bda4;
+    background-color: #eff6ee;
   }
 `;
 
@@ -85,28 +100,38 @@ export const ModalActions = styled.div`
 `;
 
 export const SaveButton = styled.button`
+  padding: 10px 20px;
   background-color: #7bb286;
-  padding: 0.6rem 1.2rem;
   border: none;
   border-radius: 1rem;
-  color: white;
-  font-size: 1rem;
   cursor: pointer;
+  color: white;
+  transition: background 0.2s ease, transform 0.2s ease;
 
   &:hover {
-    background-color: #5e9b73;
+    background: #5e9b73;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.98);
   }
 `;
 
 export const CancelButton = styled.button`
-  background-color: #ddd;
-  padding: 0.6rem 1.2rem;
+  padding: 10px 20px;
+  background: #e0e0e0;
   border: none;
   border-radius: 1rem;
-  font-size: 1rem;
   cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
 
   &:hover {
-    background-color: #bbb;
+    background: #d5d5d5;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.98);
   }
 `;
