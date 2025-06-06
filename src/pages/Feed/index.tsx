@@ -40,6 +40,8 @@ export const Feed: React.FC = () => {
             "https://m.media-amazon.com/images/I/71fEYN72-UL._SY466_.jpg",
           username: comment.username || "Anônimo",
           _id: comment.commentary?.commentaryId || Math.random().toString(),
+          isLiked: comment.isLiked ?? comment.liked ?? false,
+          likes: comment.likes ?? comment.commentary?.likes ?? 0,
         }));
 
         setComments(enriched);

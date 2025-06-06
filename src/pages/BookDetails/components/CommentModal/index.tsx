@@ -83,7 +83,7 @@ export async function postCommentary(comment: CommentPayload) {
 export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
   const [commentText, setCommentText] = useState("");
   const [readPages, setReadPages] = useState("");
-  const [progress, setProgress] = useState("");
+  const [progress] = useState("");
   const [selectedReaction, setSelectedReaction] = useState<
     CommentPayload["reaction"] | null
   >(null);

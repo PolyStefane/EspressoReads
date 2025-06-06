@@ -41,7 +41,10 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
   };
 
   const [likes, setLikes] = useState<number>(comment.likes ?? 0);
-  const [liked, setLiked] = useState<boolean>(comment.liked ?? false);
+  // Use isLiked como prioridade, depis liked, depois false
+  const [liked, setLiked] = useState<boolean>(
+    comment.isLiked ?? comment.liked ?? false
+  );
   const [loading, setLoading] = useState(false);
 
   const handleLike = async () => {
@@ -51,12 +54,25 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
     try {
       const commentaryId =
         comment.commentaryId || comment.commentary?.commentaryId;
-      if (!commentaryId) return;
+
+      if (!commentaryId) {
+        console.error("Commentary ID not found.");
+        setLoading(false);
+        return;
+      }
+
+      const userId = localStorage.getItem("userId");
+      if (!userId) {
+        console.error("User ID not found.");
+        setLoading(false);
+        return;
+      }
+
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `https://books-social.onrender.com/api/v1/commentary/like/${commentaryId}/${action}`,
+        `https://books-social.onrender.com/api/v1/commentary/like/${commentaryId}/${action}/${userId}`,
         {
-          method: "PUT",
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
             ...(token && { Authorization: `Bearer ${token}` }),
