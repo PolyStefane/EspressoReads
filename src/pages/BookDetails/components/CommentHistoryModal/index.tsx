@@ -14,6 +14,7 @@ import {
   ScrollableContent,
   EmptyState,
 } from "./styles";
+import { LikeButton } from "../../../Feed/components/FeedCard/styles";
 
 import { FaHeart, FaCommentDots, FaEllipsisH } from "react-icons/fa";
 
@@ -22,6 +23,9 @@ type Comment = {
   readPages: number;
   progress: number;
   reaction: string;
+  likes?: number;
+  isLiked?: boolean;
+  liked?: boolean;
 };
 
 type Props = {
@@ -31,6 +35,9 @@ type Props = {
   onClose: () => void;
 };
 
+function formatText(text: string) {
+  return text.replace(/\n/g, "<br />");
+}
 export const CommentHistoryModal: React.FC<Props> = ({
   comments,
   onClose,
@@ -54,8 +61,11 @@ export const CommentHistoryModal: React.FC<Props> = ({
             <CommentList>
               {comments.map((comment, index) => (
                 <StyledCommentCard key={index}>
-                  <CommentText>{comment.commentaryText}</CommentText>
-
+                  <CommentText
+                    dangerouslySetInnerHTML={{
+                      __html: formatText(comment.commentaryText),
+                    }}
+                  />
                   <ReactionProgress>
                     <span>{getEmoji(comment.reaction)}</span>
                     <span>{comment.progress}%</span>
@@ -63,9 +73,13 @@ export const CommentHistoryModal: React.FC<Props> = ({
 
                   <CommentFooter>
                     <div>
-                      <IconButton>
-                        <FaHeart /> <span>4</span>
-                      </IconButton>
+                      <LikeButton
+                        $liked={comment.isLiked ?? comment.liked ?? false}
+                        $loading={false}
+                        style={{ fontSize: "1.1rem" }}
+                      >
+                        <FaHeart /> <span>{comment.likes ?? 0}</span>
+                      </LikeButton>
                       <IconButton>
                         <FaCommentDots /> <span>Comentar</span>
                       </IconButton>

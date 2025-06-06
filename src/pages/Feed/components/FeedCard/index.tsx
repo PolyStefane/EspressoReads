@@ -104,6 +104,10 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
     setCommentText("");
   };
 
+  function formatText(text: string) {
+    return text.replace(/\n/g, "<br />");
+  }
+
   return (
     <Card>
       <Username>
@@ -117,7 +121,11 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
 
       <BookBox>
         <Left>
-          <CommentText>{comment.commentaryText}</CommentText>
+          <CommentText
+            dangerouslySetInnerHTML={{
+              __html: formatText(comment.commentaryText),
+            }}
+          />
 
           <ContainerProgress>
             <Progress>
