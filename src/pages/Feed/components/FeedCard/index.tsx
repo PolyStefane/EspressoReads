@@ -1,6 +1,9 @@
 // External libraries
-import React, { useState } from "react";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import React, { useState } from 'react';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
+
+// Assets
+import { CommentIconSVG } from '../../../../assets/icons/CommentIcon';
 
 // Styles
 import {
@@ -12,18 +15,19 @@ import {
   BookInfo,
   Progress,
   Username,
-  CommentText,
-  ContainerBook,
-  ContainerProgress,
   BookTitle,
   BookAuthor,
   LikeButton,
   CommentBox,
-  CommentTextarea,
   SendButton,
+  CommentText,
+  ContainerBook,
   CommentButton,
-} from "./styles";
-import { CommentIconSVG } from "../../../../assets/icons/CommentIcon";
+  CommentTextarea,
+  ContainerProgress,
+} from './styles';
+import { useReplies } from './hooks/useReplies';
+import { RepliesList } from '../RepliesList';
 
 interface Props {
   comment: any;
@@ -31,81 +35,69 @@ interface Props {
 
 export const FeedCard: React.FC<Props> = ({ comment }) => {
   const reactionMap: Record<string, string> = {
-    LOVING: "😍",
-    EXCITED: "🤩",
-    AMAZED: "😱",
-    DELUDED: "🤡",
-    LAUGH: "😂",
-    DISAPPOINTED: "💔",
-    CONFUSED: "😕",
-    ANGRY: "🤬",
-    SAD: "😢",
-    NAUSEOUS: "🤢",
-    BORED: "😴",
-    AGONY: "😩",
+    LOVING: '😍',
+    EXCITED: '🤩',
+    AMAZED: '😱',
+    DELUDED: '🤡',
+    LAUGH: '😂',
+    DISAPPOINTED: '💔',
+    CONFUSED: '😕',
+    ANGRY: '🤬',
+    SAD: '😢',
+    NAUSEOUS: '🤢',
+    BORED: '😴',
+    AGONY: '😩',
   };
 
   const [likes, setLikes] = useState<number>(comment.likes ?? 0);
   const [liked, setLiked] = useState<boolean>(
-    comment.isLiked ?? comment.liked ?? false
+    comment.isLiked ?? comment.liked ?? false,
   );
   const [loading, setLoading] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
-  const [commentText, setCommentText] = useState("");
+  const [commentText, setCommentText] = useState('');
+  const [successMsg] = useState('');
+
+  const commentaryId = comment.commentaryId || comment.commentary?.commentaryId;
+  const { replies, repliesLoaded, loadReplies, sendReply } =
+    useReplies(commentaryId);
+
+  const handleSendComment = async () => {
+    const ok = await sendReply(commentText.trim());
+    if (ok) setCommentText('');
+  };
 
   const handleLike = async () => {
     if (loading) return;
     setLoading(true);
-    const action = liked ? "decrease" : "increase";
+    const action = liked ? 'decrease' : 'increase';
     try {
-      const commentaryId =
-        comment.commentaryId || comment.commentary?.commentaryId;
-
-      if (!commentaryId) {
-        console.error("Commentary ID not found.");
-        setLoading(false);
-        return;
-      }
-
-      const userId = localStorage.getItem("userId");
-      if (!userId) {
-        console.error("User ID not found.");
-        setLoading(false);
-        return;
-      }
-
-      const token = localStorage.getItem("token");
+      if (!commentaryId) return setLoading(false);
+      const userId = localStorage.getItem('userId');
+      if (!userId) return setLoading(false);
+      const token = localStorage.getItem('token');
       const res = await fetch(
         `https://books-social.onrender.com/api/v1/commentary/like/${commentaryId}/${action}/${userId}`,
         {
-          method: "PATCH",
+          method: 'PATCH',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             ...(token && { Authorization: `Bearer ${token}` }),
           },
-        }
+        },
       );
       if (res.ok) {
         const updated = await res.json();
         setLikes(updated.likes ?? 0);
-        if (typeof updated.liked === "boolean") setLiked(updated.liked);
-        else setLiked(!liked);
+        setLiked(typeof updated.liked === 'boolean' ? updated.liked : !liked);
       }
-    } catch (err) {
-      console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSendComment = () => {
-    //logica
-    setShowCommentBox(false);
-    setCommentText("");
-  };
-
   function formatText(text: string) {
-    return text.replace(/\n/g, "<br />");
+    return text.replace(/\n/g, '<br />');
   }
 
   return (
@@ -114,9 +106,9 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
         <img
           src="/img/user.png"
           alt="avatar"
-          style={{ width: 40, height: 40, borderRadius: "50%" }}
+          style={{ width: 40, height: 40, borderRadius: '50%' }}
         />
-        @{comment.userName || comment.username || "Anonymous"}
+        @{comment.userName || comment.username || 'Anonymous'}
       </Username>
 
       <BookBox>
@@ -129,7 +121,7 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
 
           <ContainerProgress>
             <Progress>
-              {reactionMap[comment.reaction] || "💬"} {comment.progress}%
+              {reactionMap[comment.reaction] || '💬'} {comment.progress}%
             </Progress>
           </ContainerProgress>
         </Left>
@@ -141,10 +133,10 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
           />
           <BookInfo>
             <BookTitle>
-              {comment.bookTitle || comment.book?.title || " Unknown Title"}
+              {comment.bookTitle || comment.book?.title || ' Unknown Title'}
             </BookTitle>
             <BookAuthor>
-              {comment.bookAuthor || comment.book?.author || "Unknown Author"}
+              {comment.bookAuthor || comment.book?.author || 'Unknown Author'}
             </BookAuthor>
           </BookInfo>
         </ContainerBook>
@@ -155,13 +147,18 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
           $liked={liked}
           $loading={loading}
           onClick={loading ? undefined : handleLike}
-          title={liked ? "Dislike" : "Like"}
+          title={liked ? 'Dislike' : 'Like'}
         >
           {liked ? <FaHeart /> : <FaRegHeart />} <span>{likes}</span>
         </LikeButton>
         <CommentButton
           type="button"
-          onClick={() => setShowCommentBox((v) => !v)}
+          onClick={() => {
+            setShowCommentBox((v) => {
+              if (!repliesLoaded && !v) loadReplies();
+              return !v;
+            });
+          }}
           title="Comment"
         >
           <CommentIconSVG /> Comment
@@ -169,6 +166,10 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
       </Actions>
       {showCommentBox && (
         <CommentBox>
+          {successMsg && (
+            <div style={{ color: 'green', marginBottom: 8 }}>{successMsg}</div>
+          )}
+          {replies.length > 0 && <RepliesList replies={replies} />}
           <CommentTextarea
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}
