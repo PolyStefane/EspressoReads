@@ -1,4 +1,11 @@
-import React, { useState } from "react";
+// External libraries
+import { toast } from 'sonner';
+import React, { useState } from 'react';
+
+// Services
+import { fetchWithAuth } from '../../../../Services/api';
+
+// Styles
 import {
   CancelButton,
   EmojiBox,
@@ -11,9 +18,7 @@ import {
   SaveButton,
   Textarea,
   Title,
-} from "./styles";
-import { fetchWithAuth } from "../../../../Services/api";
-import { toast } from "sonner";
+} from './styles';
 
 type Props = {
   onClose: () => void;
@@ -22,18 +27,18 @@ type Props = {
 };
 
 const reactions = [
-  { emoji: "😍", label: "LOVING" },
-  { emoji: "🤩", label: "EXCITED" },
-  { emoji: "😱", label: "AMAZED" },
-  { emoji: "🤡", label: "DELUDED" },
-  { emoji: "😂", label: "LAUGH" },
-  { emoji: "💔", label: "DISAPPOINTED" },
-  { emoji: "😕", label: "CONFUSED" },
-  { emoji: "🤬", label: "ANGRY" },
-  { emoji: "😢", label: "SAD" },
-  { emoji: "🤢", label: "NAUSEOUS" },
-  { emoji: "😴", label: "BORED" },
-  { emoji: "😩", label: "AGONY" },
+  { emoji: '😍', label: 'LOVING' },
+  { emoji: '🤩', label: 'EXCITED' },
+  { emoji: '😱', label: 'AMAZED' },
+  { emoji: '🤡', label: 'DELUDED' },
+  { emoji: '😂', label: 'LAUGH' },
+  { emoji: '💔', label: 'DISAPPOINTED' },
+  { emoji: '😕', label: 'CONFUSED' },
+  { emoji: '🤬', label: 'ANGRY' },
+  { emoji: '😢', label: 'SAD' },
+  { emoji: '🤢', label: 'NAUSEOUS' },
+  { emoji: '😴', label: 'BORED' },
+  { emoji: '😩', label: 'AGONY' },
 ];
 
 type CommentPayload = {
@@ -43,49 +48,49 @@ type CommentPayload = {
   readPages: number;
   progress: number;
   reaction:
-    | "LOVING"
-    | "EXCITED"
-    | "AMAZED"
-    | "DELUDED"
-    | "LAUGH"
-    | "DISAPPOINTED"
-    | "CONFUSED"
-    | "ANGRY"
-    | "SAD"
-    | "NAUSEOUS"
-    | "BORED"
-    | "AGONY";
+    | 'LOVING'
+    | 'EXCITED'
+    | 'AMAZED'
+    | 'DELUDED'
+    | 'LAUGH'
+    | 'DISAPPOINTED'
+    | 'CONFUSED'
+    | 'ANGRY'
+    | 'SAD'
+    | 'NAUSEOUS'
+    | 'BORED'
+    | 'AGONY';
 };
 
 export async function postCommentary(comment: CommentPayload) {
   try {
     const response = await fetchWithAuth(
-      "https://books-social.onrender.com/api/v1/commentary",
+      'https://books-social.onrender.com/api/v1/commentary',
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(comment),
-      }
+      },
     );
 
-    if (!response.ok) throw new Error("Failed to post comment");
+    if (!response.ok) throw new Error('Failed to post comment');
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error posting comment:", error);
+    console.error('Error posting comment:', error);
     throw error;
   }
 }
 
 export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
-  const [commentText, setCommentText] = useState("");
-  const [readPages, setReadPages] = useState("");
-  const [progress] = useState("");
+  const [commentText, setCommentText] = useState('');
+  const [readPages, setReadPages] = useState('');
+  const [progress] = useState('');
   const [selectedReaction, setSelectedReaction] = useState<
-    CommentPayload["reaction"] | null
+    CommentPayload['reaction'] | null
   >(null);
 
   const handleSaveComment = async () => {
@@ -101,9 +106,9 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
         reaction: selectedReaction,
       });
       onClose();
-      toast.success("Comment saved successfully!");
+      toast.success('Comment saved successfully!');
     } catch (err) {
-      console.error("Erro ao salvar comentário:", err);
+      console.error('Erro ao salvar comentário:', err);
     }
   };
 
@@ -131,7 +136,7 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
               <EmojiBox
                 key={r.label}
                 onClick={() =>
-                  setSelectedReaction(r.label as CommentPayload["reaction"])
+                  setSelectedReaction(r.label as CommentPayload['reaction'])
                 }
                 $selected={selectedReaction === r.label}
                 title={r.label}

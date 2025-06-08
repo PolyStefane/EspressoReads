@@ -49,13 +49,13 @@ export const ReplyActions = styled.div`
 export const ReplyDelete = styled.button`
   background: none;
   border: none;
-  color: #bdbdbd; // cinza claro, discreto
+  color: #bdbdbd;
   font-size: 1.2rem;
   cursor: pointer;
   align-self: flex-end;
   transition: color 0.2s;
   margin-left: 8px;
   &:hover {
-    color: #e57373; // vermelho suave só no hover
+    color: #e57373;
   }
 `;

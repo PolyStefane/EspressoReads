@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react';
 
 // Components
 import { FeedCard } from './components/FeedCard';
+import { Spinner } from '../../components/Spinner';
 
 // Services
 import { fetchWithAuth } from '../../Services/api';
 
 // Styles
 import { FeedContainer, FeedSubtitle, FeedTitle } from './styles';
-import { Spinner } from '../../components/Spinner';
 
 export const Feed: React.FC = () => {
   const [comments, setComments] = useState([]);

@@ -1,5 +1,9 @@
+// External libraries
 import React from 'react';
 import { FiTrash2 } from 'react-icons/fi';
+
+// Types
+import { Reply } from '../../../../types';
 
 import {
   RepliesContainer,
@@ -12,7 +16,7 @@ import {
 } from './styles';
 
 interface RepliesListProps {
-  replies: any[];
+  replies: Reply[];
 }
 
 export const RepliesList: React.FC<RepliesListProps> = ({ replies }) => {

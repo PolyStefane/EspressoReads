@@ -2,8 +2,17 @@
 import React, { useState } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
+// Components
+import { RepliesList } from '../RepliesList';
+
 // Assets
 import { CommentIconSVG } from '../../../../assets/icons/CommentIcon';
+
+// Hooks
+import { useReplies } from './hooks/useReplies';
+
+// Types
+import { Comment } from '../../../../types';
 
 // Styles
 import {
@@ -26,11 +35,9 @@ import {
   CommentTextarea,
   ContainerProgress,
 } from './styles';
-import { useReplies } from './hooks/useReplies';
-import { RepliesList } from '../RepliesList';
 
 interface Props {
-  comment: any;
+  comment: Comment;
 }
 
 export const FeedCard: React.FC<Props> = ({ comment }) => {
@@ -169,7 +176,15 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
           {successMsg && (
             <div style={{ color: 'green', marginBottom: 8 }}>{successMsg}</div>
           )}
-          {replies.length > 0 && <RepliesList replies={replies} />}
+          {!repliesLoaded ? (
+            <div
+              style={{ padding: '1rem', textAlign: 'center', color: '#888' }}
+            >
+              Loading replies...
+            </div>
+          ) : (
+            replies.length > 0 && <RepliesList replies={replies} />
+          )}
           <CommentTextarea
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}

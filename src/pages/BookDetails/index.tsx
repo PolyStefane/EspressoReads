@@ -1,18 +1,21 @@
 // External libraries
-import { FaStar } from "react-icons/fa";
-import { useEffect, useRef, useState } from "react";
-import { MdFavorite } from "react-icons/md";
-import { useNavigate, useParams } from "react-router-dom";
+import { FaStar } from 'react-icons/fa';
+import { useEffect, useRef, useState } from 'react';
+import { MdFavorite } from 'react-icons/md';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // Components
-import { CommentModal } from "./components/CommentModal";
-import { CommentHistoryModal } from "./components/CommentHistoryModal";
+import { FilterType } from '../../components/Tag';
+import { StatusTag } from './components/StatusTag';
+import { Spinner } from '../../components/Spinner';
+import { CommentModal } from './components/CommentModal';
+import { CommentHistoryModal } from './components/CommentHistoryModal';
 
 // Services
-import { fetchWithAuth } from "../../Services/api";
+import { fetchWithAuth } from '../../Services/api';
 
 // Types
-import { Book } from "../Library/types/Book";
+import { Book } from '../Library/types/Book';
 
 // Styles
 import {
@@ -32,33 +35,30 @@ import {
   FormContainer,
   LeftContainer,
   RightContainer,
-} from "./styles";
-import { StatusTag } from "./components/StatusTag";
-import { FilterType } from "../../components/Tag";
-import { Spinner } from "../../components/Spinner";
+} from './styles';
 
 const genreLabels: Record<string, string> = {
-  ADVENTURE: "Adventure",
-  BIOGRAPHY: "Biography",
-  CHILDREN: "Children",
-  CLASSIC: "Classic",
-  COMIC: "Comic",
-  DRAMA: "Drama",
-  DYSTOPIAN: "Dystopian",
-  FANTASY: "Fantasy",
-  GRAPHIC_NOVEL: "Graphic Novel",
-  HISTORICAL: "Historical",
-  HORROR: "Horror",
-  HUMOR: "Humor",
-  MANGA: "Manga",
-  MYSTERY: "Mystery",
-  POETRY: "Poetry",
-  ROMANCE: "Romance",
-  SCIENCE_FICTION: "Science Fiction",
-  TECHNOLOGY: "Technology",
-  THRILLER: "Thriller",
-  TRUE_CRIME: "True Crime",
-  YOUNG_ADULT: "Young Adult",
+  ADVENTURE: 'Adventure',
+  BIOGRAPHY: 'Biography',
+  CHILDREN: 'Children',
+  CLASSIC: 'Classic',
+  COMIC: 'Comic',
+  DRAMA: 'Drama',
+  DYSTOPIAN: 'Dystopian',
+  FANTASY: 'Fantasy',
+  GRAPHIC_NOVEL: 'Graphic Novel',
+  HISTORICAL: 'Historical',
+  HORROR: 'Horror',
+  HUMOR: 'Humor',
+  MANGA: 'Manga',
+  MYSTERY: 'Mystery',
+  POETRY: 'Poetry',
+  ROMANCE: 'Romance',
+  SCIENCE_FICTION: 'Science Fiction',
+  TECHNOLOGY: 'Technology',
+  THRILLER: 'Thriller',
+  TRUE_CRIME: 'True Crime',
+  YOUNG_ADULT: 'Young Adult',
 };
 
 export const BookDetails: React.FC = () => {
@@ -70,7 +70,7 @@ export const BookDetails: React.FC = () => {
   const [loadingComments, setLoadingComments] = useState(false);
   const navigate = useNavigate();
 
-  const userId = localStorage.getItem("userId") ?? "";
+  const userId = localStorage.getItem('userId') ?? '';
   const hasFetched = useRef(false);
 
   useEffect(() => {
@@ -78,14 +78,14 @@ export const BookDetails: React.FC = () => {
     hasFetched.current = true;
 
     fetchWithAuth(
-      `https://books-social.onrender.com/api/v1/book/find/${bookId}`
+      `https://books-social.onrender.com/api/v1/book/find/${bookId}`,
     )
       .then((res) => res.json())
       .then((data) => {
         const book = {
           ...data.book,
-          physical: data.book.bookTypes?.includes("PHYSICAL"),
-          digital: data.book.bookTypes?.includes("DIGITAL"),
+          physical: data.book.bookTypes?.includes('PHYSICAL'),
+          digital: data.book.bookTypes?.includes('DIGITAL'),
         };
         setBook(book);
       })
@@ -104,11 +104,11 @@ export const BookDetails: React.FC = () => {
     setLoadingComments(true);
     try {
       const res = await fetchWithAuth(
-        `https://books-social.onrender.com/api/v1/commentary/${bookId}`
+        `https://books-social.onrender.com/api/v1/commentary/${bookId}`,
       );
 
       if (!res.ok) {
-        throw new Error("Erro na requisição");
+        throw new Error('Erro na requisição');
       }
 
       let data;
@@ -116,16 +116,16 @@ export const BookDetails: React.FC = () => {
         data = await res.json();
       } catch (e) {
         const fallbackText = await res.text();
-        console.error("Resposta não parseável como JSON:", fallbackText);
-        throw new Error("Resposta não é JSON");
+        console.error('Resposta não parseável como JSON:', fallbackText);
+        throw new Error('Resposta não é JSON');
       }
 
-      console.log("✅ Comentários:", data);
+      console.log('✅ Comentários:', data);
 
       setComments(data.comments || []);
       setShowHistory(true);
     } catch (err) {
-      console.error("Erro ao buscar comentários:", err);
+      console.error('Erro ao buscar comentários:', err);
     } finally {
       setLoadingComments(false);
     }
@@ -148,21 +148,21 @@ export const BookDetails: React.FC = () => {
               <span>{genreLabels[book.genre] || book.genre}</span>
             </Field>
 
-            {book.readingStatus !== "WISHLIST" && (
+            {book.readingStatus !== 'WISHLIST' && (
               <DateContainer>
                 <Field>
                   <Label>Start Date</Label>
                   <span>
                     {book.startDate
                       ? book.startDate
-                      : "No start date registered"}
+                      : 'No start date registered'}
                   </span>
                 </Field>
 
                 <Field>
                   <Label>End Date</Label>
                   <span>
-                    {book.endDate ? book.endDate : "No end date registered"}
+                    {book.endDate ? book.endDate : 'No end date registered'}
                   </span>
                 </Field>
               </DateContainer>
@@ -173,7 +173,7 @@ export const BookDetails: React.FC = () => {
               <span>
                 {book.review?.trim()
                   ? book.review
-                  : "There are no reviews for this book yet"}
+                  : 'There are no reviews for this book yet'}
               </span>
             </Field>
 
@@ -182,7 +182,7 @@ export const BookDetails: React.FC = () => {
               <span>
                 {book.favoriteCharacter?.trim()
                   ? book.favoriteCharacter
-                  : "Haven’t discovered your favorite character yet"}
+                  : 'Haven’t discovered your favorite character yet'}
               </span>
             </Field>
 
@@ -202,7 +202,7 @@ export const BookDetails: React.FC = () => {
 
             <IconGroup>
               <Stars>
-                {typeof book.rating === "number" &&
+                {typeof book.rating === 'number' &&
                   book.rating >= 1 &&
                   [...Array(book.rating)].map((_, i) => <FaStar key={i} />)}
               </Stars>
@@ -214,13 +214,13 @@ export const BookDetails: React.FC = () => {
             </IconGroup>
 
             <Row>
-              {book.readingStatus !== "WISHLIST" && (
+              {book.readingStatus !== 'WISHLIST' && (
                 <Field>
                   <Label>Format</Label>
                   <span>
-                    {book.physical && "Physical"}
-                    {book.physical && book.digital && " and "}
-                    {book.digital && "Digital"}
+                    {book.physical && 'Physical'}
+                    {book.physical && book.digital && ' and '}
+                    {book.digital && 'Digital'}
                   </span>
                 </Field>
               )}
@@ -232,7 +232,7 @@ export const BookDetails: React.FC = () => {
             </Row>
 
             <Buttons>
-              {book.readingStatus === "READING" && (
+              {book.readingStatus === 'READING' && (
                 <button onClick={() => setIsModalOpen(true)}>
                   Add Comment
                 </button>

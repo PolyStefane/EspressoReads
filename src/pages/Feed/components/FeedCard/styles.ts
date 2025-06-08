@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Card = styled.div`
   background: #bdd8bb;
@@ -94,8 +94,8 @@ export const BookAuthor = styled.span`
 `;
 
 export const LikeButton = styled.span<{ $liked: boolean; $loading: boolean }>`
-  cursor: ${({ $loading }) => ($loading ? "not-allowed" : "pointer")};
-  color: ${({ $liked }) => ($liked ? "#F82371" : "#F82371")};
+  cursor: ${({ $loading }) => ($loading ? 'not-allowed' : 'pointer')};
+  color: ${({ $liked }) => ($liked ? '#F82371' : '#F82371')};
   display: flex;
   align-items: center;
   gap: 4px;
@@ -103,7 +103,7 @@ export const LikeButton = styled.span<{ $liked: boolean; $loading: boolean }>`
   transition: color 0.2s;
   font-size: 1.2rem;
   &:hover {
-    color: ${({ $liked }) => ($liked ? "#b71c1c" : "#444")};
+    color: ${({ $liked }) => ($liked ? '#b71c1c' : '#444')};
   }
 `;
 
@@ -121,7 +121,7 @@ export const CommentButton = styled.button`
   outline: none;
 
   &:hover {
-    color: #6c9;
+    color: #000;
   }
 
   svg {
@@ -148,7 +148,7 @@ export const SendButton = styled.button`
   margin-top: 8px;
   padding: 6px 16px;
   border-radius: 6px;
-  background: #6c9;
+  background: #7bb286;
   border: none;
   color: #fff;
   font-weight: bold;
