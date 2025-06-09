@@ -1,9 +1,9 @@
 // External libraries
-import React from 'react';
-import { FiTrash2 } from 'react-icons/fi';
+import React from "react";
+import { FiTrash2 } from "react-icons/fi";
 
 // Types
-import { Reply } from '../../../../types';
+import { Reply } from "../../../../types";
 
 import {
   RepliesContainer,
@@ -13,20 +13,44 @@ import {
   ReplyUser,
   ReplyActions,
   ReplyDelete,
-} from './styles';
+} from "./styles";
+import { toast } from "sonner";
 
 interface RepliesListProps {
   replies: Reply[];
+  setReplies: React.Dispatch<React.SetStateAction<Reply[]>>;
 }
 
-export const RepliesList: React.FC<RepliesListProps> = ({ replies }) => {
-  const myUserId = localStorage.getItem('userId');
+export const RepliesList: React.FC<RepliesListProps> = ({
+  replies,
+  setReplies,
+}) => {
+  const myUserId = localStorage.getItem("userId");
 
-  const handleDelete = (replyId: string) => {
-    // Quando o backend estiver pronto
-    // await fetch(`/api/reply/${replyId}`, { method: 'DELETE', ... })
-    //atualizar a lista de replies
-    alert('Função de deletar reply ainda não implementada.');
+  const handleDelete = async (replyId: string) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(
+        `https://books-social.onrender.com/api/v1/reply/delete/${replyId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token && { Authorization: `Bearer ${token}` }),
+          },
+        }
+      );
+
+      if (!res.ok) throw new Error("Failed to delete reply");
+
+      toast.success("Reply deleted successfully");
+
+      // Atualiza a lista local, sem reload
+      setReplies((prev) => prev.filter((r) => r.replyId !== replyId));
+    } catch (err) {
+      console.error("Error deleting reply:", err);
+      toast.error("Error deleting reply. Please try again.");
+    }
   };
 
   return (
@@ -36,7 +60,7 @@ export const RepliesList: React.FC<RepliesListProps> = ({ replies }) => {
         .map((reply, idx) => (
           <ReplyBox key={idx}>
             <ReplyContent>
-              <ReplyUser>@{reply.username || 'Anonymous'}</ReplyUser>
+              <ReplyUser>@{reply.username || "Anonymous"}</ReplyUser>
               <ReplyText>{reply.replyText}</ReplyText>
             </ReplyContent>
             <ReplyActions>
