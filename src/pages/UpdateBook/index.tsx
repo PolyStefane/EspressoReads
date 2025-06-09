@@ -32,7 +32,7 @@ export const UpdateBook: React.FC = () => {
     if (!bookId) return;
 
     fetchWithAuth(
-      `https://books-social.onrender.com/api/v1/book/find/${bookId}`
+      `https://books-social-g338.onrender.com/api/v1/book/find/${bookId}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -83,7 +83,7 @@ export const UpdateBook: React.FC = () => {
       };
 
       const res = await fetchWithAuth(
-        `https://books-social.onrender.com/api/v1/book/update/${bookId}`,
+        `https://books-social-g338.onrender.com/api/v1/book/update/${bookId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

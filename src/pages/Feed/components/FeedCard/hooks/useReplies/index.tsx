@@ -12,7 +12,7 @@ export function useReplies(commentaryId: string | undefined) {
 
     try {
       const res = await fetch(
-        `https://books-social.onrender.com/api/v1/reply/${commentaryId}`,
+        `https://books-social-g338.onrender.com/api/v1/reply/${commentaryId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (res.ok) {
@@ -40,7 +40,7 @@ export function useReplies(commentaryId: string | undefined) {
     }
     try {
       const res = await fetch(
-        `https://books-social.onrender.com/api/v1/reply`,
+        `https://books-social-g338.onrender.com/api/v1/reply`,
         {
           method: "POST",
           headers: {

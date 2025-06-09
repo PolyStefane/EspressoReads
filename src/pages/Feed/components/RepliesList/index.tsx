@@ -31,7 +31,7 @@ export const RepliesList: React.FC<RepliesListProps> = ({
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `https://books-social.onrender.com/api/v1/reply/delete/${replyId}`,
+        `https://books-social-g338.onrender.com/api/v1/reply/delete/${replyId}`,
         {
           method: "DELETE",
           headers: {

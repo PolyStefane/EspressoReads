@@ -36,7 +36,7 @@ export const BookCard: React.FC<Props> = ({ book, onDelete }) => {
   const handleDelete = async () => {
     try {
       const response = await fetchWithAuth(
-        `https://books-social.onrender.com/api/v1/book/delete/${book.bookId}`,
+        `https://books-social-g338.onrender.com/api/v1/book/delete/${book.bookId}`,
         {
           method: "DELETE",
         }

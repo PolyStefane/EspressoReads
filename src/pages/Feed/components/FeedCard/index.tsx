@@ -84,7 +84,7 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
       if (!userId) return setLoading(false);
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `https://books-social.onrender.com/api/v1/commentary/like/${commentaryId}/${action}/${userId}`,
+        `https://books-social-g338.onrender.com/api/v1/commentary/like/${commentaryId}/${action}/${userId}`,
         {
           method: "PATCH",
           headers: {
