@@ -17,7 +17,13 @@ export function useReplies(commentaryId: string | undefined) {
       );
       if (res.ok) {
         const data = await res.json();
-        setReplies(data.replies);
+
+        const parsedReplies = (data.replies || []).map((entry: any) => ({
+          ...entry.reply,
+          username: entry.username,
+        }));
+
+        setReplies(parsedReplies);
         setRepliesLoaded(true);
       }
     } catch (err) {
