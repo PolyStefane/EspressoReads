@@ -22,7 +22,7 @@ export const Feed: React.FC = () => {
       setLoading(true);
       try {
         const res = await fetchWithAuth(
-          `https://books-social-g338.onrender/api/v1/commentary/random/${userId}`
+          `https://books-social-g338.onrender.com/api/v1/commentary/random/${userId}`
         );
         const data = await res.json();
         console.log("API:", data.comments);

@@ -1,23 +1,28 @@
+// External libraries
 import React from "react";
-import {
-  Container,
-  DateContainer,
-  FormContainer,
-  FormSection,
-  LeftContainer,
-  PagesInput,
-  RightContainer,
-  SaveButton,
-  SelectContainer,
-  TextArea,
-  Title,
-} from "../../styles";
-import { FloatingInput } from "../../../../components/FloatingInput";
+
+// Components
+import { RatingStars } from "../RatingStars";
+import { CoverUpload } from "../CoverUpload";
+import { BookTypeCheckbox } from "../BookTypeCheckbox";
 import { LabeledReactSelect } from "../LabeledReactSelect";
 import { LabelInput } from "../../../../components/LabelInput";
-import { CoverUpload } from "../CoverUpload";
-import { RatingStars } from "../RatingStars";
-import { BookTypeCheckbox } from "../BookTypeCheckbox";
+import { FloatingInput } from "../../../../components/FloatingInput";
+
+// Styles
+import {
+  Title,
+  TextArea,
+  Container,
+  PagesInput,
+  SaveButton,
+  FormSection,
+  DateContainer,
+  FormContainer,
+  LeftContainer,
+  RightContainer,
+  SelectContainer,
+} from "../../styles";
 
 interface BookFormProps {
   form: any;
@@ -40,19 +45,19 @@ interface BookFormProps {
 
 export const BookForm: React.FC<BookFormProps> = ({
   form,
+  showReview,
+  showRating,
+  showFormat,
+  showEndDate,
   isSubmitting,
+  showStartDate,
+  showFavoriteCharacter,
   handleChange,
   handleRating,
   handleSubmit,
   handleCheckbox,
   toggleFavorite,
   handleCoverUpload,
-  showReview,
-  showRating,
-  showEndDate,
-  showStartDate,
-  showFavoriteCharacter,
-  showFormat,
   title = "Book Form",
 }) => (
   <Container>

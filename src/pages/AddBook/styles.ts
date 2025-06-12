@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 interface BookCoverUploadProps {
   hasImage: boolean;
@@ -6,17 +6,16 @@ interface BookCoverUploadProps {
 
 export const Container = styled.div`
   width: 100%;
-  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
 export const Title = styled.h1`
-  font-size: 2.4rem;
+  font-size: 2.3rem;
   color: #1f1f1f;
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 `;
 
 export const FormContainer = styled.div`
@@ -102,7 +101,7 @@ export const TextArea = styled.textarea`
   }
 `;
 
-export const DateInput = styled(Input).attrs({ type: 'date' })`
+export const DateInput = styled(Input).attrs({ type: "date" })`
   max-width: 100%;
   color: #5d8665;
 `;
@@ -130,7 +129,7 @@ export const CheckboxWrapper = styled.div`
     color: #333;
   }
 
-  input[type='checkbox'] {
+  input[type="checkbox"] {
     transform: scale(1.2);
     accent-color: #bdd9c3;
     cursor: pointer;

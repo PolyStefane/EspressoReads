@@ -17,6 +17,7 @@ import {
   SearchInput,
   SearchWrapper,
   FilterContainer,
+  NoResultsContainer,
 } from "./styles";
 import { Spinner } from "../../components/Spinner";
 
@@ -90,7 +91,9 @@ export const Library: React.FC = () => {
           </FilterContainer>
 
           {filteredBooks.length === 0 ? (
-            <p>🔍 No results match your search or selected filter.</p>
+            <NoResultsContainer>
+              🔍 No results match your search or selected filter.
+            </NoResultsContainer>
           ) : (
             <BookGrid>
               {filteredBooks.map((book) => (

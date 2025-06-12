@@ -1,9 +1,14 @@
+// External libraries
 import React from "react";
-import { TagButton } from "./styles";
+
+// Assets
 import { FavoriteTagSVG } from "../../assets/icons/FavoriteTag";
 import { FinishedTagSVG } from "../../assets/icons/FinishedTag";
 import { ReadingTagSVG } from "../../assets/icons/ReadingTag";
 import { WishlistTagSVG } from "../../assets/icons/WishlistTag";
+
+// Styles
+import { TagButton } from "./styles";
 
 export type FilterType = "FAVORITES" | "FINISHED" | "READING" | "WISHLIST";
 

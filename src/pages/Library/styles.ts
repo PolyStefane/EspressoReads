@@ -5,11 +5,11 @@ export const MainContent = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5rem 8rem;
+  padding: 3rem 8rem;
 `;
 
 export const Title = styled.h2`
-  font-size: 2.4rem;
+  font-size: 2.3rem;
   color: #1f1f1f;
   text-align: center;
   margin-bottom: 2.5rem;
@@ -35,27 +35,16 @@ export const Subtext = styled.p`
   margin-bottom: 2rem;
 `;
 
-export const StartButton = styled.button`
-  background-color: #7bb286;
-  color: #fffdf0;
-  border: none;
-  border-radius: 2rem;
-  padding: 0.6rem 1.2rem;
-  font-size: 1.3rem;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #5e9b73;
-  }
-`;
 export const FilterContainer = styled.div`
   display: flex;
   gap: 0.8rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   flex-wrap: wrap;
   align-items: center;
+`;
+
+export const NoResultsContainer = styled.p`
+  margin-top: 2rem;
 `;
 
 export const SearchWrapper = styled.div`

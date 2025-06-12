@@ -34,6 +34,8 @@ export const TagButton = styled.button<{
   }
 
   &:hover {
-    opacity: 0.95;
+    background-color: ${({ $type }) => activeBgColors[$type]};
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
   }
 `;
