@@ -46,6 +46,10 @@ export const Sidebar: React.FC = () => {
     navigate("/feed");
   };
 
+  const profile = () => {
+    navigate("/profile");
+  };
+
   return (
     <SidebarContainer>
       <OptionsContainer>
@@ -64,7 +68,7 @@ export const Sidebar: React.FC = () => {
         </NavButton>
       </OptionsContainer>
       <UserSection>
-        <img src="/img/user.png" alt="User avatar" />
+        <img src="/img/user.png" alt="User avatar" onClick={profile} />
         <span>{username}</span>
         <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
       </UserSection>

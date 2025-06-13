@@ -79,6 +79,7 @@ export const LogoutButton = styled.button`
 export const UserSection = styled.div`
   text-align: center;
   margin-bottom: 1rem;
+  cursor: pointer;
 
   img {
     width: 5rem;
