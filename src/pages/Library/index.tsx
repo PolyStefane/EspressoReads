@@ -18,6 +18,7 @@ import {
   SearchWrapper,
   FilterContainer,
   NoResultsContainer,
+  LoadingMessage,
 } from "./styles";
 import { Spinner } from "../../components/Spinner";
 
@@ -54,7 +55,9 @@ export const Library: React.FC = () => {
       {loading ? (
         <Spinner text="Loading your books..." />
       ) : books.length === 0 ? (
-        <p>📭 No books found in your library. Try adding some!</p>
+        <LoadingMessage>
+          📭 No books found in your library. Try adding some!
+        </LoadingMessage>
       ) : (
         <>
           <FilterContainer>

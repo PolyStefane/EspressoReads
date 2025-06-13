@@ -35,6 +35,8 @@ export const Subtext = styled.p`
   margin-bottom: 2rem;
 `;
 
+export const LoadingMessage = styled.p``;
+
 export const FilterContainer = styled.div`
   display: flex;
   gap: 0.8rem;
