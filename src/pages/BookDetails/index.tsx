@@ -265,6 +265,7 @@ export const BookDetails: React.FC = () => {
           comments={comments}
           loading={loadingComments}
           onClose={() => setShowHistory(false)}
+          onRefresh={fetchComments}
         />
       )}
     </Container>

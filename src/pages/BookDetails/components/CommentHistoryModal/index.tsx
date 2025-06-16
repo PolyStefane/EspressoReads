@@ -1,6 +1,9 @@
 // External libraries
 import React from "react";
-import { FaHeart, FaEllipsisH } from "react-icons/fa";
+import { FaHeart, FaEllipsisH, FaTrash } from "react-icons/fa";
+
+// Services
+import { fetchWithAuth } from "../../../../Services/api";
 
 // Styles
 import {
@@ -20,6 +23,7 @@ import {
 import { LikeButton } from "../../../Feed/components/FeedCard/styles";
 
 type Comment = {
+  commentaryId: string;
   commentaryText: string;
   readPages: number;
   progress: number;
@@ -29,11 +33,14 @@ type Comment = {
   liked?: boolean;
 };
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 type Props = {
   bookId: string;
   loading: boolean;
   comments: Comment[];
   onClose: () => void;
+  onRefresh: () => void;
 };
 
 function getEmoji(reaction: string) {
@@ -59,10 +66,31 @@ function formatText(text: string) {
   return text.replace(/\n/g, "<br />");
 }
 
+async function deleteComment(commentId: string) {
+  try {
+    const response = await fetchWithAuth(
+      `${apiUrl}/api/v1/commentary/delete/${commentId}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to delete comment");
+    }
+
+    console.log("Comment deleted");
+    // Atualize a UI conforme necessário, por exemplo, recarregando os comentários
+  } catch (error) {
+    console.error("Error deleting comment:", error);
+  }
+}
+
 export const CommentHistoryModal: React.FC<Props> = ({
+  loading,
   comments,
   onClose,
-  loading,
+  onRefresh,
 }) => {
   return (
     <Overlay>
@@ -80,35 +108,58 @@ export const CommentHistoryModal: React.FC<Props> = ({
         ) : (
           <ScrollableContent>
             <CommentList>
-              {comments.map((comment, index) => (
-                <StyledCommentCard key={index}>
-                  <CommentText
-                    dangerouslySetInnerHTML={{
-                      __html: formatText(comment.commentaryText),
-                    }}
-                  />
-                  <ReactionProgress>
-                    <span>{getEmoji(comment.reaction)}</span>
-                    <span>{comment.progress}%</span>
-                  </ReactionProgress>
+              {comments.map((comment, index) => {
+                return (
+                  <StyledCommentCard key={index}>
+                    <CommentText
+                      dangerouslySetInnerHTML={{
+                        __html: formatText(comment.commentaryText),
+                      }}
+                    />
+                    <ReactionProgress>
+                      <span>{getEmoji(comment.reaction)}</span>
+                      <span>{comment.progress}%</span>
+                    </ReactionProgress>
 
-                  <CommentFooter>
-                    <div>
-                      <LikeButton
-                        $liked={comment.isLiked ?? comment.liked ?? false}
-                        $loading={false}
-                        style={{ fontSize: "1.1rem" }}
+                    <CommentFooter>
+                      <div>
+                        <LikeButton
+                          $liked={comment.isLiked ?? comment.liked ?? false}
+                          $loading={false}
+                          style={{ fontSize: "1.1rem" }}
+                        >
+                          <FaHeart /> <span>{comment.likes ?? 0}</span>
+                        </LikeButton>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: "10px",
+                          alignItems: "center",
+                        }}
                       >
-                        <FaHeart /> <span>{comment.likes ?? 0}</span>
-                      </LikeButton>
-                      {/* <IconButton>
-                        <FaCommentDots /> <span>Comentar</span>
-                      </IconButton> */}
-                    </div>
-                    <FaEllipsisH />
-                  </CommentFooter>
-                </StyledCommentCard>
-              ))}
+                        <FaEllipsisH />
+                        <FaTrash
+                          style={{ cursor: "pointer" }}
+                          onClick={async () => {
+                            const confirmed = window.confirm(
+                              "Tem certeza que deseja excluir?"
+                            );
+                            if (!confirmed) return;
+
+                            console.log(
+                              "🔴 Deletando comentário com ID:",
+                              comment.commentaryId
+                            );
+                            await deleteComment(comment.commentaryId);
+                            onRefresh();
+                          }}
+                        />
+                      </div>
+                    </CommentFooter>
+                  </StyledCommentCard>
+                );
+              })}
             </CommentList>
           </ScrollableContent>
         )}
