@@ -1,17 +1,16 @@
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const saveBook = async (payload: any) => {
   const token = localStorage.getItem("token");
 
-  const response = await fetch(
-    "https://books-social-g338.onrender.com/api/v1/book",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        ...(token && { Authorization: `Bearer ${token}` }),
-      },
-      body: JSON.stringify(payload),
-    }
-  );
+  const response = await fetch(`${apiUrl}/api/v1/book`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...(token && { Authorization: `Bearer ${token}` }),
+    },
+    body: JSON.stringify(payload),
+  });
 
   if (!response.ok) {
     const errorBody = await response.json().catch(() => ({}));

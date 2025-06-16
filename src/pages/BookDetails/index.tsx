@@ -73,13 +73,13 @@ export const BookDetails: React.FC = () => {
   const userId = localStorage.getItem("userId") ?? "";
   const hasFetched = useRef(false);
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     if (hasFetched.current) return;
     hasFetched.current = true;
 
-    fetchWithAuth(
-      `https://books-social-g338.onrender.com/api/v1/book/find/${bookId}`
-    )
+    fetchWithAuth(`${apiUrl}/api/v1/book/find/${bookId}`)
       .then((res) => res.json())
       .then((data) => {
         const book = {
@@ -103,9 +103,7 @@ export const BookDetails: React.FC = () => {
   const fetchComments = async () => {
     setLoadingComments(true);
     try {
-      const res = await fetchWithAuth(
-        `https://books-social-g338.onrender.com/api/v1/commentary/${bookId}`
-      );
+      const res = await fetchWithAuth(`${apiUrl}/api/v1/commentary/${bookId}`);
 
       if (!res.ok) {
         throw new Error("Erro na requisição");

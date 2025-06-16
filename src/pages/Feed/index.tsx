@@ -21,9 +21,7 @@ export const Feed: React.FC = () => {
     const fetchComments = async () => {
       setLoading(true);
       try {
-        const res = await fetchWithAuth(
-          `https://books-social-g338.onrender.com/api/v1/commentary/random/${userId}`
-        );
+        const res = await fetchWithAuth(`/commentary/random/${userId}`);
         const data = await res.json();
         console.log("API:", data.comments);
 

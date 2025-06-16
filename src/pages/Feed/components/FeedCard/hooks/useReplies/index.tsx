@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { toast } from "sonner";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export function useReplies(commentaryId: string | undefined) {
   const [replies, setReplies] = useState<any[]>([]);
   const [repliesLoaded, setRepliesLoaded] = useState(false);
@@ -11,10 +13,9 @@ export function useReplies(commentaryId: string | undefined) {
     if (!token) return;
 
     try {
-      const res = await fetch(
-        `https://books-social-g338.onrender.com/api/v1/reply/${commentaryId}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const res = await fetch(`${apiUrl}/api/v1/reply/${commentaryId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       if (res.ok) {
         const data = await res.json();
 
@@ -39,17 +40,14 @@ export function useReplies(commentaryId: string | undefined) {
       return false;
     }
     try {
-      const res = await fetch(
-        `https://books-social-g338.onrender.com/api/v1/reply`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ userId, commentaryId, replyText }),
-        }
-      );
+      const res = await fetch(`${apiUrl}/api/v1/reply`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ userId, commentaryId, replyText }),
+      });
       if (res.ok) {
         await loadReplies();
         toast.success("Reply enviada!");

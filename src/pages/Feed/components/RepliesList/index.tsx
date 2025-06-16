@@ -21,6 +21,8 @@ interface RepliesListProps {
   setReplies: React.Dispatch<React.SetStateAction<Reply[]>>;
 }
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const RepliesList: React.FC<RepliesListProps> = ({
   replies,
   setReplies,
@@ -30,16 +32,13 @@ export const RepliesList: React.FC<RepliesListProps> = ({
   const handleDelete = async (replyId: string) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(
-        `https://books-social-g338.onrender.com/api/v1/reply/delete/${replyId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            ...(token && { Authorization: `Bearer ${token}` }),
-          },
-        }
-      );
+      const res = await fetch(`${apiUrl}/api/v1/reply/delete/${replyId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token && { Authorization: `Bearer ${token}` }),
+        },
+      });
 
       if (!res.ok) throw new Error("Failed to delete reply");
 

@@ -29,6 +29,8 @@ type Props = {
   onOpen?: (book: Book) => void;
 };
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const BookCard: React.FC<Props> = ({ book, onDelete }) => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -36,7 +38,7 @@ export const BookCard: React.FC<Props> = ({ book, onDelete }) => {
   const handleDelete = async () => {
     try {
       const response = await fetchWithAuth(
-        `https://books-social-g338.onrender.com/api/v1/book/delete/${book.bookId}`,
+        `${apiUrl}/api/v1/book/delete/${book.bookId}`,
         {
           method: "DELETE",
         }

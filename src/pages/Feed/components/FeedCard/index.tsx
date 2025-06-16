@@ -74,6 +74,8 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
     if (ok) setCommentText("");
   };
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const handleLike = async () => {
     if (loading) return;
     setLoading(true);
@@ -84,7 +86,7 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
       if (!userId) return setLoading(false);
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `https://books-social-g338.onrender.com/api/v1/commentary/like/${commentaryId}/${action}/${userId}`,
+        `${apiUrl}/api/v1/commentary/like/${commentaryId}/${action}/${userId}`,
         {
           method: "PATCH",
           headers: {

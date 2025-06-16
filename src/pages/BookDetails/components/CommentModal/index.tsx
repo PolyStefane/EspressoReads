@@ -62,18 +62,17 @@ type CommentPayload = {
     | "AGONY";
 };
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export async function postCommentary(comment: CommentPayload) {
   try {
-    const response = await fetchWithAuth(
-      "https://books-social-g338.onrender.com/api/v1/commentary",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(comment),
-      }
-    );
+    const response = await fetchWithAuth(`${apiUrl}/api/v1/commentary`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(comment),
+    });
 
     if (!response.ok) throw new Error("Failed to post comment");
 

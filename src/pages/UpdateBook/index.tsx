@@ -13,6 +13,8 @@ import { BookForm } from "../AddBook/components/AddBookLayout";
 import { useBookFormVisibility } from "../AddBook/hooks/useBookFormVisibility";
 import { toast } from "sonner";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const UpdateBook: React.FC = () => {
   const { id: bookId } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -31,9 +33,7 @@ export const UpdateBook: React.FC = () => {
   useEffect(() => {
     if (!bookId) return;
 
-    fetchWithAuth(
-      `https://books-social-g338.onrender.com/api/v1/book/find/${bookId}`
-    )
+    fetchWithAuth(`${apiUrl}/api/v1/book/find/${bookId}`)
       .then((res) => res.json())
       .then((data) => {
         const book = data.book;
@@ -83,7 +83,7 @@ export const UpdateBook: React.FC = () => {
       };
 
       const res = await fetchWithAuth(
-        `https://books-social-g338.onrender.com/api/v1/book/update/${bookId}`,
+        `${apiUrl}/api/v1/book/update/${bookId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
