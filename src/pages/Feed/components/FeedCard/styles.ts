@@ -63,18 +63,20 @@ export const SpoilerText = styled.p`
 `;
 
 export const ShowSpoilerButton = styled.button`
-  margin-top: 1.2rem;
+  margin-top: 1rem;
   padding: 0.4rem 1rem;
-  font-size: 0.85rem;
-  border-radius: 6px;
-  border: 1px solid #aaa;
-  background-color: white;
-  color: #333;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #e3e7ea;
+  color: #2f2f2f;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
-  width: fit-content;
+  transition: background-color 0.2s ease;
+  font-style: italic;
+
   &:hover {
-    background-color: #eaeaea;
+    background-color: #d6dade;
   }
 `;
 

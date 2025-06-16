@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const FeedContainer = styled.div`
   padding: 40px;
@@ -10,6 +10,8 @@ export const FeedSubtitle = styled.p`
   text-align: center;
   font-size: 1.1rem;
   margin-bottom: 2.5rem;
+  font-style: italic;
+  color: #777;
 `;
 
 export const FeedTitle = styled.h2`

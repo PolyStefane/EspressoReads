@@ -129,6 +129,10 @@ export const BookDetails: React.FC = () => {
     }
   };
 
+  function formatText(text: string) {
+    return text.replace(/\n/g, "<br />");
+  }
+
   return (
     <Container>
       <FormContainer>
@@ -168,11 +172,15 @@ export const BookDetails: React.FC = () => {
 
             <Field>
               <Label>Review</Label>
-              <span>
-                {book.review?.trim()
-                  ? book.review
-                  : "There are no reviews for this book yet"}
-              </span>
+              {book.review?.trim() ? (
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: formatText(book.review),
+                  }}
+                />
+              ) : (
+                <span>There are no reviews for this book yet</span>
+              )}
             </Field>
 
             <Field>
