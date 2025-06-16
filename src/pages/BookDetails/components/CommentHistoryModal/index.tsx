@@ -1,4 +1,8 @@
-import React from 'react';
+// External libraries
+import React from "react";
+import { FaHeart, FaEllipsisH } from "react-icons/fa";
+
+// Styles
 import {
   Overlay,
   Modal,
@@ -10,13 +14,10 @@ import {
   CommentText,
   CommentFooter,
   ReactionProgress,
-  IconButton,
   ScrollableContent,
   EmptyState,
-} from './styles';
-import { LikeButton } from '../../../Feed/components/FeedCard/styles';
-
-import { FaHeart, FaCommentDots, FaEllipsisH } from 'react-icons/fa';
+} from "./styles";
+import { LikeButton } from "../../../Feed/components/FeedCard/styles";
 
 type Comment = {
   commentaryText: string;
@@ -35,9 +36,29 @@ type Props = {
   onClose: () => void;
 };
 
-function formatText(text: string) {
-  return text.replace(/\n/g, '<br />');
+function getEmoji(reaction: string) {
+  const map: Record<string, string> = {
+    LOVING: "😍",
+    EXCITED: "🤩",
+    AMAZED: "😱",
+    DELUDED: "🤡",
+    LAUGH: "😂",
+    DISAPPOINTED: "💔",
+    CONFUSED: "😕",
+    ANGRY: "🤬",
+    SAD: "😢",
+    NAUSEOUS: "🤢",
+    BORED: "😴",
+    AGONY: "😩",
+  };
+
+  return map[reaction.toUpperCase()] || "💬";
 }
+
+function formatText(text: string) {
+  return text.replace(/\n/g, "<br />");
+}
+
 export const CommentHistoryModal: React.FC<Props> = ({
   comments,
   onClose,
@@ -76,7 +97,7 @@ export const CommentHistoryModal: React.FC<Props> = ({
                       <LikeButton
                         $liked={comment.isLiked ?? comment.liked ?? false}
                         $loading={false}
-                        style={{ fontSize: '1.1rem' }}
+                        style={{ fontSize: "1.1rem" }}
                       >
                         <FaHeart /> <span>{comment.likes ?? 0}</span>
                       </LikeButton>
@@ -99,22 +120,3 @@ export const CommentHistoryModal: React.FC<Props> = ({
     </Overlay>
   );
 };
-
-function getEmoji(reaction: string) {
-  const map: Record<string, string> = {
-    LOVING: '😍',
-    EXCITED: '🤩',
-    AMAZED: '😱',
-    DELUDED: '🤡',
-    LAUGH: '😂',
-    DISAPPOINTED: '💔',
-    CONFUSED: '😕',
-    ANGRY: '🤬',
-    SAD: '😢',
-    NAUSEOUS: '🤢',
-    BORED: '😴',
-    AGONY: '😩',
-  };
-
-  return map[reaction.toUpperCase()] || '💬';
-}

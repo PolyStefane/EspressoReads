@@ -11,6 +11,8 @@ import { fetchWithAuth } from "../../Services/api";
 // Styles
 import { FeedContainer, FeedSubtitle, FeedTitle } from "./styles";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const Feed: React.FC = () => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,7 +23,9 @@ export const Feed: React.FC = () => {
     const fetchComments = async () => {
       setLoading(true);
       try {
-        const res = await fetchWithAuth(`/commentary/random/${userId}`);
+        const res = await fetchWithAuth(
+          `${apiUrl}/api/v1/commentary/random/${userId}`
+        );
         const data = await res.json();
         console.log("API:", data.comments);
 
