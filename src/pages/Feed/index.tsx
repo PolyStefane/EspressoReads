@@ -35,6 +35,7 @@ export const Feed: React.FC = () => {
           readPages: comment.commentary?.readPages ?? 0,
           progress: comment.commentary?.progress ?? 0,
           reaction: comment.commentary?.reaction,
+          isSpoiler: comment.commentary?.isSpoiler ?? false,
           bookTitle: comment.book?.title || "Unknown Title",
           bookAuthor: comment.book?.author || "Unknown Author",
           bookCoverUrl:

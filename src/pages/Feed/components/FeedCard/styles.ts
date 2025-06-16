@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Card = styled.div`
   background: #bdd8bb;
@@ -38,6 +38,44 @@ export const CommentText = styled.p`
   color: #111;
   margin: 0 2rem 0 1rem;
   word-break: break-word;
+`;
+
+export const SpoilerBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #f6f6f6;
+  border: 1px dashed #ccc;
+  height: 8.2rem;
+  border-radius: 8px;
+  padding: 1rem;
+  color: #555;
+  margin-bottom: 1rem;
+`;
+
+export const SpoilerText = styled.p`
+  margin: 0;
+  font-style: italic;
+  font-weight: 500;
+  color: #666;
+`;
+
+export const ShowSpoilerButton = styled.button`
+  margin-top: 1.2rem;
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: fit-content;
+  &:hover {
+    background-color: #eaeaea;
+  }
 `;
 
 export const ContainerProgress = styled.div`
@@ -94,8 +132,8 @@ export const BookAuthor = styled.span`
 `;
 
 export const LikeButton = styled.span<{ $liked: boolean; $loading: boolean }>`
-  cursor: ${({ $loading }) => ($loading ? 'not-allowed' : 'pointer')};
-  color: ${({ $liked }) => ($liked ? '#F82371' : '#F82371')};
+  cursor: ${({ $loading }) => ($loading ? "not-allowed" : "pointer")};
+  color: ${({ $liked }) => ($liked ? "#F82371" : "#F82371")};
   display: flex;
   align-items: center;
   gap: 4px;
@@ -103,7 +141,7 @@ export const LikeButton = styled.span<{ $liked: boolean; $loading: boolean }>`
   transition: color 0.2s;
   font-size: 1.2rem;
   &:hover {
-    color: ${({ $liked }) => ($liked ? '#b71c1c' : '#444')};
+    color: ${({ $liked }) => ($liked ? "#b71c1c" : "#444")};
   }
 `;
 

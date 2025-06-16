@@ -1,6 +1,6 @@
 // External libraries
-import React from "react";
-import { FaHeart, FaEllipsisH, FaTrash } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaHeart, FaTrash } from "react-icons/fa";
 
 // Services
 import { fetchWithAuth } from "../../../../Services/api";
@@ -19,6 +19,9 @@ import {
   ReactionProgress,
   ScrollableContent,
   EmptyState,
+  SpoilerContainer,
+  SpoilerLabel,
+  RevealButton,
 } from "./styles";
 import { LikeButton } from "../../../Feed/components/FeedCard/styles";
 
@@ -31,6 +34,7 @@ type Comment = {
   likes?: number;
   isLiked?: boolean;
   liked?: boolean;
+  isSpoiler?: boolean;
 };
 
 const apiUrl = import.meta.env.VITE_API_URL;
@@ -80,7 +84,6 @@ async function deleteComment(commentId: string) {
     }
 
     console.log("Comment deleted");
-    // Atualize a UI conforme necessário, por exemplo, recarregando os comentários
   } catch (error) {
     console.error("Error deleting comment:", error);
   }
@@ -92,6 +95,10 @@ export const CommentHistoryModal: React.FC<Props> = ({
   onClose,
   onRefresh,
 }) => {
+  const [revealedSpoilers, setRevealedSpoilers] = useState<
+    Record<number, boolean>
+  >({});
+
   return (
     <Overlay>
       <Modal>
@@ -111,11 +118,28 @@ export const CommentHistoryModal: React.FC<Props> = ({
               {comments.map((comment, index) => {
                 return (
                   <StyledCommentCard key={index}>
-                    <CommentText
-                      dangerouslySetInnerHTML={{
-                        __html: formatText(comment.commentaryText),
-                      }}
-                    />
+                    {comment.isSpoiler && !revealedSpoilers[index] ? (
+                      <SpoilerContainer>
+                        <SpoilerLabel>⚠️ Spoiler Alert! ⚠️</SpoilerLabel>
+                        <RevealButton
+                          onClick={() =>
+                            setRevealedSpoilers((prev) => ({
+                              ...prev,
+                              [index]: true,
+                            }))
+                          }
+                        >
+                          Show Comment
+                        </RevealButton>
+                      </SpoilerContainer>
+                    ) : (
+                      <CommentText
+                        dangerouslySetInnerHTML={{
+                          __html: formatText(comment.commentaryText),
+                        }}
+                      />
+                    )}
+
                     <ReactionProgress>
                       <span>{getEmoji(comment.reaction)}</span>
                       <span>{comment.progress}%</span>
@@ -138,7 +162,6 @@ export const CommentHistoryModal: React.FC<Props> = ({
                           alignItems: "center",
                         }}
                       >
-                        <FaEllipsisH />
                         <FaTrash
                           style={{ cursor: "pointer" }}
                           onClick={async () => {

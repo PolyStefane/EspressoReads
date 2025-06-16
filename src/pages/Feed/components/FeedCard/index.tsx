@@ -34,6 +34,9 @@ import {
   CommentButton,
   CommentTextarea,
   ContainerProgress,
+  SpoilerBox,
+  SpoilerText,
+  ShowSpoilerButton,
 } from "./styles";
 
 interface Props {
@@ -64,6 +67,7 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
   const [showCommentBox, setShowCommentBox] = useState(false);
   const [commentText, setCommentText] = useState("");
   const [successMsg] = useState("");
+  const [showSpoiler, setShowSpoiler] = useState(false);
 
   const commentaryId = comment.commentaryId || comment.commentary?.commentaryId;
   const { replies, setReplies, repliesLoaded, loadReplies, sendReply } =
@@ -122,11 +126,20 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
 
       <BookBox>
         <Left>
-          <CommentText
-            dangerouslySetInnerHTML={{
-              __html: formatText(comment.commentaryText),
-            }}
-          />
+          {comment.isSpoiler && !showSpoiler ? (
+            <SpoilerBox>
+              <SpoilerText>⚠️ Spoiler Alert! ⚠️</SpoilerText>
+              <ShowSpoilerButton onClick={() => setShowSpoiler(true)}>
+                Show Comment
+              </ShowSpoilerButton>
+            </SpoilerBox>
+          ) : (
+            <CommentText
+              dangerouslySetInnerHTML={{
+                __html: formatText(comment.commentaryText),
+              }}
+            />
+          )}
 
           <ContainerProgress>
             <Progress>

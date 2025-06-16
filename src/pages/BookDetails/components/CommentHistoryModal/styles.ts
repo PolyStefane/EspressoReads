@@ -87,6 +87,39 @@ export const CommentText = styled.div`
   margin-bottom: 1rem;
 `;
 
+export const SpoilerContainer = styled.div`
+  background-color: #f6f6f6;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  color: #555;
+  margin-bottom: 1rem;
+`;
+
+export const SpoilerLabel = styled.p`
+  margin: 0;
+  font-style: italic;
+  font-weight: 500;
+  color: #666;
+`;
+
+export const RevealButton = styled.button`
+  margin-top: 0.75rem;
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #eaeaea;
+  }
+`;
+
 export const ReactionProgress = styled.div`
   display: flex;
   align-items: center;

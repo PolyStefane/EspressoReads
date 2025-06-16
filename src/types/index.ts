@@ -14,6 +14,7 @@ export interface Comment {
   progress: number;
   likes?: number;
   isLiked?: boolean;
+  isSpoiler?: boolean;
   liked?: boolean;
   bookCoverUrl?: string;
   bookTitle?: string;

@@ -46,6 +46,7 @@ type CommentPayload = {
   userId: string;
   commentaryText: string;
   readPages: number;
+  isSpoiler?: boolean;
   progress: number;
   reaction:
     | "LOVING"
@@ -91,6 +92,7 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
   const [selectedReaction, setSelectedReaction] = useState<
     CommentPayload["reaction"] | null
   >(null);
+  const [isSpoiler, setIsSpoiler] = useState(false);
 
   const handleSaveComment = async () => {
     if (!commentText || !readPages || !selectedReaction) return;
@@ -99,6 +101,7 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
       await postCommentary({
         bookId,
         userId,
+        isSpoiler,
         commentaryText: commentText,
         readPages: Number(readPages),
         progress: Number(progress),
@@ -145,6 +148,17 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
             ))}
           </EmojiGrid>
         </ReactionSection>
+
+        <div style={{ marginTop: "1rem" }}>
+          <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <input
+              type="checkbox"
+              checked={isSpoiler}
+              onChange={(e) => setIsSpoiler(e.target.checked)}
+            />
+            This comment contains spoilers
+          </label>
+        </div>
 
         <ModalActions>
           <SaveButton
