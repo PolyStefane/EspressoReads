@@ -1,20 +1,22 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  font-family: sans-serif;
   text-align: center;
-  padding: 2rem;
+  padding: 3rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const UserName = styled.h1`
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
 `;
 
 export const ProfilePic = styled.div`
   width: 120px;
   height: 120px;
-  margin: 1rem auto;
+  margin: 2rem auto 4rem;
   border: 3px solid #cde9ce;
   border-radius: 50%;
   background-color: #f5fdf5;
@@ -57,71 +59,101 @@ export const UpdateButton = styled.button`
   margin-bottom: 2rem;
 `;
 
+export const StatsContainer = styled.div`
+  width: 45vw;
+`;
+
 export const StatsWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  gap: 2rem;
+  justify-content: space-between;
+  gap: 4rem;
   flex-wrap: wrap;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 `;
 
 export const StatBox = styled.div`
-  background-color: #def0d8;
+  background-color: #cde9ce;
   padding: 1rem;
-  border-radius: 10px;
-  width: 160px;
+  border-radius: 15px;
+  width: 15rem;
+  height: 10rem;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
 `;
 
 export const StatTitle = styled.p`
-  font-weight: bold;
-  font-size: 0.9rem;
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
 `;
 
 export const StatValue = styled.p`
   font-size: 1.5rem;
-  margin: 0.3rem 0;
+  color: #5d8665;
+  margin: 0.1rem 0;
 `;
 
 export const StatLabel = styled.p`
-  font-size: 0.8rem;
-  color: #444;
+  font-size: 1rem;
+  color: #5d8665;
 `;
 
 export const BooksWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
 `;
 
 export const BookBox = styled.div`
-  background-color: #e3f2e1;
-  padding: 1rem;
-  width: 230px;
-  border-radius: 10px;
+  background-color: #cde9ce;
+  padding: 1.5rem;
+  border-radius: 20px;
+  width: 26rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+`;
+
+export const BookTextWrapper = styled.div`
+  display: flex;
+  padding: 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 export const BookTitle = styled.p`
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
 `;
 
 export const BookName = styled.p`
-  font-size: 1rem;
-  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
 `;
 
 export const BookAuthor = styled.p`
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #666;
 `;
 
-export const BookImage = styled.img`
-  width: 100px;
-  margin: 1rem 0;
+export const BookPages = styled.p`
+  font-size: 1.1rem;
+  color: #222;
+  margin-top: 1.5rem;
+  font-weight: 500;
 `;
 
-export const BookPages = styled.p`
-  font-size: 0.9rem;
-  color: #333;
+export const BookImage = styled.img`
+  width: 130px;
+  height: auto;
+  border-radius: 10px;
 `;

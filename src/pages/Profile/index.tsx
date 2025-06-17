@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { fetchWithAuth } from "../../Services/api";
 import {
   Container,
   UserName,
@@ -15,8 +16,10 @@ import {
   BookAuthor,
   BookImage,
   BookPages,
+  BookTextWrapper,
+  StatsContainer,
 } from "./styles";
-import { fetchWithAuth } from "../../Services/api";
+import { Spinner } from "../../components/Spinner";
 
 interface Book {
   title: string;
@@ -39,8 +42,14 @@ const Profile: React.FC = () => {
   const [stats, setStats] = useState<Statistics | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [username, setUsername] = useState("User");
 
   const userId = localStorage.getItem("userId");
+
+  useEffect(() => {
+    const storedName = localStorage.getItem("username");
+    if (storedName) setUsername(storedName);
+  }, []);
 
   useEffect(() => {
     const fetchStatistics = async () => {
@@ -69,7 +78,7 @@ const Profile: React.FC = () => {
           shortestReadBook: shortest,
         });
       } catch (err: any) {
-        setError(err.message || "Erro ao carregar dados");
+        setError(err.message || "Data Error");
       } finally {
         setLoading(false);
       }
@@ -78,52 +87,55 @@ const Profile: React.FC = () => {
     fetchStatistics();
   }, [userId]);
 
-  if (loading) return <p>Carregando estatísticas...</p>;
-  if (error) return <p>Erro: {error}</p>;
-  if (!stats) return <p>Dados não disponíveis.</p>;
+  if (loading) return <Spinner text="Loading profile..." />;
+  if (error) return <p>Error: {error}</p>;
+  if (!stats) return <p>Unavailable data</p>;
 
   const renderBook = (book: Book | null, label: string) => (
     <BookBox>
-      <BookTitle>{label}</BookTitle>
-      <BookName>{book?.title || "Livro indisponível"}</BookName>
-      <BookAuthor>{book?.author || "Desconhecido"}</BookAuthor>
+      <BookTextWrapper>
+        <BookTitle>{label}</BookTitle>
+        <BookName>{book?.title || "Book unavailable"}</BookName>
+        <BookAuthor>{book?.author || "Unknown"}</BookAuthor>
+        <BookPages>{book?.numberPages || 0} pages</BookPages>
+      </BookTextWrapper>
       <BookImage
         src={book?.coverUrl || "/img/coverDefault.svg.png"}
-        alt={book?.title || "sem imagem"}
+        alt={book?.title || "no image"}
       />
-      <BookPages>{book?.numberPages || 0} pages</BookPages>
     </BookBox>
   );
 
   return (
     <Container>
-      <UserName>user_name</UserName>
+      <UserName>{username}</UserName>
 
       <ProfilePic>
         <img src="/img/user.png" alt="Profile" />
       </ProfilePic>
+      <StatsContainer>
+        <StatsWrapper>
+          <StatBox>
+            <StatTitle>Read Pages</StatTitle>
+            <StatValue>{stats.totalPages}</StatValue>
+            <StatLabel>Pages</StatLabel>
+          </StatBox>
+          <StatBox>
+            <StatTitle>Most Read Genre</StatTitle>
+            <StatValue>{stats.mostReadGenre}</StatValue>
+          </StatBox>
+          <StatBox>
+            <StatTitle>Total read</StatTitle>
+            <StatValue>{stats.totalBooks}</StatValue>
+            <StatLabel>Books</StatLabel>
+          </StatBox>
+        </StatsWrapper>
 
-      <StatsWrapper>
-        <StatBox>
-          <StatTitle>Read Pages</StatTitle>
-          <StatValue>{stats.totalPages}</StatValue>
-          <StatLabel>Pages</StatLabel>
-        </StatBox>
-        <StatBox>
-          <StatTitle>Most Read Genre</StatTitle>
-          <StatValue>{stats.mostReadGenre}</StatValue>
-        </StatBox>
-        <StatBox>
-          <StatTitle>Total read</StatTitle>
-          <StatValue>{stats.totalBooks}</StatValue>
-          <StatLabel>Books</StatLabel>
-        </StatBox>
-      </StatsWrapper>
-
-      <BooksWrapper>
-        {renderBook(stats.longestReadBook, "Longest Read Book")}
-        {renderBook(stats.shortestReadBook, "Shortest Read Book")}
-      </BooksWrapper>
+        <BooksWrapper>
+          {renderBook(stats.longestReadBook, "Longest Read Book")}
+          {renderBook(stats.shortestReadBook, "Shortest Read Book")}
+        </BooksWrapper>
+      </StatsContainer>
     </Container>
   );
 };
