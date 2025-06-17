@@ -187,6 +187,12 @@ export const CommentTextarea = styled.textarea`
   resize: vertical;
 `;
 
+export const LoadingReplies = styled.div`
+  padding: 1rem;
+  text-align: center;
+  color: #888;
+`;
+
 export const SendButton = styled.button`
   margin-top: 8px;
   padding: 6px 16px;
@@ -197,7 +203,14 @@ export const SendButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   transition: background 0.2s;
+
   &:hover {
     background: #4a6;
+  }
+
+  &:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
   }
 `;

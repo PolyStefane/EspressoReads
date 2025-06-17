@@ -1,24 +1,25 @@
 // External libraries
-import React from "react";
-import { FiTrash2 } from "react-icons/fi";
+import { toast } from "sonner";
+import React, { useState } from "react";
+import { FaTrash } from "react-icons/fa";
 
 // Types
 import { Reply } from "../../../../types";
 
 import {
-  RepliesContainer,
   ReplyBox,
-  ReplyContent,
   ReplyText,
   ReplyUser,
-  ReplyActions,
   ReplyDelete,
+  ReplyActions,
+  ReplyContent,
+  RepliesContainer,
 } from "./styles";
-import { toast } from "sonner";
 
 interface RepliesListProps {
   replies: Reply[];
   setReplies: React.Dispatch<React.SetStateAction<Reply[]>>;
+  isActionDisabled: boolean;
 }
 
 const apiUrl = import.meta.env.VITE_API_URL;
@@ -26,10 +27,15 @@ const apiUrl = import.meta.env.VITE_API_URL;
 export const RepliesList: React.FC<RepliesListProps> = ({
   replies,
   setReplies,
+  isActionDisabled,
 }) => {
+  const [deletingReplyId, setDeletingReplyId] = useState<string | null>(null);
   const myUserId = localStorage.getItem("userId");
 
   const handleDelete = async (replyId: string) => {
+    if (isActionDisabled || deletingReplyId) return;
+
+    setDeletingReplyId(replyId);
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(`${apiUrl}/api/v1/reply/delete/${replyId}`, {
@@ -44,11 +50,12 @@ export const RepliesList: React.FC<RepliesListProps> = ({
 
       toast.success("Reply deleted successfully");
 
-      // Atualiza a lista local, sem reload
       setReplies((prev) => prev.filter((r) => r.replyId !== replyId));
     } catch (err) {
       console.error("Error deleting reply:", err);
       toast.error("Error deleting reply. Please try again.");
+    } finally {
+      setDeletingReplyId(null);
     }
   };
 
@@ -56,8 +63,8 @@ export const RepliesList: React.FC<RepliesListProps> = ({
     <RepliesContainer>
       {replies
         .filter((reply) => reply && reply.replyText)
-        .map((reply, idx) => (
-          <ReplyBox key={idx}>
+        .map((reply) => (
+          <ReplyBox key={reply.replyId}>
             <ReplyContent>
               <ReplyUser>@{reply.username || "Anonymous"}</ReplyUser>
               <ReplyText>{reply.replyText}</ReplyText>
@@ -68,8 +75,13 @@ export const RepliesList: React.FC<RepliesListProps> = ({
                   as="button"
                   title="Excluir reply"
                   onClick={() => handleDelete(reply.replyId)}
+                  disabled={isActionDisabled || !!deletingReplyId}
                 >
-                  <FiTrash2 />
+                  <FaTrash
+                    color={
+                      isActionDisabled || !!deletingReplyId ? "#ccc" : "inherit"
+                    }
+                  />
                 </ReplyDelete>
               )}
             </ReplyActions>

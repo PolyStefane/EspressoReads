@@ -133,6 +133,39 @@ export const TrashContainer = styled.div`
   align-items: center;
 `;
 
+export const ConfirmationWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  span {
+    font-size: 0.9rem;
+    color: #616161;
+  }
+`;
+
+const ConfirmationButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+`;
+
+export const ConfirmButton = styled(ConfirmationButton)`
+  color: #e57373; /* Vermelho Pastel */
+`;
+
+export const CancelButton = styled(ConfirmationButton)`
+  color: #757575; /* Cinza */
+`;
+
 export const CommentFooter = styled.div`
   margin-top: 1rem;
   display: flex;

@@ -6,19 +6,19 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { RepliesList } from "../RepliesList";
 
 // Assets
-import { CommentIconSVG } from "../../../../assets/icons/CommentIcon";
-import { LovingSVG } from "../../../../assets/icons/Reactions/Loving";
-import { ExcitedSVG } from "../../../../assets/icons/Reactions/Excited";
-import { AmazedSVG } from "../../../../assets/icons/Reactions/Amazed";
-import { DeludedSVG } from "../../../../assets/icons/Reactions/Deluded";
-import { LaughSVG } from "../../../../assets/icons/Reactions/Laugh";
-import { DisappointedSVG } from "../../../../assets/icons/Reactions/Disappointed";
-import { ConfusedSVG } from "../../../../assets/icons/Reactions/Confused";
-import { AngrySVG } from "../../../../assets/icons/Reactions/Angry";
 import { SadSVG } from "../../../../assets/icons/Reactions/Sad";
-import { NauseousSVG } from "../../../../assets/icons/Reactions/Nauseous";
-import { BoredSVG } from "../../../../assets/icons/Reactions/Bored";
 import { AgonySVG } from "../../../../assets/icons/Reactions/Agony";
+import { LaughSVG } from "../../../../assets/icons/Reactions/Laugh";
+import { AngrySVG } from "../../../../assets/icons/Reactions/Angry";
+import { BoredSVG } from "../../../../assets/icons/Reactions/Bored";
+import { LovingSVG } from "../../../../assets/icons/Reactions/Loving";
+import { CommentIconSVG } from "../../../../assets/icons/CommentIcon";
+import { AmazedSVG } from "../../../../assets/icons/Reactions/Amazed";
+import { ExcitedSVG } from "../../../../assets/icons/Reactions/Excited";
+import { DeludedSVG } from "../../../../assets/icons/Reactions/Deluded";
+import { ConfusedSVG } from "../../../../assets/icons/Reactions/Confused";
+import { NauseousSVG } from "../../../../assets/icons/Reactions/Nauseous";
+import { DisappointedSVG } from "../../../../assets/icons/Reactions/Disappointed";
 
 // Hooks
 import { useReplies } from "./hooks/useReplies";
@@ -41,14 +41,15 @@ import {
   LikeButton,
   CommentBox,
   SendButton,
+  SpoilerBox,
+  SpoilerText,
   CommentText,
   ContainerBook,
   CommentButton,
+  LoadingReplies,
   CommentTextarea,
-  ContainerProgress,
-  SpoilerBox,
-  SpoilerText,
   ShowSpoilerButton,
+  ContainerProgress,
 } from "./styles";
 
 interface Props {
@@ -78,16 +79,22 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
   const [loading, setLoading] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
   const [commentText, setCommentText] = useState("");
-  const [successMsg] = useState("");
   const [showSpoiler, setShowSpoiler] = useState(false);
-
+  const [isSendingReply, setIsSendingReply] = useState(false);
   const commentaryId = comment.commentaryId || comment.commentary?.commentaryId;
+
   const { replies, setReplies, repliesLoaded, loadReplies, sendReply } =
     useReplies(commentaryId);
 
   const handleSendComment = async () => {
-    const ok = await sendReply(commentText.trim());
-    if (ok) setCommentText("");
+    if (isSendingReply || !commentText.trim()) return;
+    setIsSendingReply(true);
+    try {
+      const ok = await sendReply(commentText.trim());
+      if (ok) setCommentText("");
+    } finally {
+      setIsSendingReply(false);
+    }
   };
 
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -200,26 +207,29 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
       </Actions>
       {showCommentBox && (
         <CommentBox>
-          {successMsg && (
-            <div style={{ color: "green", marginBottom: 8 }}>{successMsg}</div>
-          )}
           {!repliesLoaded ? (
-            <div
-              style={{ padding: "1rem", textAlign: "center", color: "#888" }}
-            >
-              Loading replies...
-            </div>
+            <LoadingReplies>Loading replies...</LoadingReplies>
           ) : (
             replies.length > 0 && (
-              <RepliesList replies={replies} setReplies={setReplies} />
+              <RepliesList
+                replies={replies}
+                setReplies={setReplies}
+                isActionDisabled={isSendingReply}
+              />
             )
           )}
           <CommentTextarea
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}
             placeholder="Write your reply..."
+            disabled={isSendingReply}
           />
-          <SendButton onClick={handleSendComment}>Send</SendButton>
+          <SendButton
+            onClick={handleSendComment}
+            disabled={isSendingReply || !commentText.trim()}
+          >
+            {isSendingReply ? "Sending..." : "Send"}
+          </SendButton>
         </CommentBox>
       )}
     </Card>

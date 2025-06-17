@@ -50,14 +50,14 @@ export function useReplies(commentaryId: string | undefined) {
       });
       if (res.ok) {
         await loadReplies();
-        toast.success("Reply enviada!");
+        toast.success("Reply sent successfully!");
         return true;
       } else {
-        toast.error("Erro ao enviar reply!");
+        toast.error("Failed to send reply!");
         return false;
       }
     } catch {
-      toast.error("Erro ao enviar reply!");
+      toast.error("Failed to send reply!");
       return false;
     }
   };

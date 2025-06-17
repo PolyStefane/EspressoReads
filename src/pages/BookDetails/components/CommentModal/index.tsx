@@ -105,10 +105,12 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
     CommentPayload["reaction"] | null
   >(null);
   const [isSpoiler, setIsSpoiler] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   const handleSaveComment = async () => {
-    if (!commentText || !readPages || !selectedReaction) return;
+    if (!commentText || !readPages || !selectedReaction || isSaving) return;
 
+    setIsSaving(true);
     try {
       await postCommentary({
         bookId,
@@ -122,7 +124,10 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
       onClose();
       toast.success("Comment saved successfully!");
     } catch (err) {
+      toast.error("Failed to save comment.");
       console.error("Erro ao salvar comentário:", err);
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -140,6 +145,7 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
         <Input
           placeholder="Enter your progress (page number)"
           value={readPages}
+          type="number"
           onChange={(e) => setReadPages(e.target.value)}
         />
 
@@ -175,11 +181,15 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
         <ModalActions>
           <SaveButton
             onClick={handleSaveComment}
-            disabled={!commentText || !readPages || !selectedReaction}
+            disabled={
+              !commentText || !readPages || !selectedReaction || isSaving
+            }
           >
-            Save
+            {isSaving ? "Saving..." : "Save"}
           </SaveButton>
-          <CancelButton onClick={onClose}>Cancel</CancelButton>
+          <CancelButton onClick={onClose} disabled={isSaving}>
+            Cancel
+          </CancelButton>
         </ModalActions>
       </Modal>
     </Overlay>

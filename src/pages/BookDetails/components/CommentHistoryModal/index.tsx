@@ -1,6 +1,7 @@
 // External libraries
 import React, { JSX, useState } from "react";
 import { FaHeart, FaTrash } from "react-icons/fa";
+import { toast } from "sonner";
 
 // Assets
 import { LikeButton } from "../../../Feed/components/FeedCard/styles";
@@ -38,6 +39,9 @@ import {
   SpoilerLabel,
   RevealButton,
   TrashContainer,
+  ConfirmationWrapper,
+  ConfirmButton,
+  CancelButton,
 } from "./styles";
 
 type Comment = {
@@ -86,21 +90,15 @@ function formatText(text: string) {
 }
 
 async function deleteComment(commentId: string) {
-  try {
-    const response = await fetchWithAuth(
-      `${apiUrl}/api/v1/commentary/delete/${commentId}`,
-      {
-        method: "DELETE",
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error("Failed to delete comment");
+  const response = await fetchWithAuth(
+    `${apiUrl}/api/v1/commentary/delete/${commentId}`,
+    {
+      method: "DELETE",
     }
+  );
 
-    console.log("Comment deleted");
-  } catch (error) {
-    console.error("Error deleting comment:", error);
+  if (!response.ok) {
+    throw new Error("Failed to delete comment");
   }
 }
 
@@ -113,6 +111,8 @@ export const CommentHistoryModal: React.FC<Props> = ({
   const [revealedSpoilers, setRevealedSpoilers] = useState<
     Record<number, boolean>
   >({});
+  const [commentToDelete, setCommentToDelete] = useState<string | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   return (
     <Overlay>
@@ -171,22 +171,55 @@ export const CommentHistoryModal: React.FC<Props> = ({
                         </LikeButton>
                       </div>
                       <TrashContainer>
-                        <FaTrash
-                          style={{ cursor: "pointer" }}
-                          onClick={async () => {
-                            const confirmed = window.confirm(
-                              "Are you sure you want to delete this comment?"
-                            );
-                            if (!confirmed) return;
-
-                            console.log(
-                              "🔴 Deletando comentário com ID:",
-                              comment.commentaryId
-                            );
-                            await deleteComment(comment.commentaryId);
-                            onRefresh();
-                          }}
-                        />
+                        {commentToDelete === comment.commentaryId ? (
+                          <ConfirmationWrapper>
+                            <span>
+                              {isDeleting ? "Deleting..." : "Are you sure?"}
+                            </span>
+                            <ConfirmButton
+                              disabled={isDeleting}
+                              onClick={async () => {
+                                setIsDeleting(true);
+                                try {
+                                  await deleteComment(comment.commentaryId);
+                                  toast.success(
+                                    "Comment deleted successfully!"
+                                  );
+                                  setCommentToDelete(null);
+                                  onRefresh();
+                                } catch (error) {
+                                  toast.error("Failed to delete comment.");
+                                  console.error(
+                                    "Error deleting comment:",
+                                    error
+                                  );
+                                } finally {
+                                  setIsDeleting(false);
+                                }
+                              }}
+                            >
+                              Yes
+                            </ConfirmButton>
+                            <CancelButton
+                              disabled={isDeleting}
+                              onClick={() => setCommentToDelete(null)}
+                            >
+                              No
+                            </CancelButton>
+                          </ConfirmationWrapper>
+                        ) : (
+                          <FaTrash
+                            style={{
+                              cursor: isDeleting ? "not-allowed" : "pointer",
+                              color: isDeleting ? "#ccc" : "inherit",
+                            }}
+                            onClick={() => {
+                              if (!isDeleting) {
+                                setCommentToDelete(comment.commentaryId);
+                              }
+                            }}
+                          />
+                        )}
                       </TrashContainer>
                     </CommentFooter>
                   </StyledCommentCard>

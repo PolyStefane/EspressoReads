@@ -116,6 +116,12 @@ export const SaveButton = styled.button`
   &:active {
     transform: scale(0.98);
   }
+
+  &:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+  }
 `;
 
 export const CancelButton = styled.button`
@@ -133,5 +139,11 @@ export const CancelButton = styled.button`
 
   &:active {
     transform: scale(0.98);
+  }
+
+  &:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
   }
 `;
