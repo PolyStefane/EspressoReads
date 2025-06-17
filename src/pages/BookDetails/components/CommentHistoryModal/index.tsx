@@ -166,7 +166,7 @@ export const CommentHistoryModal: React.FC<Props> = ({
                           style={{ cursor: "pointer" }}
                           onClick={async () => {
                             const confirmed = window.confirm(
-                              "Tem certeza que deseja excluir?"
+                              "Are you sure you want to delete this comment?"
                             );
                             if (!confirmed) return;
 

@@ -36,7 +36,7 @@ export const NavButton = styled.button<NavButtonProps>`
   border: none;
   background-color: ${({ $active }) => ($active ? "#7BB286" : "#e9f1e8")};
   box-shadow: ${({ $active }) =>
-    $active ? "0 3px 6px rgba(0, 0, 0, 0.1)" : "none"};
+    $active ? "0 3px 6px rgba(0, 0, 0, 0.1)" : "0 2px 4px rgba(0, 0, 0, 0.1s)"};
   color: ${({ $active }) => ($active ? "#fffdf0" : "#1f1f1f")};
   border-radius: 2rem;
   cursor: pointer;
@@ -63,14 +63,15 @@ export const LogoutButton = styled.button`
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   border: none;
-  background-color: #e9f1e8;
+  background-color: #fffdf0;
   border-radius: 2rem;
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease, transform 0.2s ease;
 
   &:hover {
-    background-color: rgb(255, 255, 255);
+    background-color: #7bb286;
+    color: white;
     transform: scale(1.05);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }

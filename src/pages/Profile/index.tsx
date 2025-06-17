@@ -24,7 +24,7 @@ import { PageStatsSVG } from "../../assets/icons/PagesStats";
 import { GenreStatsSVG } from "../../assets/icons/GenreStats";
 import { TotalStatsSVG } from "../../assets/icons/TotalStats";
 
-interface Book {
+interface ResumeBook {
   title: string;
   author: string;
   numberPages: number;
@@ -35,9 +35,33 @@ interface Statistics {
   totalPages: number;
   totalBooks: number;
   mostReadGenre: string;
-  longestReadBook: Book | null;
-  shortestReadBook: Book | null;
+  longestReadBook: ResumeBook | null;
+  shortestReadBook: ResumeBook | null;
 }
+
+const genreLabels: Record<string, string> = {
+  ADVENTURE: "Adventure",
+  BIOGRAPHY: "Biography",
+  CHILDREN: "Children",
+  CLASSIC: "Classic",
+  COMIC: "Comic",
+  DRAMA: "Drama",
+  DYSTOPIAN: "Dystopian",
+  FANTASY: "Fantasy",
+  GRAPHIC_NOVEL: "Graphic Novel",
+  HISTORICAL: "Historical",
+  HORROR: "Horror",
+  HUMOR: "Humor",
+  MANGA: "Manga",
+  MYSTERY: "Mystery",
+  POETRY: "Poetry",
+  ROMANCE: "Romance",
+  SCIENCE_FICTION: "Science Fiction",
+  TECHNOLOGY: "Technology",
+  THRILLER: "Thriller",
+  TRUE_CRIME: "True Crime",
+  YOUNG_ADULT: "Young Adult",
+};
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -94,7 +118,7 @@ const Profile: React.FC = () => {
   if (error) return <p>Error: {error}</p>;
   if (!stats) return <p>Unavailable data</p>;
 
-  const renderBook = (book: Book | null, label: string) => (
+  const renderBook = (book: ResumeBook | null, label: string) => (
     <BookBox>
       <BookTextWrapper>
         <BookTitle>{label}</BookTitle>
@@ -126,7 +150,7 @@ const Profile: React.FC = () => {
           </StatBox>
           <StatBox>
             <StatTitle>Most Read Genre</StatTitle>
-            <StatValue>{stats.mostReadGenre}</StatValue>
+            <StatValue>{genreLabels[stats.mostReadGenre]}</StatValue>
             <GenreStatsSVG />
           </StatBox>
           <StatBox>
