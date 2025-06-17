@@ -72,13 +72,13 @@ export const CoverImage = styled.div`
 export const IconGroup = styled.div`
   margin-top: 1rem;
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
 `;
 
 export const Stars = styled.div`
   display: flex;
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: #f2c94c;
 
   svg {
@@ -87,11 +87,10 @@ export const Stars = styled.div`
 `;
 
 export const HeartIcon = styled.div`
-  font-size: 2rem;
+  font-size: 2.2rem;
   color: #e18eeb;
-  margin-left: 0.6rem;
+  margin-left: 0.4rem;
   display: flex;
-  align-items: center;
 `;
 
 export const Tag = styled.span<{ color: string }>`

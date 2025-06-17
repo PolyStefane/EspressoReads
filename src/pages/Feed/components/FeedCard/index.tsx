@@ -1,5 +1,5 @@
 // External libraries
-import React, { useState } from "react";
+import React, { JSX, useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 // Components
@@ -7,6 +7,18 @@ import { RepliesList } from "../RepliesList";
 
 // Assets
 import { CommentIconSVG } from "../../../../assets/icons/CommentIcon";
+import { LovingSVG } from "../../../../assets/icons/Reactions/Loving";
+import { ExcitedSVG } from "../../../../assets/icons/Reactions/Excited";
+import { AmazedSVG } from "../../../../assets/icons/Reactions/Amazed";
+import { DeludedSVG } from "../../../../assets/icons/Reactions/Deluded";
+import { LaughSVG } from "../../../../assets/icons/Reactions/Laugh";
+import { DisappointedSVG } from "../../../../assets/icons/Reactions/Disappointed";
+import { ConfusedSVG } from "../../../../assets/icons/Reactions/Confused";
+import { AngrySVG } from "../../../../assets/icons/Reactions/Angry";
+import { SadSVG } from "../../../../assets/icons/Reactions/Sad";
+import { NauseousSVG } from "../../../../assets/icons/Reactions/Nauseous";
+import { BoredSVG } from "../../../../assets/icons/Reactions/Bored";
+import { AgonySVG } from "../../../../assets/icons/Reactions/Agony";
 
 // Hooks
 import { useReplies } from "./hooks/useReplies";
@@ -44,19 +56,19 @@ interface Props {
 }
 
 export const FeedCard: React.FC<Props> = ({ comment }) => {
-  const reactionMap: Record<string, string> = {
-    LOVING: "😍",
-    EXCITED: "🤩",
-    AMAZED: "😱",
-    DELUDED: "🤡",
-    LAUGH: "😂",
-    DISAPPOINTED: "💔",
-    CONFUSED: "😕",
-    ANGRY: "🤬",
-    SAD: "😢",
-    NAUSEOUS: "🤢",
-    BORED: "😴",
-    AGONY: "😩",
+  const reactionMap: Record<string, JSX.Element> = {
+    LOVING: <LovingSVG />,
+    EXCITED: <ExcitedSVG />,
+    AMAZED: <AmazedSVG />,
+    DELUDED: <DeludedSVG />,
+    LAUGH: <LaughSVG />,
+    DISAPPOINTED: <DisappointedSVG />,
+    CONFUSED: <ConfusedSVG />,
+    ANGRY: <AngrySVG />,
+    SAD: <SadSVG />,
+    NAUSEOUS: <NauseousSVG />,
+    BORED: <BoredSVG />,
+    AGONY: <AgonySVG />,
   };
 
   const [likes, setLikes] = useState<number>(comment.likes ?? 0);

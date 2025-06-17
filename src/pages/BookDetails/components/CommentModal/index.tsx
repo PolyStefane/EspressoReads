@@ -19,6 +19,18 @@ import {
   Textarea,
   Title,
 } from "./styles";
+import { ExcitedSVG } from "../../../../assets/icons/Reactions/Excited";
+import { LovingSVG } from "../../../../assets/icons/Reactions/Loving";
+import { AmazedSVG } from "../../../../assets/icons/Reactions/Amazed";
+import { DeludedSVG } from "../../../../assets/icons/Reactions/Deluded";
+import { LaughSVG } from "../../../../assets/icons/Reactions/Laugh";
+import { DisappointedSVG } from "../../../../assets/icons/Reactions/Disappointed";
+import { ConfusedSVG } from "../../../../assets/icons/Reactions/Confused";
+import { AngrySVG } from "../../../../assets/icons/Reactions/Angry";
+import { SadSVG } from "../../../../assets/icons/Reactions/Sad";
+import { NauseousSVG } from "../../../../assets/icons/Reactions/Nauseous";
+import { BoredSVG } from "../../../../assets/icons/Reactions/Bored";
+import { AgonySVG } from "../../../../assets/icons/Reactions/Agony";
 
 type Props = {
   onClose: () => void;
@@ -27,18 +39,18 @@ type Props = {
 };
 
 const reactions = [
-  { emoji: "😍", label: "LOVING" },
-  { emoji: "🤩", label: "EXCITED" },
-  { emoji: "😱", label: "AMAZED" },
-  { emoji: "🤡", label: "DELUDED" },
-  { emoji: "😂", label: "LAUGH" },
-  { emoji: "💔", label: "DISAPPOINTED" },
-  { emoji: "😕", label: "CONFUSED" },
-  { emoji: "🤬", label: "ANGRY" },
-  { emoji: "😢", label: "SAD" },
-  { emoji: "🤢", label: "NAUSEOUS" },
-  { emoji: "😴", label: "BORED" },
-  { emoji: "😩", label: "AGONY" },
+  { emoji: <LovingSVG />, label: "LOVING" },
+  { emoji: <ExcitedSVG />, label: "EXCITED" },
+  { emoji: <AmazedSVG />, label: "AMAZED" },
+  { emoji: <DeludedSVG />, label: "DELUDED" },
+  { emoji: <LaughSVG />, label: "LAUGH" },
+  { emoji: <DisappointedSVG />, label: "DISAPPOINTED" },
+  { emoji: <ConfusedSVG />, label: "CONFUSED" },
+  { emoji: <AngrySVG />, label: "ANGRY" },
+  { emoji: <SadSVG />, label: "SAD" },
+  { emoji: <NauseousSVG />, label: "NAUSEOUS" },
+  { emoji: <BoredSVG />, label: "BORED" },
+  { emoji: <AgonySVG />, label: "AGONY" },
 ];
 
 type CommentPayload = {

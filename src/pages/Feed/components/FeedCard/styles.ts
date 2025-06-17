@@ -85,7 +85,10 @@ export const ContainerProgress = styled.div`
 `;
 
 export const Progress = styled.div`
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
   margin-top: 1rem;
 `;
 
@@ -138,7 +141,7 @@ export const LikeButton = styled.span<{ $liked: boolean; $loading: boolean }>`
   color: ${({ $liked }) => ($liked ? "#F82371" : "#F82371")};
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   user-select: none;
   transition: color 0.2s;
   font-size: 1.2rem;

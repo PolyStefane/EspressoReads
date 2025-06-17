@@ -1,6 +1,21 @@
 // External libraries
-import React, { useState } from "react";
+import React, { JSX, useState } from "react";
 import { FaHeart, FaTrash } from "react-icons/fa";
+
+// Assets
+import { LikeButton } from "../../../Feed/components/FeedCard/styles";
+import { LovingSVG } from "../../../../assets/icons/Reactions/Loving";
+import { ExcitedSVG } from "../../../../assets/icons/Reactions/Excited";
+import { AmazedSVG } from "../../../../assets/icons/Reactions/Amazed";
+import { DeludedSVG } from "../../../../assets/icons/Reactions/Deluded";
+import { LaughSVG } from "../../../../assets/icons/Reactions/Laugh";
+import { DisappointedSVG } from "../../../../assets/icons/Reactions/Disappointed";
+import { ConfusedSVG } from "../../../../assets/icons/Reactions/Confused";
+import { AngrySVG } from "../../../../assets/icons/Reactions/Angry";
+import { SadSVG } from "../../../../assets/icons/Reactions/Sad";
+import { NauseousSVG } from "../../../../assets/icons/Reactions/Nauseous";
+import { BoredSVG } from "../../../../assets/icons/Reactions/Bored";
+import { AgonySVG } from "../../../../assets/icons/Reactions/Agony";
 
 // Services
 import { fetchWithAuth } from "../../../../Services/api";
@@ -22,8 +37,8 @@ import {
   SpoilerContainer,
   SpoilerLabel,
   RevealButton,
+  TrashContainer,
 } from "./styles";
-import { LikeButton } from "../../../Feed/components/FeedCard/styles";
 
 type Comment = {
   commentaryId: string;
@@ -48,19 +63,19 @@ type Props = {
 };
 
 function getEmoji(reaction: string) {
-  const map: Record<string, string> = {
-    LOVING: "😍",
-    EXCITED: "🤩",
-    AMAZED: "😱",
-    DELUDED: "🤡",
-    LAUGH: "😂",
-    DISAPPOINTED: "💔",
-    CONFUSED: "😕",
-    ANGRY: "🤬",
-    SAD: "😢",
-    NAUSEOUS: "🤢",
-    BORED: "😴",
-    AGONY: "😩",
+  const map: Record<string, JSX.Element> = {
+    LOVING: <LovingSVG />,
+    EXCITED: <ExcitedSVG />,
+    AMAZED: <AmazedSVG />,
+    DELUDED: <DeludedSVG />,
+    LAUGH: <LaughSVG />,
+    DISAPPOINTED: <DisappointedSVG />,
+    CONFUSED: <ConfusedSVG />,
+    ANGRY: <AngrySVG />,
+    SAD: <SadSVG />,
+    NAUSEOUS: <NauseousSVG />,
+    BORED: <BoredSVG />,
+    AGONY: <AgonySVG />,
   };
 
   return map[reaction.toUpperCase()] || "💬";
@@ -155,13 +170,7 @@ export const CommentHistoryModal: React.FC<Props> = ({
                           <FaHeart /> <span>{comment.likes ?? 0}</span>
                         </LikeButton>
                       </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          gap: "10px",
-                          alignItems: "center",
-                        }}
-                      >
+                      <TrashContainer>
                         <FaTrash
                           style={{ cursor: "pointer" }}
                           onClick={async () => {
@@ -178,7 +187,7 @@ export const CommentHistoryModal: React.FC<Props> = ({
                             onRefresh();
                           }}
                         />
-                      </div>
+                      </TrashContainer>
                     </CommentFooter>
                   </StyledCommentCard>
                 );

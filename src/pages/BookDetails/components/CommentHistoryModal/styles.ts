@@ -14,7 +14,7 @@ export const Modal = styled.div`
   padding: 2rem;
   border-radius: 1.2rem;
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   max-height: 90vh;
   display: flex;
   flex-direction: column;
@@ -124,17 +124,20 @@ export const ReactionProgress = styled.div`
   display: flex;
   align-items: center;
   gap: 0.7rem;
-  font-size: 1.1rem;
-  margin-left: 0.2rem;
+  font-size: 1.3rem;
+`;
+
+export const TrashContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: center;
 `;
 
 export const CommentFooter = styled.div`
   margin-top: 1rem;
-  padding-top: 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #444;
 `;
 
 export const IconButton = styled.span`
