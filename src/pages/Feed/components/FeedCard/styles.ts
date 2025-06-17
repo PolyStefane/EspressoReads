@@ -87,9 +87,24 @@ export const ContainerProgress = styled.div`
 export const Progress = styled.div`
   font-size: 1.5rem;
   display: flex;
+  width: 100%;
   align-items: center;
   gap: 0.8rem;
   margin-top: 1rem;
+`;
+
+export const ReactionContainer = styled.div`
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    width: 100% !important;
+    height: 100% !important;
+
+    background-size: cover;
+  }
 `;
 
 export const ContainerBook = styled.div`

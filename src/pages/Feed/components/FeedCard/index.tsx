@@ -50,6 +50,7 @@ import {
   CommentTextarea,
   ShowSpoilerButton,
   ContainerProgress,
+  ReactionContainer,
 } from "./styles";
 
 interface Props {
@@ -162,7 +163,10 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
 
           <ContainerProgress>
             <Progress>
-              {reactionMap[comment.reaction] || "💬"} {comment.progress}%
+              <ReactionContainer>
+                {reactionMap[comment.reaction] || "💬"}
+              </ReactionContainer>
+              {comment.progress}%
             </Progress>
           </ContainerProgress>
         </Left>

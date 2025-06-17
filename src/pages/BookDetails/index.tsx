@@ -243,14 +243,16 @@ export const BookDetails: React.FC = () => {
                   Add Comment
                 </button>
               )}
-              <button
-                onClick={() => {
-                  setShowHistory(true);
-                  fetchComments();
-                }}
-              >
-                Comment History
-              </button>
+              {book.readingStatus !== "WISHLIST" && (
+                <button
+                  onClick={() => {
+                    setShowHistory(true);
+                    fetchComments();
+                  }}
+                >
+                  Comment History
+                </button>
+              )}
               <button onClick={() => navigate(`/books/edit/${book.bookId}`)}>
                 Edit Book
               </button>

@@ -118,6 +118,21 @@ const Profile: React.FC = () => {
   if (error) return <p>Error: {error}</p>;
   if (!stats) return <p>Unavailable data</p>;
 
+  if (stats.totalBooks === 0) {
+    return (
+      <Container>
+        <UserName>{username}</UserName>
+        <ProfilePic>
+          <img src="/img/profileimg.png" alt="Profile" />
+        </ProfilePic>
+        <div style={{ textAlign: "center", marginTop: "2rem", color: "#666" }}>
+          <h3>No statistics to show yet</h3>
+          <p>Start your reading journey to see your progress here!</p>
+        </div>
+      </Container>
+    );
+  }
+
   const renderBook = (book: ResumeBook | null, label: string) => (
     <BookBox>
       <BookTextWrapper>
@@ -137,9 +152,9 @@ const Profile: React.FC = () => {
     <Container>
       <UserName>{username}</UserName>
 
-      <ProfilePic>
+      {/* <ProfilePic>
         <img src="/img/profileimg.png" alt="Profile" />
-      </ProfilePic>
+      </ProfilePic> */}
       <StatsContainer>
         <StatsWrapper>
           <StatBox>
@@ -150,7 +165,9 @@ const Profile: React.FC = () => {
           </StatBox>
           <StatBox>
             <StatTitle>Most Read Genre</StatTitle>
-            <StatValue>{genreLabels[stats.mostReadGenre]}</StatValue>
+            <StatValue>
+              {genreLabels[stats.mostReadGenre] || "Not enough data"}
+            </StatValue>
             <GenreStatsSVG />
           </StatBox>
           <StatBox>

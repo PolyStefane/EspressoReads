@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   text-align: center;
-  padding: 3rem;
+  padding: 7rem;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -10,6 +10,7 @@ export const Container = styled.div`
 
 export const UserName = styled.h1`
   font-size: 1.8rem;
+  margin-bottom: 5rem;
   font-weight: bold;
 `;
 

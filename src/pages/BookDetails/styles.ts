@@ -16,7 +16,7 @@ export const Title = styled.h1`
 
 export const FormContainer = styled.div`
   width: 100%;
-  max-width: 60rem;
+  max-width: 63rem;
   padding: 4rem;
 `;
 
