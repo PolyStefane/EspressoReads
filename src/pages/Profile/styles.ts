@@ -17,9 +17,8 @@ export const ProfilePic = styled.div`
   width: 120px;
   height: 120px;
   margin: 2rem auto 4rem;
-  border: 3px solid #cde9ce;
+  border: 3px solid #7bb286;
   border-radius: 50%;
-  background-color: #f5fdf5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,7 +75,7 @@ export const StatBox = styled.div`
   padding: 1rem;
   border-radius: 15px;
   width: 15rem;
-  height: 10rem;
+  height: 11rem;
   display: flex;
 
   flex-direction: column;
@@ -86,7 +85,7 @@ export const StatBox = styled.div`
 `;
 
 export const StatTitle = styled.p`
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
 `;
@@ -94,11 +93,11 @@ export const StatTitle = styled.p`
 export const StatValue = styled.p`
   font-size: 1.5rem;
   color: #5d8665;
-  margin: 0.1rem 0;
 `;
 
 export const StatLabel = styled.p`
   font-size: 1rem;
+  margin-bottom: 0.5rem;
   color: #5d8665;
 `;
 
@@ -112,8 +111,8 @@ export const BooksWrapper = styled.div`
 
 export const BookBox = styled.div`
   background-color: #cde9ce;
-  padding: 1.5rem;
   border-radius: 20px;
+  padding: 1.5rem;
   width: 26rem;
   display: flex;
   flex-direction: row;
@@ -130,7 +129,7 @@ export const BookTextWrapper = styled.div`
 `;
 
 export const BookTitle = styled.p`
-  font-weight: bold;
+  font-weight: 500;
   font-size: 1.3rem;
   margin-bottom: 1.5rem;
 `;

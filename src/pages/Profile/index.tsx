@@ -20,6 +20,9 @@ import {
   StatsContainer,
 } from "./styles";
 import { Spinner } from "../../components/Spinner";
+import { PageStatsSVG } from "../../assets/icons/PagesStats";
+import { GenreStatsSVG } from "../../assets/icons/GenreStats";
+import { TotalStatsSVG } from "../../assets/icons/TotalStats";
 
 interface Book {
   title: string;
@@ -111,7 +114,7 @@ const Profile: React.FC = () => {
       <UserName>{username}</UserName>
 
       <ProfilePic>
-        <img src="/img/user.png" alt="Profile" />
+        <img src="/img/profileimg.png" alt="Profile" />
       </ProfilePic>
       <StatsContainer>
         <StatsWrapper>
@@ -119,15 +122,18 @@ const Profile: React.FC = () => {
             <StatTitle>Read Pages</StatTitle>
             <StatValue>{stats.totalPages}</StatValue>
             <StatLabel>Pages</StatLabel>
+            <PageStatsSVG />
           </StatBox>
           <StatBox>
             <StatTitle>Most Read Genre</StatTitle>
             <StatValue>{stats.mostReadGenre}</StatValue>
+            <GenreStatsSVG />
           </StatBox>
           <StatBox>
             <StatTitle>Total read</StatTitle>
             <StatValue>{stats.totalBooks}</StatValue>
             <StatLabel>Books</StatLabel>
+            <TotalStatsSVG />
           </StatBox>
         </StatsWrapper>
 
