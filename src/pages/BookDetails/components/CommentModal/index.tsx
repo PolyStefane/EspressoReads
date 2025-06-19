@@ -1,9 +1,9 @@
 // External libraries
-import { toast } from "sonner";
-import React, { useState } from "react";
+import { toast } from 'sonner';
+import React, { useState } from 'react';
 
 // Services
-import { fetchWithAuth } from "../../../../Services/api";
+import { fetchWithAuth } from '../../../../Services/api';
 
 // Styles
 import {
@@ -18,19 +18,7 @@ import {
   SaveButton,
   Textarea,
   Title,
-} from "./styles";
-import { ExcitedSVG } from "../../../../assets/icons/Reactions/Excited";
-import { LovingSVG } from "../../../../assets/icons/Reactions/Loving";
-import { AmazedSVG } from "../../../../assets/icons/Reactions/Amazed";
-import { DeludedSVG } from "../../../../assets/icons/Reactions/Deluded";
-import { LaughSVG } from "../../../../assets/icons/Reactions/Laugh";
-import { DisappointedSVG } from "../../../../assets/icons/Reactions/Disappointed";
-import { ConfusedSVG } from "../../../../assets/icons/Reactions/Confused";
-import { AngrySVG } from "../../../../assets/icons/Reactions/Angry";
-import { SadSVG } from "../../../../assets/icons/Reactions/Sad";
-import { NauseousSVG } from "../../../../assets/icons/Reactions/Nauseous";
-import { BoredSVG } from "../../../../assets/icons/Reactions/Bored";
-import { AgonySVG } from "../../../../assets/icons/Reactions/Agony";
+} from './styles';
 
 type Props = {
   onClose: () => void;
@@ -39,18 +27,54 @@ type Props = {
 };
 
 const reactions = [
-  { emoji: <LovingSVG />, label: "LOVING" },
-  { emoji: <ExcitedSVG />, label: "EXCITED" },
-  { emoji: <AmazedSVG />, label: "AMAZED" },
-  { emoji: <DeludedSVG />, label: "DELUDED" },
-  { emoji: <LaughSVG />, label: "LAUGH" },
-  { emoji: <DisappointedSVG />, label: "DISAPPOINTED" },
-  { emoji: <ConfusedSVG />, label: "CONFUSED" },
-  { emoji: <AngrySVG />, label: "ANGRY" },
-  { emoji: <SadSVG />, label: "SAD" },
-  { emoji: <NauseousSVG />, label: "NAUSEOUS" },
-  { emoji: <BoredSVG />, label: "BORED" },
-  { emoji: <AgonySVG />, label: "AGONY" },
+  {
+    emoji: <img src="/img/reactions/loving.png" alt="Loving" />,
+    label: 'LOVING',
+  },
+  {
+    emoji: <img src="/img/reactions/excited.png" alt="Excited" />,
+    label: 'EXCITED',
+  },
+  {
+    emoji: <img src="/img/reactions/amazed.png" alt="Amazed" />,
+    label: 'AMAZED',
+  },
+  {
+    emoji: <img src="/img/reactions/deluded.png" alt="Deluded" />,
+    label: 'DELUDED',
+  },
+  {
+    emoji: <img src="/img/reactions/laugh.png" alt="Laugh" />,
+    label: 'LAUGH',
+  },
+  {
+    emoji: <img src="/img/reactions/disappointed.png" alt="Disappointed" />,
+    label: 'DISAPPOINTED',
+  },
+  {
+    emoji: <img src="/img/reactions/confused.png" alt="Confused" />,
+    label: 'CONFUSED',
+  },
+  {
+    emoji: <img src="/img/reactions/angry.png" alt="Angry" />,
+    label: 'ANGRY',
+  },
+  {
+    emoji: <img src="/img/reactions/sad.png" alt="Sad" />,
+    label: 'SAD',
+  },
+  {
+    emoji: <img src="/img/reactions/nauseous.png" alt="Nauseous" />,
+    label: 'NAUSEOUS',
+  },
+  {
+    emoji: <img src="/img/reactions/bored.png" alt="Bored" />,
+    label: 'BORED',
+  },
+  {
+    emoji: <img src="/img/reactions/agony.png" alt="Agony" />,
+    label: 'AGONY',
+  },
 ];
 
 type CommentPayload = {
@@ -61,18 +85,18 @@ type CommentPayload = {
   isSpoiler?: boolean;
   progress: number;
   reaction:
-    | "LOVING"
-    | "EXCITED"
-    | "AMAZED"
-    | "DELUDED"
-    | "LAUGH"
-    | "DISAPPOINTED"
-    | "CONFUSED"
-    | "ANGRY"
-    | "SAD"
-    | "NAUSEOUS"
-    | "BORED"
-    | "AGONY";
+    | 'LOVING'
+    | 'EXCITED'
+    | 'AMAZED'
+    | 'DELUDED'
+    | 'LAUGH'
+    | 'DISAPPOINTED'
+    | 'CONFUSED'
+    | 'ANGRY'
+    | 'SAD'
+    | 'NAUSEOUS'
+    | 'BORED'
+    | 'AGONY';
 };
 
 const apiUrl = import.meta.env.VITE_API_URL;
@@ -80,29 +104,29 @@ const apiUrl = import.meta.env.VITE_API_URL;
 export async function postCommentary(comment: CommentPayload) {
   try {
     const response = await fetchWithAuth(`${apiUrl}/api/v1/commentary`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(comment),
     });
 
-    if (!response.ok) throw new Error("Failed to post comment");
+    if (!response.ok) throw new Error('Failed to post comment');
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error posting comment:", error);
+    console.error('Error posting comment:', error);
     throw error;
   }
 }
 
 export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
-  const [commentText, setCommentText] = useState("");
-  const [readPages, setReadPages] = useState("");
-  const [progress] = useState("");
+  const [commentText, setCommentText] = useState('');
+  const [readPages, setReadPages] = useState('');
+  const [progress] = useState('');
   const [selectedReaction, setSelectedReaction] = useState<
-    CommentPayload["reaction"] | null
+    CommentPayload['reaction'] | null
   >(null);
   const [isSpoiler, setIsSpoiler] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -122,10 +146,10 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
         reaction: selectedReaction,
       });
       onClose();
-      toast.success("Comment saved successfully!");
+      toast.success('Comment saved successfully!');
     } catch (err) {
-      toast.error("Failed to save comment.");
-      console.error("Erro ao salvar comentário:", err);
+      toast.error('Failed to save comment.');
+      console.error('Erro ao salvar comentário:', err);
     } finally {
       setIsSaving(false);
     }
@@ -156,7 +180,7 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
               <EmojiBox
                 key={r.label}
                 onClick={() =>
-                  setSelectedReaction(r.label as CommentPayload["reaction"])
+                  setSelectedReaction(r.label as CommentPayload['reaction'])
                 }
                 $selected={selectedReaction === r.label}
                 title={r.label}
@@ -167,8 +191,8 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
           </EmojiGrid>
         </ReactionSection>
 
-        <div style={{ marginTop: "1rem" }}>
-          <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <div style={{ marginTop: '1rem' }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <input
               type="checkbox"
               checked={isSpoiler}
@@ -185,7 +209,7 @@ export const CommentModal: React.FC<Props> = ({ onClose, bookId, userId }) => {
               !commentText || !readPages || !selectedReaction || isSaving
             }
           >
-            {isSaving ? "Saving..." : "Save"}
+            {isSaving ? 'Saving...' : 'Save'}
           </SaveButton>
           <CancelButton onClick={onClose} disabled={isSaving}>
             Cancel

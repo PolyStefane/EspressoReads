@@ -1,25 +1,13 @@
 // External libraries
-import React, { JSX, useState } from "react";
-import { FaHeart, FaTrash } from "react-icons/fa";
-import { toast } from "sonner";
+import React, { JSX, useState } from 'react';
+import { FaHeart, FaTrash } from 'react-icons/fa';
+import { toast } from 'sonner';
 
 // Assets
-import { LikeButton } from "../../../Feed/components/FeedCard/styles";
-import { LovingSVG } from "../../../../assets/icons/Reactions/Loving";
-import { ExcitedSVG } from "../../../../assets/icons/Reactions/Excited";
-import { AmazedSVG } from "../../../../assets/icons/Reactions/Amazed";
-import { DeludedSVG } from "../../../../assets/icons/Reactions/Deluded";
-import { LaughSVG } from "../../../../assets/icons/Reactions/Laugh";
-import { DisappointedSVG } from "../../../../assets/icons/Reactions/Disappointed";
-import { ConfusedSVG } from "../../../../assets/icons/Reactions/Confused";
-import { AngrySVG } from "../../../../assets/icons/Reactions/Angry";
-import { SadSVG } from "../../../../assets/icons/Reactions/Sad";
-import { NauseousSVG } from "../../../../assets/icons/Reactions/Nauseous";
-import { BoredSVG } from "../../../../assets/icons/Reactions/Bored";
-import { AgonySVG } from "../../../../assets/icons/Reactions/Agony";
+import { LikeButton } from '../../../Feed/components/FeedCard/styles';
 
 // Services
-import { fetchWithAuth } from "../../../../Services/api";
+import { fetchWithAuth } from '../../../../Services/api';
 
 // Styles
 import {
@@ -42,7 +30,7 @@ import {
   ConfirmationWrapper,
   ConfirmButton,
   CancelButton,
-} from "./styles";
+} from './styles';
 
 type Comment = {
   commentaryId: string;
@@ -68,37 +56,47 @@ type Props = {
 
 function getEmoji(reaction: string) {
   const map: Record<string, JSX.Element> = {
-    LOVING: <LovingSVG />,
-    EXCITED: <ExcitedSVG />,
-    AMAZED: <AmazedSVG />,
-    DELUDED: <DeludedSVG />,
-    LAUGH: <LaughSVG />,
-    DISAPPOINTED: <DisappointedSVG />,
-    CONFUSED: <ConfusedSVG />,
-    ANGRY: <AngrySVG />,
-    SAD: <SadSVG />,
-    NAUSEOUS: <NauseousSVG />,
-    BORED: <BoredSVG />,
-    AGONY: <AgonySVG />,
+    LOVING: <img src="/img/reactions/loving.png" alt="Loving" />,
+    EXCITED: <img src="/img/reactions/excited.png" alt="Excited" />,
+    AMAZED: <img src="/img/reactions/amazed.png" alt="Amazed" />,
+    DELUDED: <img src="/img/reactions/deluded.png" alt="Deluded" />,
+    LAUGH: <img src="/img/reactions/laugh.png" alt="Laugh" />,
+    DISAPPOINTED: (
+      <img src="/img/reactions/disappointed.png" alt="Disappointed" />
+    ),
+    CONFUSED: <img src="/img/reactions/confused.png" alt="Confused" />,
+    ANGRY: <img src="/img/reactions/angry.png" alt="Angry" />,
+    SAD: <img src="/img/reactions/sad.png" alt="Sad" />,
+    NAUSEOUS: <img src="/img/reactions/nauseous.png" alt="Nauseous" />,
+    BORED: <img src="/img/reactions/bored.png" alt="Bored" />,
+    AGONY: <img src="/img/reactions/agony.png" alt="Agony" />,
   };
 
-  return map[reaction.toUpperCase()] || "💬";
+  const reactionImage = map[reaction.toUpperCase()];
+
+  if (reactionImage) {
+    return React.cloneElement(reactionImage, {
+      style: { width: '24px', height: '24px', verticalAlign: 'middle' },
+    });
+  }
+
+  return '💬';
 }
 
 function formatText(text: string) {
-  return text.replace(/\n/g, "<br />");
+  return text.replace(/\n/g, '<br />');
 }
 
 async function deleteComment(commentId: string) {
   const response = await fetchWithAuth(
     `${apiUrl}/api/v1/commentary/delete/${commentId}`,
     {
-      method: "DELETE",
-    }
+      method: 'DELETE',
+    },
   );
 
   if (!response.ok) {
-    throw new Error("Failed to delete comment");
+    throw new Error('Failed to delete comment');
   }
 }
 
@@ -165,7 +163,7 @@ export const CommentHistoryModal: React.FC<Props> = ({
                         <LikeButton
                           $liked={comment.isLiked ?? comment.liked ?? false}
                           $loading={false}
-                          style={{ fontSize: "1.1rem" }}
+                          style={{ fontSize: '1.1rem' }}
                         >
                           <FaHeart /> <span>{comment.likes ?? 0}</span>
                         </LikeButton>
@@ -174,7 +172,7 @@ export const CommentHistoryModal: React.FC<Props> = ({
                         {commentToDelete === comment.commentaryId ? (
                           <ConfirmationWrapper>
                             <span>
-                              {isDeleting ? "Deleting..." : "Are you sure?"}
+                              {isDeleting ? 'Deleting...' : 'Are you sure?'}
                             </span>
                             <ConfirmButton
                               disabled={isDeleting}
@@ -183,15 +181,15 @@ export const CommentHistoryModal: React.FC<Props> = ({
                                 try {
                                   await deleteComment(comment.commentaryId);
                                   toast.success(
-                                    "Comment deleted successfully!"
+                                    'Comment deleted successfully!',
                                   );
                                   setCommentToDelete(null);
                                   onRefresh();
                                 } catch (error) {
-                                  toast.error("Failed to delete comment.");
+                                  toast.error('Failed to delete comment.');
                                   console.error(
-                                    "Error deleting comment:",
-                                    error
+                                    'Error deleting comment:',
+                                    error,
                                   );
                                 } finally {
                                   setIsDeleting(false);
@@ -210,8 +208,8 @@ export const CommentHistoryModal: React.FC<Props> = ({
                         ) : (
                           <FaTrash
                             style={{
-                              cursor: isDeleting ? "not-allowed" : "pointer",
-                              color: isDeleting ? "#ccc" : "inherit",
+                              cursor: isDeleting ? 'not-allowed' : 'pointer',
+                              color: isDeleting ? '#ccc' : 'inherit',
                             }}
                             onClick={() => {
                               if (!isDeleting) {

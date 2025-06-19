@@ -1,30 +1,18 @@
 // External libraries
-import React, { JSX, useState } from "react";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import React, { JSX, useState } from 'react';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
 // Components
-import { RepliesList } from "../RepliesList";
+import { RepliesList } from '../RepliesList';
 
 // Assets
-import { SadSVG } from "../../../../assets/icons/Reactions/Sad";
-import { AgonySVG } from "../../../../assets/icons/Reactions/Agony";
-import { LaughSVG } from "../../../../assets/icons/Reactions/Laugh";
-import { AngrySVG } from "../../../../assets/icons/Reactions/Angry";
-import { BoredSVG } from "../../../../assets/icons/Reactions/Bored";
-import { LovingSVG } from "../../../../assets/icons/Reactions/Loving";
-import { CommentIconSVG } from "../../../../assets/icons/CommentIcon";
-import { AmazedSVG } from "../../../../assets/icons/Reactions/Amazed";
-import { ExcitedSVG } from "../../../../assets/icons/Reactions/Excited";
-import { DeludedSVG } from "../../../../assets/icons/Reactions/Deluded";
-import { ConfusedSVG } from "../../../../assets/icons/Reactions/Confused";
-import { NauseousSVG } from "../../../../assets/icons/Reactions/Nauseous";
-import { DisappointedSVG } from "../../../../assets/icons/Reactions/Disappointed";
+import { CommentIconSVG } from '../../../../assets/icons/CommentIcon';
 
 // Hooks
-import { useReplies } from "./hooks/useReplies";
+import { useReplies } from './hooks/useReplies';
 
 // Types
-import { Comment } from "../../../../types";
+import { Comment } from '../../../../types';
 
 // Styles
 import {
@@ -51,7 +39,7 @@ import {
   ShowSpoilerButton,
   ContainerProgress,
   ReactionContainer,
-} from "./styles";
+} from './styles';
 
 interface Props {
   comment: Comment;
@@ -59,27 +47,29 @@ interface Props {
 
 export const FeedCard: React.FC<Props> = ({ comment }) => {
   const reactionMap: Record<string, JSX.Element> = {
-    LOVING: <LovingSVG />,
-    EXCITED: <ExcitedSVG />,
-    AMAZED: <AmazedSVG />,
-    DELUDED: <DeludedSVG />,
-    LAUGH: <LaughSVG />,
-    DISAPPOINTED: <DisappointedSVG />,
-    CONFUSED: <ConfusedSVG />,
-    ANGRY: <AngrySVG />,
-    SAD: <SadSVG />,
-    NAUSEOUS: <NauseousSVG />,
-    BORED: <BoredSVG />,
-    AGONY: <AgonySVG />,
+    LOVING: <img src="/img/reactions/loving.png" alt="Loving" />,
+    EXCITED: <img src="/img/reactions/excited.png" alt="Excited" />,
+    AMAZED: <img src="/img/reactions/amazed.png" alt="Amazed" />,
+    DELUDED: <img src="/img/reactions/deluded.png" alt="Deluded" />,
+    LAUGH: <img src="/img/reactions/laugh.png" alt="Laugh" />,
+    DISAPPOINTED: (
+      <img src="/img/reactions/disappointed.png" alt="Disappointed" />
+    ),
+    CONFUSED: <img src="/img/reactions/confused.png" alt="Confused" />,
+    ANGRY: <img src="/img/reactions/angry.png" alt="Angry" />,
+    SAD: <img src="/img/reactions/sad.png" alt="Sad" />,
+    NAUSEOUS: <img src="/img/reactions/nauseous.png" alt="Nauseous" />,
+    BORED: <img src="/img/reactions/bored.png" alt="Bored" />,
+    AGONY: <img src="/img/reactions/agony.png" alt="Agony" />,
   };
 
   const [likes, setLikes] = useState<number>(comment.likes ?? 0);
   const [liked, setLiked] = useState<boolean>(
-    comment.isLiked ?? comment.liked ?? false
+    comment.isLiked ?? comment.liked ?? false,
   );
   const [loading, setLoading] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
-  const [commentText, setCommentText] = useState("");
+  const [commentText, setCommentText] = useState('');
   const [showSpoiler, setShowSpoiler] = useState(false);
   const [isSendingReply, setIsSendingReply] = useState(false);
   const commentaryId = comment.commentaryId || comment.commentary?.commentaryId;
@@ -92,7 +82,7 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
     setIsSendingReply(true);
     try {
       const ok = await sendReply(commentText.trim());
-      if (ok) setCommentText("");
+      if (ok) setCommentText('');
     } finally {
       setIsSendingReply(false);
     }
@@ -103,26 +93,26 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
   const handleLike = async () => {
     if (loading) return;
     setLoading(true);
-    const action = liked ? "decrease" : "increase";
+    const action = liked ? 'decrease' : 'increase';
     try {
       if (!commentaryId) return setLoading(false);
-      const userId = localStorage.getItem("userId");
+      const userId = localStorage.getItem('userId');
       if (!userId) return setLoading(false);
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       const res = await fetch(
         `${apiUrl}/api/v1/commentary/like/${commentaryId}/${action}/${userId}`,
         {
-          method: "PATCH",
+          method: 'PATCH',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             ...(token && { Authorization: `Bearer ${token}` }),
           },
-        }
+        },
       );
       if (res.ok) {
         const updated = await res.json();
         setLikes(updated.likes ?? 0);
-        setLiked(typeof updated.liked === "boolean" ? updated.liked : !liked);
+        setLiked(typeof updated.liked === 'boolean' ? updated.liked : !liked);
       }
     } finally {
       setLoading(false);
@@ -130,7 +120,7 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
   };
 
   function formatText(text: string) {
-    return text.replace(/\n/g, "<br />");
+    return text.replace(/\n/g, '<br />');
   }
 
   return (
@@ -139,9 +129,9 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
         <img
           src="/img/user.png"
           alt="avatar"
-          style={{ width: 40, height: 40, borderRadius: "50%" }}
+          style={{ width: 40, height: 40, borderRadius: '50%' }}
         />
-        @{comment.userName || comment.username || "Anonymous"}
+        @{comment.userName || comment.username || 'Anonymous'}
       </Username>
 
       <BookBox>
@@ -164,7 +154,9 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
           <ContainerProgress>
             <Progress>
               <ReactionContainer>
-                {reactionMap[comment.reaction] || "💬"}
+                {React.cloneElement(
+                  reactionMap[comment.reaction] || <span>💬</span>,
+                )}
               </ReactionContainer>
               {comment.progress}%
             </Progress>
@@ -178,10 +170,10 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
           />
           <BookInfo>
             <BookTitle>
-              {comment.bookTitle || comment.book?.title || " Unknown Title"}
+              {comment.bookTitle || comment.book?.title || ' Unknown Title'}
             </BookTitle>
             <BookAuthor>
-              {comment.bookAuthor || comment.book?.author || "Unknown Author"}
+              {comment.bookAuthor || comment.book?.author || 'Unknown Author'}
             </BookAuthor>
           </BookInfo>
         </ContainerBook>
@@ -192,7 +184,7 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
           $liked={liked}
           $loading={loading}
           onClick={loading ? undefined : handleLike}
-          title={liked ? "Dislike" : "Like"}
+          title={liked ? 'Dislike' : 'Like'}
         >
           {liked ? <FaHeart /> : <FaRegHeart />} <span>{likes}</span>
         </LikeButton>
@@ -232,7 +224,7 @@ export const FeedCard: React.FC<Props> = ({ comment }) => {
             onClick={handleSendComment}
             disabled={isSendingReply || !commentText.trim()}
           >
-            {isSendingReply ? "Sending..." : "Send"}
+            {isSendingReply ? 'Sending...' : 'Send'}
           </SendButton>
         </CommentBox>
       )}
